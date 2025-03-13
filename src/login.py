@@ -3,6 +3,7 @@ import sqlite3
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtGui import QPixmap
 from admin import AdminWindow
 #from supplier import SupplierWindow
 
@@ -17,6 +18,9 @@ class LoginWindow(QMainWindow):
         
         # Load the UI file
         loadUi('ui//login.ui', self)
+
+        #load images
+        self.loginImg()
         
         #connect db file
         self.connection = sqlite3.connect("data/database.db")
@@ -54,7 +58,13 @@ class LoginWindow(QMainWindow):
         # else:
         #     self.invInpLbl.show()
         #     print("invalid input")
-            
+
+
+    def loginImg(self):
+        pixmap = QPixmap("data//images//login_img.jpg")
+        self.imgLabel.setPixmap(pixmap)
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
