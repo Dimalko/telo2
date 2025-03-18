@@ -1,6 +1,6 @@
 import sys
 import sqlite3
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
@@ -30,7 +30,7 @@ class AdminWindow(QMainWindow):
         self.statsBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
 
     #populate tables/lists
-        # self.populate_stock_table()
+        self.populate_tour_table()
         # self.populate_sellers_table()
         # self.populate_order_list()
         # self.populate_order_table()
@@ -44,6 +44,19 @@ class AdminWindow(QMainWindow):
         self.logoLabel.setPixmap(pixmap)
         self.logoLabel.setStyleSheet("padding-top: 20px; padding-bottom: 20px;")
 
+    def populate_tour_table(self):
+        self.cursor.execute("SELECT * FROM Tours")
+        data = self.cursor.fetchall()
+        
+        if not data:
+            return
+        
+        self.tourTableWidget.setRowCount(len(data))
+        self.tourTableWidget.setColumnCount(9)
+
+        for row_num, row_data in enumerate(data):
+            for col_num, col_data in enumerate(row_data):
+                self.tourTableWidget.setItem(row_num, col_num, QTableWidgetItem(str(col_data)))
     
 if __name__ == "__main__":
     app = QApplication(sys.argv)

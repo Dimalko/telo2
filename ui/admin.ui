@@ -288,16 +288,6 @@ background-color: rgb(47, 142, 228);
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QTableView" name="tableView">
-          <property name="styleSheet">
-           <string notr="true">border:none;</string>
-          </property>
-          <property name="cornerButtonEnabled">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="label_2">
           <property name="text">
@@ -306,6 +296,103 @@ background-color: rgb(47, 142, 228);
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QTableWidget" name="tourTableWidget">
+          <property name="styleSheet">
+           <string notr="true">QTableWidget {
+border:none;
+background-color: white; 
+alternate-background-color: #f0f0f0; /* Alternating row color */
+}
+
+QHeaderView::section {
+    background-color: #0984e3; /* Header background */
+    color: white;              /* Header text color */
+    font: bold 12px Arial;     /* Header font */
+    padding: 5px;
+    border: 1px solid #74b9ff; /* Border color */
+}
+
+#QTableWidget QTableCornerButton::section {
+    background-color: #74b9ff; /* Top-left corner color */
+    border: 1px solid #0984e3;
+}
+
+QScrollBar:horizontal {
+    border: none;
+    background: #dfe6e9;  /* Background color of the scrollbar track */
+    height: 12px;  /* Thickness of the scrollbar */
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #0984e3; /* Color of the scrollbar handle (slider) */
+    min-width: 20px; /* Minimum width of the handle */
+    border-radius: 6px; /* Rounded edges */
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #74b9ff; /* Lighter color when hovered */
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    background: none; /* Removes the small arrow buttons */
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none; /* Keeps empty space color same */
+}</string>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>true</bool>
+          </property>
+          <column>
+           <property name="text">
+            <string>Id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Destination</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Starting Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>End Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Description</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Distance</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Agent</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Transportation</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>
