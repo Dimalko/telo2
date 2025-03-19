@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>865</width>
+    <height>812</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Travel Agents</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+font: 57 8pt &quot;Yu Gothic Medium&quot;;
+}
+
+QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(8, 123, 225);
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>30</y>
+      <width>581</width>
+      <height>711</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QWidget{
+font: 57 8pt &quot;Yu Gothic Medium&quot;;
+}
+
+QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(8, 123, 225);
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+    </property>
+    <widget class="QLabel" name="LastNameLabel">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>330</y>
+       <width>399</width>
+       <height>82</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Last name</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="Work_HoursInput">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>531</y>
+       <width>399</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+    border: 1px solid #cccccc; /* Border color and width */
+    border-radius: 5px; /* Border radius */</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="FirstNameLabel">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>217</y>
+       <width>399</width>
+       <height>83</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>First Name</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LastNameInput">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>418</y>
+       <width>399</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+    border: 1px solid #cccccc; /* Border color and width */
+    border-radius: 5px; /* Border radius */</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Work_HoursLabel">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>442</y>
+       <width>399</width>
+       <height>83</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Work Hours</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="SalaryLabel">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>555</y>
+       <width>399</width>
+       <height>82</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Salary</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="passwordLabel">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>105</y>
+       <width>399</width>
+       <height>82</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Password</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="usernameInput">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>81</y>
+       <width>399</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+    border: 1px solid #cccccc; /* Border color and width */
+    border-radius: 5px; /* Border radius */</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SalaryInput">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>643</y>
+       <width>399</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+    border: 1px solid #cccccc; /* Border color and width */
+    border-radius: 5px; /* Border radius */</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="FirstNameInput">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>306</y>
+       <width>399</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+    border: 1px solid #cccccc; /* Border color and width */
+    border-radius: 5px; /* Border radius */</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="usernameLabel">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>-8</y>
+       <width>399</width>
+       <height>83</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Username</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="passwordInput">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>193</y>
+       <width>399</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+    border: 1px solid #cccccc; /* Border color and width */
+    border-radius: 5px; /* Border radius */</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="add_Travel_Agent_button">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>750</y>
+      <width>101</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(8, 123, 225);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

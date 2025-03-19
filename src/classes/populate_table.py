@@ -15,7 +15,7 @@ class PopulateTable:
             return
 
         table_widget.setRowCount(len(data))
-        table_widget.setColumnCount(col)  # Assumes all rows have same columns
+        table_widget.setColumnCount(col)  
 
         for row_num, row_data in enumerate(data):
             for col_num, col_data in enumerate(row_data):
