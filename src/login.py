@@ -40,7 +40,7 @@ class LoginWindow(QMainWindow):
         role = self.roleInput.currentText()
         print(role)
         
-        self.cursor.execute("SELECT * FROM login WHERE username=? AND password=? AND role=?", (username, password, role))
+        self.cursor.execute("SELECT username,password,role FROM Staff WHERE username=? AND password=? AND role=?", (username, password, role))
         result = self.cursor.fetchone()
         
         if result:
