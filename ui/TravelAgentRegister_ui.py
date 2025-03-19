@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(865, 812)
+        MainWindow.resize(851, 812)
         MainWindow.setStyleSheet(u"QWidget{\n"
 "font: 57 8pt \"Yu Gothic Medium\";\n"
 "}\n"
