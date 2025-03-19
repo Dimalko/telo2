@@ -34,11 +34,11 @@ class TravelAgentRegisterWindow(QMainWindow):
 
 
     def createItemID(self):
-        min_id = 10**8  
-        max_id = (10**9) - 1 
+        min_id = 10**5  
+        max_id = (10**6) - 1 
         
         while True:
-            new_id = random.randint(min_id, max_id)
+            new_id = f"AG{random.randint(min_id, max_id)}"
             if new_id not in self.generateId:
                 self.generateId.add(new_id)
                 return new_id
