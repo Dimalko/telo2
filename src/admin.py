@@ -31,6 +31,7 @@ class AdminWindow(QMainWindow):
 
     #populate tables/lists
         self.populate_tour_table()
+        self.populate_travelagent_table()
         # self.populate_sellers_table()
         # self.populate_order_list()
         # self.populate_order_table()
@@ -57,6 +58,20 @@ class AdminWindow(QMainWindow):
         for row_num, row_data in enumerate(data):
             for col_num, col_data in enumerate(row_data):
                 self.tourTableWidget.setItem(row_num, col_num, QTableWidgetItem(str(col_data)))
+    
+    def populate_travelagent_table(self):
+        self.cursor.execute("SELECT * FROM Staff WHERE role='Travel_Agent'")
+        data = self.cursor.fetchall()
+        
+        if not data:
+            return
+        
+        self.travelagentTableWidget.setRowCount(len(data))
+        self.travelagentTableWidget.setColumnCount(8)
+
+        for row_num, row_data in enumerate(data):
+            for col_num, col_data in enumerate(row_data):
+                self.travelagentTableWidget.setItem(row_num, col_num, QTableWidgetItem(str(col_data)))
     
 if __name__ == "__main__":
     app = QApplication(sys.argv)

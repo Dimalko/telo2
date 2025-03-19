@@ -242,7 +242,7 @@ background-color: rgb(47, 142, 228);
        <string notr="true">background-color: rgb(243, 249, 254);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout">
@@ -513,7 +513,93 @@ QTabBar::tab:hover {
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
             <item row="0" column="0" colspan="3">
-             <widget class="QTableWidget" name="tableWidget"/>
+             <widget class="QTableWidget" name="travelagentTableWidget">
+              <property name="styleSheet">
+               <string notr="true">QTableWidget {
+border:none;
+background-color: white; 
+alternate-background-color: #f0f0f0; /* Alternating row color */
+}
+
+QHeaderView::section {
+    background-color: #0984e3; /* Header background */
+    color: white;              /* Header text color */
+    font: bold 12px Arial;     /* Header font */
+    padding: 5px;
+    border: 1px solid #74b9ff; /* Border color */
+}
+
+#QTableWidget QTableCornerButton::section {
+    background-color: #74b9ff; /* Top-left corner color */
+    border: 1px solid #0984e3;
+}
+
+QScrollBar:horizontal {
+    border: none;
+    background: #dfe6e9;  /* Background color of the scrollbar track */
+    height: 12px;  /* Thickness of the scrollbar */
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #0984e3; /* Color of the scrollbar handle (slider) */
+    min-width: 20px; /* Minimum width of the handle */
+    border-radius: 6px; /* Rounded edges */
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #74b9ff; /* Lighter color when hovered */
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    background: none; /* Removes the small arrow buttons */
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none; /* Keeps empty space color same */
+}</string>
+              </property>
+              <column>
+               <property name="text">
+                <string>Id</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Usename</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Password</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>First Name</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Last Name</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Role</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Hours</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Salary</string>
+               </property>
+              </column>
+             </widget>
             </item>
             <item row="1" column="0">
              <widget class="QPushButton" name="pushButton_8">
