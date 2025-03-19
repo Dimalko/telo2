@@ -21,6 +21,10 @@ class PopulateTable:
             for col_num, col_data in enumerate(row_data):
                 table_widget.setItem(row_num, col_num, QTableWidgetItem(str(col_data)))
 
+
+
+
+
     def close_connection(self):
         """Close the database connection"""
         self.connection.close()

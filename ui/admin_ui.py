@@ -388,6 +388,57 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName(u"tab_2")
         self.gridLayout_3 = QGridLayout(self.tab_2)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.pushButton_10 = QPushButton(self.tab_2)
+        self.pushButton_10.setObjectName(u"pushButton_10")
+        self.pushButton_10.setStyleSheet(u"QPushButton{\n"
+"color:#fff;\n"
+"border: 0px;\n"
+"font-size: 14px;\n"
+"padding: 5px;\n"
+"background-color: rgb(8, 123, 225);\n"
+"border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgb(47, 142, 228);\n"
+"}")
+
+        self.gridLayout_3.addWidget(self.pushButton_10, 1, 2, 1, 1)
+
+        self.add_Travel_Agent_button = QPushButton(self.tab_2)
+        self.add_Travel_Agent_button.setObjectName(u"add_Travel_Agent_button")
+        self.add_Travel_Agent_button.setStyleSheet(u"QPushButton{\n"
+"color:#fff;\n"
+"border: 0px;\n"
+"font-size: 14px;\n"
+"padding: 5px;\n"
+"background-color: rgb(8, 123, 225);\n"
+"border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgb(47, 142, 228);\n"
+"}")
+
+        self.gridLayout_3.addWidget(self.add_Travel_Agent_button, 1, 0, 1, 1)
+
+        self.pushButton_9 = QPushButton(self.tab_2)
+        self.pushButton_9.setObjectName(u"pushButton_9")
+        self.pushButton_9.setStyleSheet(u"QPushButton{\n"
+"color:#fff;\n"
+"border: 0px;\n"
+"font-size: 14px;\n"
+"padding: 5px;\n"
+"background-color: rgb(8, 123, 225);\n"
+"border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgb(47, 142, 228);\n"
+"}")
+
+        self.gridLayout_3.addWidget(self.pushButton_9, 1, 1, 1, 1)
+
         self.travelagentTableWidget = QTableWidget(self.tab_2)
         if (self.travelagentTableWidget.columnCount() < 8):
             self.travelagentTableWidget.setColumnCount(8)
@@ -454,57 +505,6 @@ class Ui_MainWindow(object):
 "}")
 
         self.gridLayout_3.addWidget(self.travelagentTableWidget, 0, 0, 1, 3)
-
-        self.pushButton_8 = QPushButton(self.tab_2)
-        self.pushButton_8.setObjectName(u"pushButton_8")
-        self.pushButton_8.setStyleSheet(u"QPushButton{\n"
-"color:#fff;\n"
-"border: 0px;\n"
-"font-size: 14px;\n"
-"padding: 5px;\n"
-"background-color: rgb(8, 123, 225);\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"background-color: rgb(47, 142, 228);\n"
-"}")
-
-        self.gridLayout_3.addWidget(self.pushButton_8, 1, 0, 1, 1)
-
-        self.pushButton_9 = QPushButton(self.tab_2)
-        self.pushButton_9.setObjectName(u"pushButton_9")
-        self.pushButton_9.setStyleSheet(u"QPushButton{\n"
-"color:#fff;\n"
-"border: 0px;\n"
-"font-size: 14px;\n"
-"padding: 5px;\n"
-"background-color: rgb(8, 123, 225);\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"background-color: rgb(47, 142, 228);\n"
-"}")
-
-        self.gridLayout_3.addWidget(self.pushButton_9, 1, 1, 1, 1)
-
-        self.pushButton_10 = QPushButton(self.tab_2)
-        self.pushButton_10.setObjectName(u"pushButton_10")
-        self.pushButton_10.setStyleSheet(u"QPushButton{\n"
-"color:#fff;\n"
-"border: 0px;\n"
-"font-size: 14px;\n"
-"padding: 5px;\n"
-"background-color: rgb(8, 123, 225);\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"background-color: rgb(47, 142, 228);\n"
-"}")
-
-        self.gridLayout_3.addWidget(self.pushButton_10, 1, 2, 1, 1)
 
         self.tabWidget.addTab(self.tab_2, "")
         self.widget_2 = QWidget()
@@ -748,6 +748,9 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Status", None));
         self.pushButton_18.setText(QCoreApplication.translate("MainWindow", u"Accept", None))
         self.pushButton_17.setText(QCoreApplication.translate("MainWindow", u"Decline", None))
+        self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
+        self.add_Travel_Agent_button.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         ___qtablewidgetitem9 = self.travelagentTableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Id", None));
         ___qtablewidgetitem10 = self.travelagentTableWidget.horizontalHeaderItem(1)
@@ -764,9 +767,6 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Hours", None));
         ___qtablewidgetitem16 = self.travelagentTableWidget.horizontalHeaderItem(7)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Salary", None));
-        self.pushButton_8.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Travel Agents", None))
         self.pushButton_11.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.pushButton_12.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
