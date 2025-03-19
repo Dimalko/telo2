@@ -5,6 +5,8 @@ from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
 
+from classes.populate_table import PopulateTable
+
 class AdminWindow(QMainWindow):
     switch_login = pyqtSignal()
     
@@ -20,6 +22,9 @@ class AdminWindow(QMainWindow):
     #connect db
         self.connection = sqlite3.connect("data//database.db")
         self.cursor = self.connection.cursor()
+
+    #initialize classes
+        self.populate_table = PopulateTable()
 
     #connect buttons
         self.homeBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
@@ -45,33 +50,13 @@ class AdminWindow(QMainWindow):
         self.logoLabel.setPixmap(pixmap)
         self.logoLabel.setStyleSheet("padding-top: 20px; padding-bottom: 20px;")
 
-    def populate_tour_table(self):
-        self.cursor.execute("SELECT * FROM Tours")
-        data = self.cursor.fetchall()
-        
-        if not data:
-            return
-        
-        self.tourTableWidget.setRowCount(len(data))
-        self.tourTableWidget.setColumnCount(9)
-
-        for row_num, row_data in enumerate(data):
-            for col_num, col_data in enumerate(row_data):
-                self.tourTableWidget.setItem(row_num, col_num, QTableWidgetItem(str(col_data)))
     
+    def populate_tour_table(self):
+        self.populate_table.populate_table(self.tourTableWidget, "SELECT * FROM Tours", 9)
+        
     def populate_travelagent_table(self):
-        self.cursor.execute("SELECT * FROM Staff WHERE role='Travel_Agent'")
-        data = self.cursor.fetchall()
-        
-        if not data:
-            return
-        
-        self.travelagentTableWidget.setRowCount(len(data))
-        self.travelagentTableWidget.setColumnCount(8)
+        self.populate_table.populate_table(self.travelagentTableWidget, "SELECT * FROM Staff WHERE role='Travel_Agent'", 8)
 
-        for row_num, row_data in enumerate(data):
-            for col_num, col_data in enumerate(row_data):
-                self.travelagentTableWidget.setItem(row_num, col_num, QTableWidgetItem(str(col_data)))
     
 if __name__ == "__main__":
     app = QApplication(sys.argv)
