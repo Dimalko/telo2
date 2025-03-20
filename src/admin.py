@@ -56,14 +56,17 @@ class AdminWindow(QMainWindow):
     #Connect Other Windows
         self.TravelAgentRegister = TravelAgentRegisterWindow()
         self.TravelAgentRegister.finished.connect(lambda: self.update_table("Agents"))   
+        
         seller_query = "DELETE FROM Staff WHERE id = ?"
         seller_labelText = "Travel Agent id:"
         self.removeAgentShow = DeleteWindow(seller_query, seller_labelText, True)
         self.removeAgentShow.finished.connect(lambda: self.update_table("Agents"))
+        
         tour_query = "DELETE FROM Tours WHERE id = ?"
         tour_labelText = "Tour id:"
         self.removeTourShow = DeleteWindow(tour_query, tour_labelText, True)
         self.removeTourShow.finished.connect(lambda: self.update_table("Tours"))
+        
         self.TeamLeaderRegister = TeamLeaderRegisterWindow()
         self.TeamLeaderRegister.finished.connect(lambda: self.update_table("TeamLeaders"))
 
@@ -91,6 +94,7 @@ class AdminWindow(QMainWindow):
         
     def populate_travelagent_table(self):
         self.populate_table.populate_table(self.travelagentTableWidget, "SELECT * FROM Staff WHERE role='Travel_Agent'", 8)
+    
     def populate_teamleader_table(self):
         self.populate_table.populate_table(self.teamleaderTableWidget, "SELECT * FROM TeamLeaders", 5)  
 
@@ -103,7 +107,8 @@ class AdminWindow(QMainWindow):
     
     def addTeamLeader(self):
         self.open_TeamLeaderReg.emit()
-        self.TeamLeaderRegister.show()      
+        self.TeamLeaderRegister.show()    
+        self.populate_teamleader_table()  
 
     #Remove/Delete Windows
     def removeAgent(self):
