@@ -352,7 +352,7 @@ background-color: rgb(47, 142, 228);
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QPushButton" name="pushButton_7">
+         <widget class="QPushButton" name="add_Tour_button">
           <property name="styleSheet">
            <string notr="true">QPushButton{
 color:#fff;
@@ -547,7 +547,7 @@ QTabBar::tab:hover {
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="tab_2">
            <attribute name="title">
@@ -774,7 +774,7 @@ background-color: rgb(47, 142, 228);
            </attribute>
            <layout class="QGridLayout" name="gridLayout_5">
             <item row="1" column="0">
-             <widget class="QPushButton" name="pushButton_14">
+             <widget class="QPushButton" name="add_Driver_Button">
               <property name="styleSheet">
                <string notr="true">QPushButton{
 color:#fff;
@@ -837,7 +837,7 @@ background-color: rgb(47, 142, 228);
              </widget>
             </item>
             <item row="0" column="0" colspan="3">
-             <widget class="QTableWidget" name="tableWidget_3">
+             <widget class="QTableWidget" name="driverTableWidget">
               <column>
                <property name="text">
                 <string>Tax Code</string>
@@ -879,7 +879,7 @@ background-color: rgb(47, 142, 228);
       <widget class="QWidget" name="vehiclePage">
        <layout class="QGridLayout" name="gridLayout_6">
         <item row="1" column="0">
-         <widget class="QPushButton" name="pushButton_19">
+         <widget class="QPushButton" name="Add_Buses_Button">
           <property name="styleSheet">
            <string notr="true">QPushButton{
 color:#fff;
@@ -895,7 +895,7 @@ background-color: rgb(47, 142, 228);
 }</string>
           </property>
           <property name="text">
-           <string>PushButton</string>
+           <string>Add</string>
           </property>
          </widget>
         </item>
@@ -942,7 +942,53 @@ background-color: rgb(47, 142, 228);
          </widget>
         </item>
         <item row="0" column="0" colspan="3">
-         <widget class="QTableWidget" name="tableWidget_5"/>
+         <widget class="QTableWidget" name="busesTableWidget">
+          <column>
+           <property name="text">
+            <string>Plate Number</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Model</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Year</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Mileage</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Company</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>RentalCost</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Seats</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Contract Date</string>
+           </property>
+          </column>
+         </widget>
         </item>
        </layout>
       </widget>

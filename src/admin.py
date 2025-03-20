@@ -8,6 +8,9 @@ from PyQt5.QtGui import QPixmap
 from travelAgentRegister import TravelAgentRegisterWindow
 from delete import DeleteWindow
 from teamleaderRegister import TeamLeaderRegisterWindow
+from driversRegister import DriverRegisterWindow
+from busesRegister import BusesRegisterWindow
+from toursRegister import ToursRegisterWindow
 
 
 from classes.populate_table import PopulateTable
@@ -15,6 +18,9 @@ from classes.populate_table import PopulateTable
 class AdminWindow(QMainWindow):
     open_TravelAgentReg = pyqtSignal()
     open_TeamLeaderReg = pyqtSignal()
+    open_DriverReg = pyqtSignal()
+    open_BusReg = pyqtSignal()
+    open_TourReg = pyqtSignal()
     open_delete = pyqtSignal()
     switch_login = pyqtSignal()
     
@@ -45,6 +51,9 @@ class AdminWindow(QMainWindow):
         #Add Buttons
         self.add_Travel_Agent_button.clicked.connect(self.addTravelAgent)
         self.add_Team_Leader_button.clicked.connect(self.addTeamLeader)
+        self.add_Driver_Button.clicked.connect(self.addDriver)
+        self.Add_Buses_Button.clicked.connect(self.addBus)
+        self.add_Tour_button.clicked.connect(self.addTour)
         #Remove Buttons
         self.removeAgentBtn.clicked.connect(self.removeAgent)
         self.removeTourBtn.clicked.connect(self.removeTour)
@@ -54,6 +63,8 @@ class AdminWindow(QMainWindow):
         self.populate_tour_table()
         self.populate_travelagent_table()
         self.populate_teamleader_table()
+        self.populate_driver_table()
+        self.populate_buses_table()
 
     #Connect Other Windows
         self.TravelAgentRegister = TravelAgentRegisterWindow()
@@ -61,6 +72,15 @@ class AdminWindow(QMainWindow):
 
         self.TeamLeaderRegister = TeamLeaderRegisterWindow()
         self.TeamLeaderRegister.finished.connect(lambda: self.update_table("TeamLeaders")) 
+
+        self.DriverRegister = DriverRegisterWindow()
+        self.DriverRegister.finished.connect(lambda: self.update_table("Drivers"))
+
+        self.BusRegister = BusesRegisterWindow()
+        self.BusRegister.finished.connect(lambda: self.update_table("Buses"))
+
+        self.ToursRegister = ToursRegisterWindow()
+        self.ToursRegister.finished.connect(lambda: self.update_table("Tours"))
         
         seller_query = "DELETE FROM Staff WHERE id = ?"
         seller_labelText = "Travel Agent id:"
@@ -89,6 +109,10 @@ class AdminWindow(QMainWindow):
     def update_table(self, table_name):
         if table_name == 'Agents':
             self.populate_travelagent_table()
+        elif table_name == 'Drivers':
+            self.populate_driver_table()
+        elif table_name == 'Buses':
+            self.populate_buses_table()           
         elif table_name == 'TeamLeaders':
             self.populate_teamleader_table()    
         elif table_name == "Tours":
@@ -104,6 +128,11 @@ class AdminWindow(QMainWindow):
     
     def populate_teamleader_table(self):
         self.populate_table.populate_table(self.teamleaderTableWidget, "SELECT * FROM TeamLeaders", 5)  
+    def populate_driver_table(self):
+        self.populate_table.populate_table(self.driverTableWidget, "SELECT * FROM Drivers", 6)    
+    def populate_buses_table(self):
+        self.populate_table.populate_table(self.busesTableWidget, "SELECT * FROM Buses", 10)
+
 
 #--Display Windows----------
     #Add Windows
@@ -116,7 +145,15 @@ class AdminWindow(QMainWindow):
         self.open_TeamLeaderReg.emit()
         self.TeamLeaderRegister.show()    
         self.populate_teamleader_table()  
-
+    def addDriver(self):
+        self.open_DriverReg.emit()
+        self.DriverRegister.show()    
+    def addBus(self):
+        self.open_BusReg.emit()
+        self.BusRegister.show()
+    def addTour(self):
+        self.open_TourReg.emit()
+        self.ToursRegister.show()    
     #Remove/Delete Windows
     def removeAgent(self):
         self.open_delete.emit()
