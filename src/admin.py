@@ -7,11 +7,14 @@ from PyQt5.QtGui import QPixmap
 
 from travelAgentRegister import TravelAgentRegisterWindow
 from delete import DeleteWindow
+from teamleaderRegister import TeamLeaderRegisterWindow
+
 
 from classes.populate_table import PopulateTable
 
 class AdminWindow(QMainWindow):
     open_TravelAgentReg = pyqtSignal()
+    open_TeamLeaderReg = pyqtSignal()
     open_delete = pyqtSignal()
     switch_login = pyqtSignal()
     
@@ -41,6 +44,7 @@ class AdminWindow(QMainWindow):
         self.statsBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
         #Add Buttons
         self.add_Travel_Agent_button.clicked.connect(self.addTravelAgent)
+        self.add_Team_Leader_button.clicked.connect(self.addTeamLeader)
         #Remove Buttons
         self.removeAgentBtn.clicked.connect(self.removeAgent)
         self.removeTourBtn.clicked.connect(self.removeTour)
@@ -60,6 +64,8 @@ class AdminWindow(QMainWindow):
         tour_labelText = "Tour id:"
         self.removeTourShow = DeleteWindow(tour_query, tour_labelText, True)
         self.removeTourShow.finished.connect(lambda: self.update_table("Tours"))
+        self.TeamLeaderRegister = TeamLeaderRegisterWindow()
+        self.TeamLeaderRegister.finished.connect(lambda: self.update_table("TeamLeaders"))
 
 
 #--Style----------   
@@ -73,6 +79,8 @@ class AdminWindow(QMainWindow):
     def update_table(self, table_name):
         if table_name == 'Agents':
             self.populate_travelagent_table()
+        elif table_name == 'TeamLeaders':
+            self.populate_teamleader_table()    
         elif table_name == "Tours":
             self.populate_tour_table()
 
@@ -83,7 +91,8 @@ class AdminWindow(QMainWindow):
         
     def populate_travelagent_table(self):
         self.populate_table.populate_table(self.travelagentTableWidget, "SELECT * FROM Staff WHERE role='Travel_Agent'", 8)
-
+    def populate_teamleader_table(self):
+        self.populate_table.populate_table(self.teamleaderTableWidget, "SELECT * FROM TeamLeaders", 5)  
 
 #--Display Windows----------
     #Add Windows
@@ -91,6 +100,10 @@ class AdminWindow(QMainWindow):
         self.open_TravelAgentReg.emit()
         self.TravelAgentRegister.show()
         self.populate_travelagent_table()
+    
+    def addTeamLeader(self):
+        self.open_TeamLeaderReg.emit()
+        self.TeamLeaderRegister.show()      
 
     #Remove/Delete Windows
     def removeAgent(self):

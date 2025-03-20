@@ -180,9 +180,9 @@ class Ui_MainWindow(object):
         self.homePage.setObjectName(u"homePage")
         self.gridLayout = QGridLayout(self.homePage)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.pushButton_6 = QPushButton(self.homePage)
-        self.pushButton_6.setObjectName(u"pushButton_6")
-        self.pushButton_6.setStyleSheet(u"QPushButton{\n"
+        self.removeTourBtn = QPushButton(self.homePage)
+        self.removeTourBtn.setObjectName(u"removeTourBtn")
+        self.removeTourBtn.setStyleSheet(u"QPushButton{\n"
 "color:#fff;\n"
 "border: 0px;\n"
 "font-size: 14px;\n"
@@ -195,7 +195,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(47, 142, 228);\n"
 "}")
 
-        self.gridLayout.addWidget(self.pushButton_6, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.removeTourBtn, 2, 1, 1, 1)
 
         self.pushButton_7 = QPushButton(self.homePage)
         self.pushButton_7.setObjectName(u"pushButton_7")
@@ -422,9 +422,9 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.add_Travel_Agent_button, 1, 0, 1, 1)
 
-        self.pushButton_9 = QPushButton(self.tab_2)
-        self.pushButton_9.setObjectName(u"pushButton_9")
-        self.pushButton_9.setStyleSheet(u"QPushButton{\n"
+        self.removeAgentBtn = QPushButton(self.tab_2)
+        self.removeAgentBtn.setObjectName(u"removeAgentBtn")
+        self.removeAgentBtn.setStyleSheet(u"QPushButton{\n"
 "color:#fff;\n"
 "border: 0px;\n"
 "font-size: 14px;\n"
@@ -437,7 +437,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(47, 142, 228);\n"
 "}")
 
-        self.gridLayout_3.addWidget(self.pushButton_9, 1, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.removeAgentBtn, 1, 1, 1, 1)
 
         self.travelagentTableWidget = QTableWidget(self.tab_2)
         if (self.travelagentTableWidget.columnCount() < 8):
@@ -511,14 +511,70 @@ class Ui_MainWindow(object):
         self.widget_2.setObjectName(u"widget_2")
         self.gridLayout_4 = QGridLayout(self.widget_2)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.tableWidget_2 = QTableWidget(self.widget_2)
-        self.tableWidget_2.setObjectName(u"tableWidget_2")
+        self.teamleaderTableWidget = QTableWidget(self.widget_2)
+        if (self.teamleaderTableWidget.columnCount() < 5):
+            self.teamleaderTableWidget.setColumnCount(5)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.teamleaderTableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.teamleaderTableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem18)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        self.teamleaderTableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        self.teamleaderTableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem20)
+        __qtablewidgetitem21 = QTableWidgetItem()
+        self.teamleaderTableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem21)
+        self.teamleaderTableWidget.setObjectName(u"teamleaderTableWidget")
+        self.teamleaderTableWidget.setStyleSheet(u"QTableWidget {\n"
+"border:none;\n"
+"background-color: white; \n"
+"alternate-background-color: #f0f0f0; /* Alternating row color */\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    background-color: #0984e3; /* Header background */\n"
+"    color: white;              /* Header text color */\n"
+"    font: bold 12px Arial;     /* Header font */\n"
+"    padding: 5px;\n"
+"    border: 1px solid #74b9ff; /* Border color */\n"
+"}\n"
+"\n"
+"#QTableWidget QTableCornerButton::section {\n"
+"    background-color: #74b9ff; /* Top-left corner color */\n"
+"    border: 1px solid #0984e3;\n"
+"}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background: #dfe6e9;  /* Background color of the scrollbar track */\n"
+"    height: 12px;  /* Thickness of the scrollbar */\n"
+"    margin: 0px 0px 0px 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #0984e3; /* Color of the scrollbar handle (slider) */\n"
+"    min-width: 20px; /* Minimum width of the handle */\n"
+"    border-radius: 6px; /* Rounded edges *"
+                        "/\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #74b9ff; /* Lighter color when hovered */\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
+"    background: none; /* Removes the small arrow buttons */\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
+"    background: none; /* Keeps empty space color same */\n"
+"}")
 
-        self.gridLayout_4.addWidget(self.tableWidget_2, 0, 0, 1, 3)
+        self.gridLayout_4.addWidget(self.teamleaderTableWidget, 0, 0, 1, 3)
 
-        self.pushButton_11 = QPushButton(self.widget_2)
-        self.pushButton_11.setObjectName(u"pushButton_11")
-        self.pushButton_11.setStyleSheet(u"QPushButton{\n"
+        self.add_Team_Leader_button = QPushButton(self.widget_2)
+        self.add_Team_Leader_button.setObjectName(u"add_Team_Leader_button")
+        self.add_Team_Leader_button.setStyleSheet(u"QPushButton{\n"
 "color:#fff;\n"
 "border: 0px;\n"
 "font-size: 14px;\n"
@@ -531,7 +587,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(47, 142, 228);\n"
 "}")
 
-        self.gridLayout_4.addWidget(self.pushButton_11, 1, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.add_Team_Leader_button, 1, 0, 1, 1)
 
         self.pushButton_12 = QPushButton(self.widget_2)
         self.pushButton_12.setObjectName(u"pushButton_12")
@@ -710,7 +766,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(3)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -725,7 +781,7 @@ class Ui_MainWindow(object):
         self.staffBtn.setText(QCoreApplication.translate("MainWindow", u"Staff", None))
         self.vehiclesBtn.setText(QCoreApplication.translate("MainWindow", u"Vehicles", None))
         self.statsBtn.setText(QCoreApplication.translate("MainWindow", u"Stats", None))
-        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.removeTourBtn.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.pushButton_7.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Available Destinations", None))
         ___qtablewidgetitem = self.tourTableWidget.horizontalHeaderItem(0)
@@ -750,7 +806,7 @@ class Ui_MainWindow(object):
         self.pushButton_17.setText(QCoreApplication.translate("MainWindow", u"Decline", None))
         self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.add_Travel_Agent_button.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.removeAgentBtn.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         ___qtablewidgetitem9 = self.travelagentTableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Id", None));
         ___qtablewidgetitem10 = self.travelagentTableWidget.horizontalHeaderItem(1)
@@ -768,7 +824,17 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem16 = self.travelagentTableWidget.horizontalHeaderItem(7)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Salary", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Travel Agents", None))
-        self.pushButton_11.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        ___qtablewidgetitem17 = self.teamleaderTableWidget.horizontalHeaderItem(0)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"New Column", None));
+        ___qtablewidgetitem18 = self.teamleaderTableWidget.horizontalHeaderItem(1)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"First Name", None));
+        ___qtablewidgetitem19 = self.teamleaderTableWidget.horizontalHeaderItem(2)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"Last Name", None));
+        ___qtablewidgetitem20 = self.teamleaderTableWidget.horizontalHeaderItem(3)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Payment", None));
+        ___qtablewidgetitem21 = self.teamleaderTableWidget.horizontalHeaderItem(4)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Skills", None));
+        self.add_Team_Leader_button.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.pushButton_12.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.pushButton_13.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.widget_2), QCoreApplication.translate("MainWindow", u"Team Leaders", None))
