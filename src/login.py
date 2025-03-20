@@ -38,13 +38,11 @@ class LoginWindow(QMainWindow):
         username = self.usernameInput.text()
         password = self.passwordInput.text()
         role = self.roleInput.currentText()
-        print(role)
         
         self.cursor.execute("SELECT username,password,role FROM Staff WHERE username=? AND password=? AND role=?", (username, password, role))
         result = self.cursor.fetchone()
         
         if result:
-            print("connect success")
             if role == "Admin":
                 self.switch_admin.emit()
                 self.admin = AdminWindow()
@@ -55,9 +53,8 @@ class LoginWindow(QMainWindow):
         #         self.supplier = SupplierWindow(username)
         #         self.supplier.show()
         #         self.hide()
-        # else:
-        #     self.invInpLbl.show()
-        #     print("invalid input")
+        else:
+            self.invInpLbl.show()
 
 
     def loginImg(self):
