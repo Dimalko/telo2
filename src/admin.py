@@ -48,14 +48,19 @@ class AdminWindow(QMainWindow):
         #Remove Buttons
         self.removeAgentBtn.clicked.connect(self.removeAgent)
         self.removeTourBtn.clicked.connect(self.removeTour)
+        self.removeTeamLeaderBtn.clicked.connect(self.removeTeamLeader)
 
     #Populate Tables/Lists
         self.populate_tour_table()
         self.populate_travelagent_table()
+        self.populate_teamleader_table()
 
     #Connect Other Windows
         self.TravelAgentRegister = TravelAgentRegisterWindow()
-        self.TravelAgentRegister.finished.connect(lambda: self.update_table("Agents"))   
+        self.TravelAgentRegister.finished.connect(lambda: self.update_table("Agents"))  
+
+        self.TeamLeaderRegister = TeamLeaderRegisterWindow()
+        self.TeamLeaderRegister.finished.connect(lambda: self.update_table("TeamLeaders")) 
         
         seller_query = "DELETE FROM Staff WHERE id = ?"
         seller_labelText = "Travel Agent id:"
@@ -66,9 +71,11 @@ class AdminWindow(QMainWindow):
         tour_labelText = "Tour id:"
         self.removeTourShow = DeleteWindow(tour_query, tour_labelText, True)
         self.removeTourShow.finished.connect(lambda: self.update_table("Tours"))
-        
-        self.TeamLeaderRegister = TeamLeaderRegisterWindow()
-        self.TeamLeaderRegister.finished.connect(lambda: self.update_table("TeamLeaders"))
+
+        tLeader_query = "DELETE FROM TeamLeaders WHERE id = ?"
+        tLeader_labelText = "Team Leader id:"
+        self.removeTeamLeaderShow = DeleteWindow(tLeader_query, tLeader_labelText, True)
+        self.removeTeamLeaderShow.finished.connect(lambda: self.update_table("TeamLeaders"))
 
 
 #--Style----------   
@@ -118,6 +125,10 @@ class AdminWindow(QMainWindow):
     def removeTour(self):
         self.open_delete.emit()
         self.removeTourShow.show()
+    
+    def removeTeamLeader(self):
+        self.open_delete.emit()
+        self.removeTeamLeaderShow.show()
 
 
 

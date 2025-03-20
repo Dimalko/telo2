@@ -55,6 +55,5 @@ class TeamLeaderRegisterWindow(QMainWindow):
                 self.connection.rollback()
             finally:
                 self.connection.close()
-                self.cursor.close()
                 self.finished.emit()
                 self.close()
