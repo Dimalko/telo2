@@ -58,6 +58,8 @@ class AdminWindow(QMainWindow):
         self.removeAgentBtn.clicked.connect(self.removeAgent)
         self.removeTourBtn.clicked.connect(self.removeTour)
         self.removeTeamLeaderBtn.clicked.connect(self.removeTeamLeader)
+        self.removeDriverBtn.clicked.connect(self.removeDriver)
+        self.removeBusBtn.clicked.connect(self.removeBus)
 
     #Populate Tables/Lists
         self.populate_tour_table()
@@ -97,6 +99,16 @@ class AdminWindow(QMainWindow):
         self.removeTeamLeaderShow = DeleteWindow(tLeader_query, tLeader_labelText, True)
         self.removeTeamLeaderShow.finished.connect(lambda: self.update_table("TeamLeaders"))
 
+        driver_query = "DELETE FROM Drivers WHERE tax_code = ?"
+        driver_labelText = "Driver id:"
+        self.removeDriverShow = DeleteWindow(driver_query, driver_labelText, True)
+        self.removeDriverShow.finished.connect(lambda: self.update_table("Drivers"))
+
+        bus_query = "DELETE FROM Buses WHERE plate_number = ?"
+        bus_labelText = "Plate Number:"
+        self.removeBusShow = DeleteWindow(bus_query, bus_labelText, True)
+        self.removeBusShow.finished.connect(lambda: self.update_table("Buses"))
+
 
 #--Style----------   
     def uiStyle(self):
@@ -128,8 +140,10 @@ class AdminWindow(QMainWindow):
     
     def populate_teamleader_table(self):
         self.populate_table.populate_table(self.teamleaderTableWidget, "SELECT * FROM TeamLeaders", 5)  
+    
     def populate_driver_table(self):
         self.populate_table.populate_table(self.driverTableWidget, "SELECT * FROM Drivers", 6)    
+    
     def populate_buses_table(self):
         self.populate_table.populate_table(self.busesTableWidget, "SELECT * FROM Buses", 10)
 
@@ -145,15 +159,19 @@ class AdminWindow(QMainWindow):
         self.open_TeamLeaderReg.emit()
         self.TeamLeaderRegister.show()    
         self.populate_teamleader_table()  
+    
     def addDriver(self):
         self.open_DriverReg.emit()
         self.DriverRegister.show()    
+    
     def addBus(self):
         self.open_BusReg.emit()
         self.BusRegister.show()
+    
     def addTour(self):
         self.open_TourReg.emit()
         self.ToursRegister.show()    
+    
     #Remove/Delete Windows
     def removeAgent(self):
         self.open_delete.emit()
@@ -166,6 +184,14 @@ class AdminWindow(QMainWindow):
     def removeTeamLeader(self):
         self.open_delete.emit()
         self.removeTeamLeaderShow.show()
+
+    def removeDriver(self):
+        self.open_delete.emit()
+        self.removeDriverShow.show()
+
+    def removeBus(self):
+        self.open_delete.emit()
+        self.removeBusShow.show()
 
 
 

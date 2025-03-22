@@ -795,7 +795,7 @@ background-color: rgb(47, 142, 228);
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="pushButton_15">
+             <widget class="QPushButton" name="removeDriverBtn">
               <property name="styleSheet">
                <string notr="true">QPushButton{
 color:#fff;
@@ -900,14 +900,14 @@ background-color: rgb(47, 142, 228);
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QPushButton" name="pushButton_21">
+         <widget class="QPushButton" name="removeBusBtn">
           <property name="styleSheet">
            <string notr="true">QPushButton{
 color:#fff;
 border: 0px;
 font-size: 14px;
 padding: 5px;
-background-color: rgb(8, 123, 225);
+background-color: rgb(18, 65, 141);
 border-radius: 4px;
 }
 
@@ -916,7 +916,7 @@ background-color: rgb(47, 142, 228);
 }</string>
           </property>
           <property name="text">
-           <string>PushButton</string>
+           <string>Remove</string>
           </property>
          </widget>
         </item>
