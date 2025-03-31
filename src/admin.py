@@ -11,6 +11,7 @@ from teamleaderRegister import TeamLeaderRegisterWindow
 from driversRegister import DriverRegisterWindow
 from busesRegister import BusesRegisterWindow
 from toursRegister import ToursRegisterWindow
+from createDescription import CreateTourDescriptionWindow
 
 
 from classes.populate_table import PopulateTable
@@ -21,6 +22,7 @@ class AdminWindow(QMainWindow):
     open_DriverReg = pyqtSignal()
     open_BusReg = pyqtSignal()
     open_TourReg = pyqtSignal()
+    open_createDescription = pyqtSignal()
     open_delete = pyqtSignal()
     switch_login = pyqtSignal()
     
@@ -60,6 +62,8 @@ class AdminWindow(QMainWindow):
         self.removeTeamLeaderBtn.clicked.connect(self.removeTeamLeader)
         self.removeDriverBtn.clicked.connect(self.removeDriver)
         self.removeBusBtn.clicked.connect(self.removeBus)
+        #Create Tour Description Button
+        self.createTourDescriptionBtn.clicked.connect(self.createTourDescription)
 
     #Populate Tables/Lists
         self.populate_tour_table()
@@ -108,6 +112,8 @@ class AdminWindow(QMainWindow):
         bus_labelText = "Plate Number:"
         self.removeBusShow = DeleteWindow(bus_query, bus_labelText, True)
         self.removeBusShow.finished.connect(lambda: self.update_table("Buses"))
+
+        self.createDescriptionShow = CreateTourDescriptionWindow()
 
 
 #--Style----------   
@@ -192,6 +198,11 @@ class AdminWindow(QMainWindow):
     def removeBus(self):
         self.open_delete.emit()
         self.removeBusShow.show()
+    
+    #Create Tour Description Window
+    def createTourDescription(self):
+        self.open_createDescription.emit()
+        self.createDescriptionShow.show()
 
 
 

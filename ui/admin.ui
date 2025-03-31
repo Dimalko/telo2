@@ -152,7 +152,7 @@ background-color: rgb(47, 142, 228);
 }</string>
          </property>
          <property name="text">
-          <string>Home</string>
+          <string>Tours</string>
          </property>
         </widget>
        </item>
@@ -372,17 +372,28 @@ background-color: rgb(47, 142, 228);
           </property>
          </widget>
         </item>
-        <item row="0" column="0" colspan="2">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Tours</string>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="editTourBtn">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color:rgb(234, 129, 0);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color:rgb(240, 168, 0);
+}</string>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
+          <property name="text">
+           <string>Edit</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="2">
+        <item row="1" column="0" colspan="3">
          <widget class="QTableWidget" name="tourTableWidget">
           <property name="styleSheet">
            <string notr="true"/>
@@ -435,6 +446,37 @@ background-color: rgb(47, 142, 228);
             <string>Status</string>
            </property>
           </column>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="3">
+         <widget class="QPushButton" name="createTourDescriptionBtn">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color:#74b9ff;
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color: rgb(136, 205, 255);
+}</string>
+          </property>
+          <property name="text">
+           <string>Create Tour Description 📝</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Tours</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
        </layout>
@@ -547,7 +589,7 @@ QTabBar::tab:hover {
 }</string>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_2">
            <attribute name="title">
