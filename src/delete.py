@@ -1,4 +1,3 @@
-import sys
 import sqlite3
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.uic import loadUi

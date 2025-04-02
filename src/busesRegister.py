@@ -1,6 +1,4 @@
-import sys
 import sqlite3
-import random
 from datetime import datetime
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtCore import QObject, pyqtSignal

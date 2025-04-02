@@ -13,8 +13,8 @@ from busesRegister import BusesRegisterWindow
 from toursRegister import ToursRegisterWindow
 from createDescription import CreateTourDescriptionWindow
 
-
 from classes.populate_table import PopulateTable
+
 
 class AdminWindow(QMainWindow):
     open_TravelAgentReg = pyqtSignal()
