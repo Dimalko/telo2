@@ -8,7 +8,7 @@
 
 ## Installation
 
-Use the package manager [pip] (https://pip.pypa.io/en/stable/) to install necesary libraries
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install necesary libraries
 
 '''bash
 pip install PyQt5
@@ -38,6 +38,4 @@ Pull requests are welcome. For any changes, please open an issue first to discus
 
 ## Licence
 
-[MIT]
-
-(https://opensource.org/license/mit)
+[MIT](https://opensource.org/license/mit)
