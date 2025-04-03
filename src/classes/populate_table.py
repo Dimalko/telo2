@@ -1,6 +1,7 @@
 import sqlite3
 from PyQt5.QtWidgets import QTableWidgetItem
 
+
 class PopulateTable:
     def __init__(self, db_path="data//database.db"):
         self.connection = sqlite3.connect(db_path)

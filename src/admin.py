@@ -206,7 +206,7 @@ class AdminWindow(QMainWindow):
 
 
 
-
+#!REMOVE BEFORE FINAL VERSION------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = AdminWindow()

@@ -5,13 +5,13 @@ from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
 from admin import AdminWindow
-#from supplier import SupplierWindow
+from agent import AgentWindow
 
 
 class LoginWindow(QMainWindow):
     
     switch_admin = pyqtSignal()
-    #switch_supplier = Signal()
+    switch_agent = pyqtSignal()
     
     def __init__(self):
         super().__init__()    
@@ -48,11 +48,11 @@ class LoginWindow(QMainWindow):
                 self.admin = AdminWindow()
                 self.admin.show()
                 self.hide()
-        #     else:
-        #         self.switch_supplier.emit()
-        #         self.supplier = SupplierWindow(username)
-        #         self.supplier.show()
-        #         self.hide()
+            else:
+                self.switch_agent.emit()
+                self.agent = AgentWindow(username)
+                self.agent.show()
+                self.hide()
         else:
             self.invInpLbl.show()
 

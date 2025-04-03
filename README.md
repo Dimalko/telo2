@@ -10,16 +10,16 @@
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install necesary libraries
 
-'''bash
+```bash
 pip install PyQt5
-'''
+```
 
 ## How To Run
 
 Για την σωστη λειτουργια του προγραμματος τρεξτε το αρχειο login.py (ή το app.exe όποτε και αν το βαλουμε)
 Συνδεθειτε σαν admin ή agent με τους αναλογους κωδικους
 
-'''bash
+```bash
 Admin Login Info:
 username: admin1
 password: admin1
@@ -27,10 +27,10 @@ password: admin1
 Agent Login Info:
 username: agent1
 password: agent1
-'''
+```
 
 ## Future Plans
-!todo add info rof our future updates (if we have any)
+!todo add info for our future updates (if we have any)
 
 ## Contributing
 

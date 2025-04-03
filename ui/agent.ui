@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>907</width>
+    <height>665</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+font: 57 8pt &quot;Yu Gothic Medium&quot;;
+}
+
+QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(8, 123, 225);
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}
+
+QTableWidget {
+border:none;
+background-color: white; 
+alternate-background-color: #f0f0f0;
+}
+
+QHeaderView::section {
+    background-color: rgb(18, 65, 141);            
+	color: rgb(243, 249, 254);
+    font: 57 8pt &quot;Yu Gothic Medium&quot;;
+    padding: 5px;
+    border: 1px solid rgb(24, 89, 193); 
+}
+
+#QTableWidget QTableCornerButton::section {
+    background-color: #74b9ff; /* Top-left corner color */
+    border: 1px solid #0984e3;
+	border-radius:5px;
+}
+
+QScrollBar:horizontal {
+    border: none;
+    background: #dfe6e9;  /* Background color of the scrollbar track */
+    height: 12px;  /* Thickness of the scrollbar */
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #0984e3; /* Color of the scrollbar handle (slider) */
+    min-width: 20px; /* Minimum width of the handle */
+    border-radius: 6px; /* Rounded edges */
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #74b9ff; /* Lighter color when hovered */
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    background: none; /* Removes the small arrow buttons */
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none; /* Keeps empty space color same */
+}
+
+QListWidget{
+	border: 1px solid rgb(161, 161, 161);	
+	border-radius:10px;
+}
+
+QLineEdit{
+	border: 1px solid rgb(18, 65, 141);	
+	border-radius: 9px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,8">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(8, 123, 225);</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="logoLabel">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>../Downloads/travel-agency (2).png</pixmap>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="margin">
+          <number>20</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="homeBtn">
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+border-radius: 0px;
+background-color: rgb(8, 123, 225);
+}
+
+QPushButton:hover{
+background-color: rgb(18, 65, 141);
+border-radius: 10px;
+border-bottom: 2px solid #74b9ff;
+}</string>
+         </property>
+         <property name="text">
+          <string>Tours</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="reservationsBtn">
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+border-radius: 0px;
+background-color: rgb(8, 123, 225);
+}
+
+QPushButton:hover{
+background-color: rgb(18, 65, 141);
+border-radius: 10px;
+border-bottom: 2px solid #74b9ff;
+}</string>
+         </property>
+         <property name="text">
+          <string>Reservations</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="staffBtn">
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+border-radius: 0px;
+background-color: rgb(8, 123, 225);
+}
+
+QPushButton:hover{
+background-color: rgb(18, 65, 141);
+border-radius: 10px;
+border-bottom: 2px solid #74b9ff;
+}</string>
+         </property>
+         <property name="text">
+          <string>Staff</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="vehiclesBtn">
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+border-radius: 0px;
+background-color: rgb(8, 123, 225);
+}
+
+QPushButton:hover{
+background-color: rgb(18, 65, 141);
+border-radius: 10px;
+border-bottom: 2px solid #74b9ff;
+}</string>
+         </property>
+         <property name="text">
+          <string>Vehicles</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="statsBtn">
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+border-radius: 0px;
+background-color: rgb(8, 123, 225);
+}
+
+QPushButton:hover{
+background-color: rgb(18, 65, 141);
+border-radius: 10px;
+border-bottom: 2px solid #74b9ff;
+}</string>
+         </property>
+         <property name="text">
+          <string>Stats</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="logOutBtn">
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(18, 65, 141);
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}
+
+
+
+
+
+
+/*
+QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(233, 128, 0);
+}
+
+QPushButton:hover{
+background-color:rgb(240, 168, 0);
+}
+*/</string>
+         </property>
+         <property name="text">
+          <string>Log Out</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::DefaultContextMenu</enum>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(243, 249, 254);</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="homePage">
+       <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0">
+        <item row="1" column="0" colspan="3">
+         <widget class="QTableWidget" name="tourTableWidget">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>true</bool>
+          </property>
+          <column>
+           <property name="text">
+            <string>Id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Destination</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Starting Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>End Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Description</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Distance</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Agent</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Transportation</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QPushButton" name="createTourDescriptionBtn">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color:#74b9ff;
+border-radius: 10px;
+}
+
+QPushButton:hover{
+background-color: rgb(136, 205, 255);
+}</string>
+          </property>
+          <property name="text">
+           <string>Create Tour Description 📝</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Tours</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="reservationsPage">
+       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,8">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Scheduled Tours&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="listWidget"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(8, 123, 225);
+border-radius: 10px;
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+            </property>
+            <property name="text">
+             <string>Create Reservation</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTableWidget" name="tableWidget">
+            <column>
+             <property name="text">
+              <string>Id</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Client Name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Number Of People</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Hotel</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Cost</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Payment Type</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_3" native="true"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="6,4">
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_4" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>246</width>
+                <height>32</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>246</width>
+                <height>32</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border: 1px solid rgb(161, 161, 161);	
+	border-radius:10px;</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="4,6">
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="styleSheet">
+                  <string notr="true">border: none;</string>
+                 </property>
+                 <property name="text">
+                  <string>Total Cost:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="styleSheet">
+                  <string notr="true">border:none;</string>
+                 </property>
+                 <property name="text">
+                  <string>--</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="staffPage">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="styleSheet">
+           <string notr="true">QTabBar{
+border:none;
+}
+
+QTabBar::tab {
+        background: rgb(220, 228, 231);
+        
+       
+}
+
+QTabBar::tab:selected {
+        background: #087be1;
+        color: white; 
+}
+
+QTabBar::tab:hover {
+        background: #2f8ee4;
+		color: white; 
+}</string>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>Travel Agents</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0" colspan="2">
+             <widget class="QTableWidget" name="travelagentTableWidget">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <column>
+               <property name="text">
+                <string>Id</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Usename</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Password</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>First Name</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Last Name</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Role</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Hours</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Salary</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="widget_2">
+           <attribute name="title">
+            <string>Team Leaders</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0" colspan="2">
+             <widget class="QTableWidget" name="teamleaderTableWidget">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <column>
+               <property name="text">
+                <string>Id</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>First Name</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Last Name</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Payment</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Skills</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab">
+           <attribute name="title">
+            <string>Drivers</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0">
+            <item row="0" column="0" colspan="2">
+             <widget class="QTableWidget" name="driverTableWidget">
+              <column>
+               <property name="text">
+                <string>Tax Code</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>First Name</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Last Name</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Type</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Salary</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Status</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="vehiclePage">
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0" colspan="2">
+         <widget class="QTableWidget" name="busesTableWidget">
+          <column>
+           <property name="text">
+            <string>Plate Number</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Model</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Year</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Mileage</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Company</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>RentalCost</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Seats</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Contract Date</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="statsPage">
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>270</y>
+          <width>201</width>
+          <height>81</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;STATS TO DO!!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
