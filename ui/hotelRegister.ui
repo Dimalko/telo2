@@ -112,7 +112,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
          <height>773</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="3,7">
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -137,7 +137,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <string notr="true">color: rgb(243, 249, 254);</string>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;Travel Agent Register&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;Hotel register&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
@@ -153,12 +153,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
            <item>
             <widget class="QLabel" name="usernameLabel">
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Username&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Id&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="usernameInput">
+            <widget class="QLineEdit" name="hotelIdInput">
              <property name="styleSheet">
               <string notr="true"/>
              </property>
@@ -167,12 +167,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
            <item>
             <widget class="QLabel" name="passwordLabel">
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Password&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="passwordInput">
+            <widget class="QLineEdit" name="hotelNameInput">
              <property name="styleSheet">
               <string notr="true"/>
              </property>
@@ -181,12 +181,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
            <item>
             <widget class="QLabel" name="FirstNameLabel">
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;First Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Address&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="FirstNameInput">
+            <widget class="QLineEdit" name="hotelAddressInput">
              <property name="styleSheet">
               <string notr="true"/>
              </property>
@@ -195,43 +195,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
            <item>
             <widget class="QLabel" name="LastNameLabel">
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Last name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Price Per Person&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="LastNameInput">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="Work_HoursLabel">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Work Hours&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="Work_HoursInput">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="SalaryLabel">
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Salary&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="SalaryInput">
+            <widget class="QLineEdit" name="hotelPriceInput">
              <property name="styleSheet">
               <string notr="true"/>
              </property>
@@ -269,7 +238,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="add_Travel_Agent_button">
+              <widget class="QPushButton" name="add_Hotel_button">
                <property name="enabled">
                 <bool>true</bool>
                </property>

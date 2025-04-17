@@ -363,7 +363,7 @@ background-color:rgb(240, 168, 0);
        <string notr="true">background-color: rgb(243, 249, 254);</string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout">
@@ -508,8 +508,13 @@ background-color: rgb(136, 205, 255);
         </item>
         <item row="0" column="0" colspan="3">
          <widget class="QLabel" name="label_2">
+          <property name="styleSheet">
+           <string notr="true">background-color:rgb(170, 217, 231);
+padding: 5px;
+border-radius: 7px;</string>
+          </property>
           <property name="text">
-           <string>Tours</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#12418d;&quot;&gt;Tours&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -519,8 +524,8 @@ background-color: rgb(136, 205, 255);
        </layout>
       </widget>
       <widget class="QWidget" name="requestPage">
-       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="2,8">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_8" columnstretch="2,8">
+        <item row="1" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="leftMargin">
            <number>0</number>
@@ -579,12 +584,33 @@ background-color: rgb(47, 142, 228);
           </item>
          </layout>
         </item>
-        <item>
+        <item row="1" column="1">
          <widget class="QTableWidget" name="tableWidget_4"/>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Requests&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="ongoingPage"/>
+      <widget class="QWidget" name="ongoingPage">
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>50</y>
+          <width>251</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Ongoing Trips&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="staffPage">
        <layout class="QGridLayout" name="gridLayout_2">
         <property name="leftMargin">
@@ -633,27 +659,6 @@ QTabBar::tab:hover {
             <string>Travel Agents</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
-            <item row="1" column="2">
-             <widget class="QPushButton" name="pushButton_10">
-              <property name="styleSheet">
-               <string notr="true">QPushButton{
-color:#fff;
-border: 0px;
-font-size: 14px;
-padding: 5px;
-background-color:rgb(234, 129, 0);
-border-radius: 4px;
-}
-
-QPushButton:hover{
-background-color:rgb(240, 168, 0);
-}</string>
-              </property>
-              <property name="text">
-               <string>Edit</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QPushButton" name="add_Travel_Agent_button">
               <property name="styleSheet">
@@ -672,6 +677,27 @@ background-color: rgb(47, 142, 228);
               </property>
               <property name="text">
                <string>Add</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pushButton_10">
+              <property name="styleSheet">
+               <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color:rgb(234, 129, 0);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color:rgb(240, 168, 0);
+}</string>
+              </property>
+              <property name="text">
+               <string>Edit</string>
               </property>
              </widget>
             </item>
@@ -852,69 +878,6 @@ background-color: rgb(47, 142, 228);
             <string>Drivers</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_5">
-            <item row="1" column="0">
-             <widget class="QPushButton" name="add_Driver_Button">
-              <property name="styleSheet">
-               <string notr="true">QPushButton{
-color:#fff;
-border: 0px;
-font-size: 14px;
-padding: 5px;
-background-color: rgb(8, 123, 225);
-border-radius: 4px;
-}
-
-QPushButton:hover{
-background-color: rgb(47, 142, 228);
-}</string>
-              </property>
-              <property name="text">
-               <string>Add</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="removeDriverBtn">
-              <property name="styleSheet">
-               <string notr="true">QPushButton{
-color:#fff;
-border: 0px;
-font-size: 14px;
-padding: 5px;
-background-color: rgb(18, 65, 141);
-border-radius: 4px;
-}
-
-QPushButton:hover{
-background-color: rgb(47, 142, 228);
-}</string>
-              </property>
-              <property name="text">
-               <string>Remove</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="pushButton_16">
-              <property name="styleSheet">
-               <string notr="true">QPushButton{
-color:#fff;
-border: 0px;
-font-size: 14px;
-padding: 5px;
-background-color: rgb(8, 123, 225);
-border-radius: 4px;
-}
-
-QPushButton:hover{
-background-color: rgb(47, 142, 228);
-}</string>
-              </property>
-              <property name="text">
-               <string>Edit</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="driverTableWidget">
               <column>
@@ -949,39 +912,10 @@ background-color: rgb(47, 142, 228);
               </column>
              </widget>
             </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="vehiclePage">
-       <layout class="QGridLayout" name="gridLayout_6">
-        <item row="1" column="0">
-         <widget class="QPushButton" name="Add_Buses_Button">
-          <property name="styleSheet">
-           <string notr="true">QPushButton{
-color:#fff;
-border: 0px;
-font-size: 14px;
-padding: 5px;
-background-color: rgb(8, 123, 225);
-border-radius: 4px;
-}
-
-QPushButton:hover{
-background-color: rgb(47, 142, 228);
-}</string>
-          </property>
-          <property name="text">
-           <string>Add</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="removeBusBtn">
-          <property name="styleSheet">
-           <string notr="true">QPushButton{
+            <item row="1" column="1">
+             <widget class="QPushButton" name="removeDriverBtn">
+              <property name="styleSheet">
+               <string notr="true">QPushButton{
 color:#fff;
 border: 0px;
 font-size: 14px;
@@ -993,16 +927,16 @@ border-radius: 4px;
 QPushButton:hover{
 background-color: rgb(47, 142, 228);
 }</string>
-          </property>
-          <property name="text">
-           <string>Remove</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="pushButton_22">
-          <property name="styleSheet">
-           <string notr="true">QPushButton{
+              </property>
+              <property name="text">
+               <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="add_Driver_Button">
+              <property name="styleSheet">
+               <string notr="true">QPushButton{
 color:#fff;
 border: 0px;
 font-size: 14px;
@@ -1014,13 +948,42 @@ border-radius: 4px;
 QPushButton:hover{
 background-color: rgb(47, 142, 228);
 }</string>
-          </property>
-          <property name="text">
-           <string>PushButton</string>
-          </property>
+              </property>
+              <property name="text">
+               <string>Add</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pushButton_16">
+              <property name="styleSheet">
+               <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(8, 123, 225);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+              </property>
+              <property name="text">
+               <string>Edit</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
-        <item row="0" column="0" colspan="3">
+       </layout>
+      </widget>
+      <widget class="QWidget" name="vehiclePage">
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="1" column="0" colspan="3">
          <widget class="QTableWidget" name="busesTableWidget">
           <column>
            <property name="text">
@@ -1069,58 +1032,175 @@ background-color: rgb(47, 142, 228);
           </column>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="Add_Buses_Button">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(8, 123, 225);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+          </property>
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="pushButton_22">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(8, 123, 225);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="removeBusBtn">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(18, 65, 141);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+          </property>
+          <property name="text">
+           <string>Remove</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Vehicles&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="hotelsPage">
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>570</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="geometry">
-         <rect>
-          <x>200</x>
-          <y>570</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="geometry">
-         <rect>
-          <x>330</x>
-          <y>570</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-       <widget class="QTableWidget" name="tableWidget">
-        <property name="geometry">
-         <rect>
-          <x>200</x>
-          <y>180</y>
-          <width>256</width>
-          <height>192</height>
-         </rect>
-        </property>
-       </widget>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="2" column="2">
+         <widget class="QPushButton" name="editHotelBtn">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color:rgb(234, 129, 0);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color:rgb(240, 168, 0);
+}</string>
+          </property>
+          <property name="text">
+           <string>Edit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="removeHotelBtn">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(18, 65, 141);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+          </property>
+          <property name="text">
+           <string>Remove</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QTableWidget" name="hotelTableWidget">
+          <column>
+           <property name="text">
+            <string>Id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Adress</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Price Per Person</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="addHotelBtn">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
+padding: 5px;
+background-color: rgb(8, 123, 225);
+border-radius: 4px;
+}
+
+QPushButton:hover{
+background-color: rgb(47, 142, 228);
+}</string>
+          </property>
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Hotels&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="statsPage">
        <widget class="QLabel" name="label_3">
@@ -1134,6 +1214,19 @@ background-color: rgb(47, 142, 228);
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;STATS TO DO!!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>30</y>
+          <width>361</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Statistics&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </widget>

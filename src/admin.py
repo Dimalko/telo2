@@ -11,6 +11,7 @@ from teamleaderRegister import TeamLeaderRegisterWindow
 from driversRegister import DriverRegisterWindow
 from busesRegister import BusesRegisterWindow
 from toursRegister import ToursRegisterWindow
+from hotelRegister import HotelRegisterWindow
 from createDescription import CreateTourDescriptionWindow
 
 from classes.populate_table import PopulateTable
@@ -22,6 +23,7 @@ class AdminWindow(QMainWindow):
     open_DriverReg = pyqtSignal()
     open_BusReg = pyqtSignal()
     open_TourReg = pyqtSignal()
+    open_HotelReg = pyqtSignal()
     open_createDescription = pyqtSignal()
     open_delete = pyqtSignal()
     switch_login = pyqtSignal()
@@ -49,19 +51,22 @@ class AdminWindow(QMainWindow):
         self.ongoingBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
         self.staffBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.vehiclesBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(4))
-        self.statsBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
+        self.hotelsBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
+        self.statsBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(6))
         #Add Buttons
         self.add_Travel_Agent_button.clicked.connect(self.addTravelAgent)
         self.add_Team_Leader_button.clicked.connect(self.addTeamLeader)
         self.add_Driver_Button.clicked.connect(self.addDriver)
         self.Add_Buses_Button.clicked.connect(self.addBus)
         self.add_Tour_button.clicked.connect(self.addTour)
+        self.addHotelBtn.clicked.connect(self.addHotel)
         #Remove Buttons
         self.removeAgentBtn.clicked.connect(self.removeAgent)
         self.removeTourBtn.clicked.connect(self.removeTour)
         self.removeTeamLeaderBtn.clicked.connect(self.removeTeamLeader)
         self.removeDriverBtn.clicked.connect(self.removeDriver)
         self.removeBusBtn.clicked.connect(self.removeBus)
+        self.removeHotelBtn.clicked.connect(self.removeHotel)
         #Create Tour Description Button
         self.createTourDescriptionBtn.clicked.connect(self.createTourDescription)
 
@@ -71,6 +76,7 @@ class AdminWindow(QMainWindow):
         self.populate_teamleader_table()
         self.populate_driver_table()
         self.populate_buses_table()
+        self.populate_hotels_table()
 
     #Connect Other Windows
         self.TravelAgentRegister = TravelAgentRegisterWindow()
@@ -87,6 +93,9 @@ class AdminWindow(QMainWindow):
 
         self.ToursRegister = ToursRegisterWindow()
         self.ToursRegister.finished.connect(lambda: self.update_table("Tours"))
+
+        self.HotelRegister = HotelRegisterWindow()
+        self.HotelRegister.finished.connect(lambda: self.update_table("Hotels"))
         
         seller_query = "DELETE FROM Staff WHERE id = ?"
         seller_labelText = "Travel Agent id:"
@@ -113,6 +122,11 @@ class AdminWindow(QMainWindow):
         self.removeBusShow = DeleteWindow(bus_query, bus_labelText, True)
         self.removeBusShow.finished.connect(lambda: self.update_table("Buses"))
 
+        hotel_query = "DELETE FROM Hotels WHERE id = ?"
+        hotel_labelText= "Hotel id:"
+        self.removeHotelShow = DeleteWindow(hotel_query, hotel_labelText, True)
+        self.removeHotelShow.finished.connect(lambda: self.update_table("Hotels"))
+
         self.createDescriptionShow = CreateTourDescriptionWindow()
 
 
@@ -135,6 +149,8 @@ class AdminWindow(QMainWindow):
             self.populate_teamleader_table()    
         elif table_name == "Tours":
             self.populate_tour_table()
+        elif table_name == "Hotels":
+            self.populate_hotels_table()
 
 
 #--Populate Tables----------  
@@ -152,6 +168,9 @@ class AdminWindow(QMainWindow):
     
     def populate_buses_table(self):
         self.populate_table.populate_table(self.busesTableWidget, "SELECT * FROM Buses", 10)
+
+    def populate_hotels_table(self):
+        self.populate_table.populate_table(self.hotelTableWidget, "SELECT * FROM Hotels", 4)
 
 
 #--Display Windows----------
@@ -176,7 +195,11 @@ class AdminWindow(QMainWindow):
     
     def addTour(self):
         self.open_TourReg.emit()
-        self.ToursRegister.show()    
+        self.ToursRegister.show()   
+
+    def addHotel(self):
+        self.open_HotelReg.emit()
+        self.HotelRegister.show() 
     
     #Remove/Delete Windows
     def removeAgent(self):
@@ -198,6 +221,10 @@ class AdminWindow(QMainWindow):
     def removeBus(self):
         self.open_delete.emit()
         self.removeBusShow.show()
+
+    def removeHotel(self):
+        self.open_delete.emit()
+        self.removeHotelShow.show()
     
     #Create Tour Description Window
     def createTourDescription(self):
