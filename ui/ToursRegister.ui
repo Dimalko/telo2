@@ -47,6 +47,16 @@ color: rgb(18, 65, 141);
 font-size:14px;
 }
 
+QComboBox{
+	background-color: rgb(255, 255, 255);
+	border: 2px solid; 
+	border-radius: 6px; 
+	border-color:rgb(18, 65, 141);
+	padding: 8px;
+	color: rgb(18, 65, 141);
+	font-size:14px;
+}
+
 QPushButton{
 color:#fff;
 border: 0px;
@@ -226,6 +236,21 @@ padding: 8px;
 color: rgb(18, 65, 141);
 font-size:14px;</string>
              </property>
+             <property name="locale">
+              <locale language="English" country="Germany"/>
+             </property>
+             <property name="frame">
+              <bool>true</bool>
+             </property>
+             <property name="readOnly">
+              <bool>false</bool>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>d/M/yyyy</string>
+             </property>
             </widget>
            </item>
            <item>
@@ -245,6 +270,12 @@ border-color:rgb(18, 65, 141);
 padding: 8px;
 color: rgb(18, 65, 141);
 font-size:14px;</string>
+             </property>
+             <property name="locale">
+              <locale language="English" country="Germany"/>
+             </property>
+             <property name="displayFormat">
+              <string>d/M/yyyy</string>
              </property>
             </widget>
            </item>
@@ -287,11 +318,33 @@ font-size:14px;</string>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="transportationInput">
-             <property name="styleSheet">
-              <string notr="true"/>
+            <widget class="QComboBox" name="transportationInput">
+             <item>
+              <property name="text">
+               <string>Bus</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Ship</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Airplain</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Hotels&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="hotelContainer"/>
            </item>
            <item>
             <spacer name="verticalSpacer">

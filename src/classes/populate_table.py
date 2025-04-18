@@ -8,7 +8,7 @@ class PopulateTable:
         self.cursor = self.connection.cursor()
 
 
-    def populate_table(self, table_widget, query, col):
+    def populate_table(self, table_widget, query, col, q_num = 1):
         self.cursor.execute(query)
         data = self.cursor.fetchall()
 
@@ -18,14 +18,28 @@ class PopulateTable:
         table_widget.setRowCount(len(data))
         table_widget.setColumnCount(col)  
 
-        for row_num, row_data in enumerate(data):
-            for col_num, col_data in enumerate(row_data):
-                table_widget.setItem(row_num, col_num, QTableWidgetItem(str(col_data)))
+        if q_num == 2:
+            for row_num, row_data in enumerate(data):
+                hotel_cell = ""
+                
+                for col_num, col_data in enumerate(row_data):
+                    table_widget.setItem(row_num, col_num, QTableWidgetItem(str(col_data)))
+                
+                tour_id = row_data[0]
 
+                self.cursor.execute("""
+                    SELECT Hotels.name
+                    FROM Hotels
+                    JOIN ToursHotels ON Hotels.id = ToursHotels.hotel_id
+                    WHERE ToursHotels.tour_id = ?
+                """, (tour_id,))
 
+                hotels = self.cursor.fetchall()
+                hotel_names = [hotel[0] for hotel in hotels]
+                hotel_cell = ", ".join(hotel_names)
 
-
-
-    def close_connection(self):
-        """Close the database connection"""
-        self.connection.close()
+                table_widget.setItem(row_num, 9, QTableWidgetItem(hotel_cell))
+        else:
+            for row_num, row_data in enumerate(data):
+                for col_num, col_data in enumerate(row_data):
+                    table_widget.setItem(row_num, col_num, QTableWidgetItem(str(col_data)))

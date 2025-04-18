@@ -483,6 +483,11 @@ background-color:rgb(240, 168, 0);
             <string>Status</string>
            </property>
           </column>
+          <column>
+           <property name="text">
+            <string>Hotels</string>
+           </property>
+          </column>
          </widget>
         </item>
         <item row="3" column="0" colspan="3">
@@ -589,8 +594,13 @@ background-color: rgb(47, 142, 228);
         </item>
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="label_7">
+          <property name="styleSheet">
+           <string notr="true">background-color:rgb(170, 217, 231);
+padding: 5px;
+border-radius: 7px;</string>
+          </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Requests&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#12418d;&quot;&gt;Requests&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -605,6 +615,11 @@ background-color: rgb(47, 142, 228);
           <width>251</width>
           <height>41</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:rgb(170, 217, 231);
+padding: 5px;
+border-radius: 7px;</string>
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Ongoing Trips&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1017,6 +1032,11 @@ background-color: rgb(47, 142, 228);
           </column>
           <column>
            <property name="text">
+            <string>Consumption</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Seats</string>
            </property>
           </column>
@@ -1097,6 +1117,11 @@ background-color: rgb(47, 142, 228);
         </item>
         <item row="0" column="0" colspan="3">
          <widget class="QLabel" name="label_4">
+          <property name="styleSheet">
+           <string notr="true">background-color:rgb(170, 217, 231);
+padding: 5px;
+border-radius: 7px;</string>
+          </property>
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Vehicles&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
@@ -1162,6 +1187,11 @@ background-color: rgb(47, 142, 228);
           </column>
           <column>
            <property name="text">
+            <string>City</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Adress</string>
            </property>
           </column>
@@ -1195,6 +1225,11 @@ background-color: rgb(47, 142, 228);
         </item>
         <item row="0" column="0" colspan="3">
          <widget class="QLabel" name="label_5">
+          <property name="styleSheet">
+           <string notr="true">background-color:rgb(170, 217, 231);
+padding: 5px;
+border-radius: 7px;</string>
+          </property>
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Hotels&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
@@ -1224,6 +1259,11 @@ background-color: rgb(47, 142, 228);
           <width>361</width>
           <height>61</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:rgb(170, 217, 231);
+padding: 5px;
+border-radius: 7px;</string>
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Statistics&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

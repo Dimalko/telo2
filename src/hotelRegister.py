@@ -15,7 +15,6 @@ class HotelRegisterWindow(QMainWindow):
             
             loadUi('ui/hotelRegister.ui', self)
             
-            
             self.connection = sqlite3.connect("data//database.db")
             self.cursor = self.connection.cursor()
 
@@ -25,6 +24,7 @@ class HotelRegisterWindow(QMainWindow):
     def input_clear(self):
             self.hotelIdInput.setText("")
             self.hotelNameInput.setText("")
+            self.hotelCityInput.setText("")
             self.hotelAddressInput.setText("")
             self.hotelPriceInput.setText("") 
 
@@ -34,12 +34,13 @@ class HotelRegisterWindow(QMainWindow):
             try:
                 id = self.hotelIdInput.text()
                 name = self.hotelNameInput.text()
+                city = self.hotelCityInput.text()
                 address = self.hotelAddressInput.text()
                 price = self.hotelPriceInput.text()
                 
 
-                self.cursor.execute("INSERT INTO Hotels (id, name, address, price_pp) VALUES (?, ?, ?, ?)",
-                                    (id, name, address, price))
+                self.cursor.execute("INSERT INTO Hotels (id, name, city, address, price_pp) VALUES (?, ?, ?, ?, ?)",
+                                    (id, name, city, address, price))
                 self.connection.commit()
                 
                 self.hide()

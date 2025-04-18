@@ -155,7 +155,7 @@ class AdminWindow(QMainWindow):
 
 #--Populate Tables----------  
     def populate_tour_table(self):
-        self.populate_table.populate_table(self.tourTableWidget, "SELECT * FROM Tours", 9)
+        self.populate_table.populate_table(self.tourTableWidget, "SELECT * FROM Tours", 10, 2)
         
     def populate_travelagent_table(self):
         self.populate_table.populate_table(self.travelagentTableWidget, "SELECT * FROM Staff WHERE role='Travel_Agent'", 8)
@@ -170,7 +170,7 @@ class AdminWindow(QMainWindow):
         self.populate_table.populate_table(self.busesTableWidget, "SELECT * FROM Buses", 10)
 
     def populate_hotels_table(self):
-        self.populate_table.populate_table(self.hotelTableWidget, "SELECT * FROM Hotels", 4)
+        self.populate_table.populate_table(self.hotelTableWidget, "SELECT * FROM Hotels", 5)
 
 
 #--Display Windows----------
@@ -225,11 +225,14 @@ class AdminWindow(QMainWindow):
     def removeHotel(self):
         self.open_delete.emit()
         self.removeHotelShow.show()
+
     
     #Create Tour Description Window
     def createTourDescription(self):
         self.open_createDescription.emit()
         self.createDescriptionShow.show()
+
+    
 
 
 
