@@ -327,7 +327,7 @@ background-color:rgb(240, 168, 0);
        <string notr="true">background-color: rgb(243, 249, 254);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0">
@@ -444,7 +444,7 @@ background-color: rgb(136, 205, 255);
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="add_Reservation_Button">
             <property name="styleSheet">
              <string notr="true">QPushButton{
 color:#fff;

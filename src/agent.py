@@ -6,10 +6,10 @@ from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
 
 from classes.populate_table import PopulateTable
-
+from reservation import ReservationWindow
 
 class AgentWindow(QMainWindow):
-
+    open_ReservationtReg = pyqtSignal()
     def __init__(self, agent="agent1"): #REMOVE BEFORE FINAL VERSION
         super().__init__()
 
@@ -39,6 +39,12 @@ class AgentWindow(QMainWindow):
         self.populate_teamleader_table()
         self.populate_driver_table()
         self.populate_buses_table()
+    #Connect Other Windows
+        self.ReservationRegister = ReservationWindow()
+        self.ReservationRegister.finished.connect(lambda: self)
+    #Add Buttons
+        self.add_Reservation_Button.clicked.connect(self.addReservation)        
+
 
 
 
@@ -80,7 +86,10 @@ class AgentWindow(QMainWindow):
 
 
 
-
+    def addReservation(self):
+        self.open_ReservationtReg.emit()
+        self.ReservationRegister.show()
+        
 
 
 #!REMOVE BEFORE FINAL VERSION---------------------------------------------------------------------------------------------------------------------------
