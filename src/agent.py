@@ -1,6 +1,6 @@
 import sys
 import sqlite3
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem,QListWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
@@ -21,6 +21,7 @@ class AgentWindow(QMainWindow):
     #connect db
         self.connection = sqlite3.connect("data//database.db")
         self.cursor = self.connection.cursor()
+        self.loadFreeTours()
 
     #initialize classes
         self.populate_table = PopulateTable()
@@ -32,6 +33,8 @@ class AgentWindow(QMainWindow):
         self.staffBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
         self.vehiclesBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.statsBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(4))
+        self.TourslineEdit.textChanged.connect(self.filterFreeTours)
+        self.TourlistWidget.itemClicked.connect(self.handleTourSelection)
 
     #Populate Tables/Lists
         self.populate_tour_table()
@@ -89,7 +92,78 @@ class AgentWindow(QMainWindow):
     def addReservation(self):
         self.open_ReservationtReg.emit()
         self.ReservationRegister.show()
+
+
+
+    def loadFreeTours(self):
+        self.TourlistWidget.clear()
+        self.cursor.execute("SELECT id, destination FROM Tours WHERE status = 'Free'")
+        tours = self.cursor.fetchall()
+
+        for tour in tours:
+            item = QListWidgetItem(f"{tour[0]} - {tour[1]}")
+            item.setData(Qt.UserRole, tour[0])  # Αποθήκευση tour_id
+            self.TourlistWidget.addItem(item)
+    
+    def filterFreeTours(self):
+            search_text = self.TourslineEdit.text().strip().lower()
+            self.TourlistWidget.clear()
+
+            if not search_text:
+                self.loadFreeTours()
+                return
+
+            self.cursor.execute("""
+                SELECT id, destination FROM Tours
+                WHERE status = 'Free' AND LOWER(id) LIKE ?
+            """, (f"{search_text}%",))
+            tours = self.cursor.fetchall()
+
+            if not tours:
+                self.TourlistWidget.addItem("No results for this value")
+                return
+
+            for tour in tours:
+                item = QListWidgetItem(f"{tour[0]} - {tour[1]}")
+                item.setData(Qt.UserRole, tour[0])
+                self.TourlistWidget.addItem(item)
+
         
+    def loadTourReservations(self, tour_id):
+        self.ReservationtableWidget.setRowCount(0)
+        self.cursor.execute("""
+            SELECT
+                Reservations.id,
+                Client.f_name,
+                Reservations.people_numb,
+                Hotels.name,
+                Reservations.cost,
+                Reservations.payment_type
+            FROM Reservations
+            JOIN Client ON Reservations.client_n = Client.phone_number
+            JOIN Hotels ON Reservations.hotel_id = Hotels.id
+            WHERE Reservations.tour_id = ?
+        """, (tour_id,))
+        
+        results = self.cursor.fetchall()
+
+        for row_idx, row_data in enumerate(results):
+            self.ReservationtableWidget.insertRow(row_idx)
+            for col_idx, value in enumerate(row_data):
+                self.ReservationtableWidget.setItem(row_idx, col_idx, QTableWidgetItem(str(value)))
+
+    def handleTourSelection(self, item):
+        tour_id = item.data(Qt.UserRole)
+        self.loadTourReservations(tour_id)
+        self.updateTotalCostLabel(tour_id)
+
+    def updateTotalCostLabel(self, tour_id):
+        self.cursor.execute("""
+            SELECT SUM(cost) FROM Reservations WHERE tour_id = ?
+        """, (tour_id,))
+        result = self.cursor.fetchone()
+        total = result[0] if result[0] is not None else 0.0
+        self.TotalCostlabel.setText(f"€ {total:.2f}")
 
 
 #!REMOVE BEFORE FINAL VERSION---------------------------------------------------------------------------------------------------------------------------

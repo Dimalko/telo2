@@ -69,7 +69,60 @@ class Ui_MainWindow(object):
 "    color: white;\n"
 "    border-radius: 4px;\n"
 "}\n"
-"")
+"QTableWidget {\n"
+"border:none;\n"
+"background-color: white; \n"
+"alternate-background-color: #f0f0f0;\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    background-color: rgb(18, 65, 141);            \n"
+"    color: rgb(243, 249, 254);\n"
+"    font: 57 8pt \"Yu Gothic Medium\";\n"
+"    padding: 5px;\n"
+"    border: 1px solid rgb(24, 89, 193); \n"
+"}\n"
+"\n"
+"#QTableWidget QTableCornerButton::section {\n"
+"    background-color: #74b9ff; /* Top-left corner color */\n"
+"    border: 1px solid #0984e3;\n"
+"    border-radius:5px;\n"
+"}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background: #dfe6e9;  /* Background color of the scrollbar track */\n"
+"    height: 12px;  /* Thickness of the scrollbar */\n"
+"    margin: 0px 0px 0px 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #0984e3; /* Color of the scrollbar handle (slider) */\n"
+"    min-width: 20px; /* Minimum width of the handle */\n"
+"    border-radius: 6px; /* Rounded edges */\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #74b9ff; /* Lighter color when hovered */\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
+"    background: none; /* Removes the small arrow buttons */\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
+"    background: none; /* Keeps empty space color same */\n"
+"}\n"
+"\n"
+"QListWidget{\n"
+"    border: 1px solid rgb(161, 161, 161);    \n"
+"    border-radius:10px;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"    border: 1px solid rgb(18, 65, 141);    \n"
+"    border-radius: 9px;\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("")
         self.centralwidget.setObjectName("centralwidget")
@@ -78,8 +131,118 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+        self.tabWidget.setStyleSheet("QWidget{\n"
+"background-color: rgb(243, 249, 254);\n"
+"}\n"
+"\n"
+"\n"
+"QLabel{\n"
+"color: rgb(18, 65, 141);\n"
+"font-size:16px;\n"
+"padding-bottom: 0px;\n"
+"text-align: center;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"background-color: rgb(255, 255, 255);\n"
+"border: 2px solid; \n"
+"border-radius: 6px; \n"
+"border-color:rgb(18, 65, 141);\n"
+"padding: 8px;\n"
+"color: rgb(18, 65, 141);\n"
+"font-size:14px;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"color:#fff;\n"
+"border: 0px;\n"
+"font-size: 16px;\n"
+"padding: 5px;\n"
+"background-color: rgb(18, 65, 141);\n"
+"border-radius:4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgb(47, 142, 228);\n"
+"}\n"
+"QListWidget {\n"
+"    background-color: white;\n"
+"    border: 2px solid rgb(18, 65, 141);\n"
+"    border-radius: 6px;\n"
+"    alternate-background-color: #f0f0f0;\n"
+"    padding: 2px;\n"
+"    font-size: 14px;\n"
+"    color: rgb(18, 65, 141);\n"
+"}\n"
+"\n"
+"QListWidget::item {\n"
+"    padding: 6px;\n"
+"    border-bottom: 1px solid #e0e0e0;\n"
+"}\n"
+"\n"
+"QListWidget::item:selected {\n"
+"    background-color: rgb(18, 65, 141);\n"
+"    color: white;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"")
         self.tabWidget.setObjectName("tabWidget")
         self.reservationTab = QtWidgets.QWidget()
+        self.reservationTab.setStyleSheet("QWidget{\n"
+"background-color: rgb(243, 249, 254);\n"
+"}\n"
+"\n"
+"\n"
+"QLabel{\n"
+"color: rgb(18, 65, 141);\n"
+"font-size:16px;\n"
+"padding-bottom: 0px;\n"
+"text-align: center;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"background-color: rgb(255, 255, 255);\n"
+"border: 2px solid; \n"
+"border-radius: 6px; \n"
+"border-color:rgb(18, 65, 141);\n"
+"padding: 8px;\n"
+"color: rgb(18, 65, 141);\n"
+"font-size:14px;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"color:#fff;\n"
+"border: 0px;\n"
+"font-size: 16px;\n"
+"padding: 5px;\n"
+"background-color: rgb(18, 65, 141);\n"
+"border-radius:4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgb(47, 142, 228);\n"
+"}\n"
+"QListWidget {\n"
+"    background-color: white;\n"
+"    border: 2px solid rgb(18, 65, 141);\n"
+"    border-radius: 6px;\n"
+"    alternate-background-color: #f0f0f0;\n"
+"    padding: 2px;\n"
+"    font-size: 14px;\n"
+"    color: rgb(18, 65, 141);\n"
+"}\n"
+"\n"
+"QListWidget::item {\n"
+"    padding: 6px;\n"
+"    border-bottom: 1px solid #e0e0e0;\n"
+"}\n"
+"\n"
+"QListWidget::item:selected {\n"
+"    background-color: rgb(18, 65, 141);\n"
+"    color: white;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"")
         self.reservationTab.setObjectName("reservationTab")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.reservationTab)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(122, 49, 531, 451))
@@ -107,20 +270,7 @@ class Ui_MainWindow(object):
         self.Clientlabel.setObjectName("Clientlabel")
         self.verticalLayout.addWidget(self.Clientlabel)
         self.Client_listWidget = QtWidgets.QListWidget(self.horizontalLayoutWidget)
-        self.Client_listWidget.setStyleSheet("QListWidget {\n"
-"    border: none;\n"
-"    background-color: white;\n"
-"    alternate-background-color: #f0f0f0;\n"
-"}\n"
-"\n"
-"QListWidget::item {\n"
-"    padding: 5px;\n"
-"}\n"
-"\n"
-"QListWidget::item:selected {\n"
-"    background-color: #0078d7;  /* Μπλε highlight */\n"
-"    color: white;\n"
-"}")
+        self.Client_listWidget.setStyleSheet("")
         self.Client_listWidget.setObjectName("Client_listWidget")
         self.verticalLayout.addWidget(self.Client_listWidget)
         self.ClientlineEdit = QtWidgets.QLineEdit(self.horizontalLayoutWidget)
@@ -133,9 +283,9 @@ class Ui_MainWindow(object):
         self.label_3 = QtWidgets.QLabel(self.horizontalLayoutWidget)
         self.label_3.setObjectName("label_3")
         self.verticalLayout_4.addWidget(self.label_3)
-        self.spinBox = QtWidgets.QSpinBox(self.horizontalLayoutWidget)
-        self.spinBox.setObjectName("spinBox")
-        self.verticalLayout_4.addWidget(self.spinBox)
+        self.peopleSpinBox = QtWidgets.QSpinBox(self.horizontalLayoutWidget)
+        self.peopleSpinBox.setObjectName("peopleSpinBox")
+        self.verticalLayout_4.addWidget(self.peopleSpinBox)
         self.label_4 = QtWidgets.QLabel(self.horizontalLayoutWidget)
         self.label_4.setObjectName("label_4")
         self.verticalLayout_4.addWidget(self.label_4)
@@ -145,14 +295,17 @@ class Ui_MainWindow(object):
         self.label_5 = QtWidgets.QLabel(self.horizontalLayoutWidget)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_4.addWidget(self.label_5)
-        self.comboBox_2 = QtWidgets.QComboBox(self.horizontalLayoutWidget)
-        self.comboBox_2.setObjectName("comboBox_2")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.verticalLayout_4.addWidget(self.comboBox_2)
+        self.paymentComboBox = QtWidgets.QComboBox(self.horizontalLayoutWidget)
+        self.paymentComboBox.setObjectName("paymentComboBox")
+        self.paymentComboBox.addItem("")
+        self.paymentComboBox.addItem("")
+        self.verticalLayout_4.addWidget(self.paymentComboBox)
         self.horizontalLayout_2.addLayout(self.verticalLayout_4)
         self.horizontalLayout_2.setStretch(0, 5)
         self.horizontalLayout_2.setStretch(1, 5)
+        self.add_reservation_pushButton = QtWidgets.QPushButton(self.reservationTab)
+        self.add_reservation_pushButton.setGeometry(QtCore.QRect(320, 530, 151, 32))
+        self.add_reservation_pushButton.setObjectName("add_reservation_pushButton")
         self.tabWidget.addTab(self.reservationTab, "")
         self.clientsTab = QtWidgets.QWidget()
         self.clientsTab.setObjectName("clientsTab")
@@ -226,13 +379,173 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.EmailLabel, 7, 0, 1, 1)
         self.tabWidget.addTab(self.clientsTab, "")
         self.tab_3 = QtWidgets.QWidget()
+        self.tab_3.setStyleSheet("QWidget{\n"
+"background-color: rgb(243, 249, 254);\n"
+"}\n"
+"\n"
+"\n"
+"QLabel{\n"
+"color: rgb(18, 65, 141);\n"
+"font-size:16px;\n"
+"padding-bottom: 0px;\n"
+"text-align: center;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"background-color: rgb(255, 255, 255);\n"
+"border: 2px solid; \n"
+"border-radius: 6px; \n"
+"border-color:rgb(18, 65, 141);\n"
+"padding: 8px;\n"
+"color: rgb(18, 65, 141);\n"
+"font-size:14px;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"color:#fff;\n"
+"border: 0px;\n"
+"font-size: 16px;\n"
+"padding: 5px;\n"
+"background-color: rgb(18, 65, 141);\n"
+"border-radius:4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgb(47, 142, 228);\n"
+"}\n"
+"QListWidget {\n"
+"    background-color: white;\n"
+"    border: 2px solid rgb(18, 65, 141);\n"
+"    border-radius: 6px;\n"
+"    alternate-background-color: #f0f0f0;\n"
+"    padding: 2px;\n"
+"    font-size: 14px;\n"
+"    color: rgb(18, 65, 141);\n"
+"}\n"
+"\n"
+"QListWidget::item {\n"
+"    padding: 6px;\n"
+"    border-bottom: 1px solid #e0e0e0;\n"
+"}\n"
+"\n"
+"QListWidget::item:selected {\n"
+"    background-color: rgb(18, 65, 141);\n"
+"    color: white;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"")
         self.tab_3.setObjectName("tab_3")
+        self.verticalLayout1 = QtWidgets.QVBoxLayout(self.tab_3)
+        self.verticalLayout1.setObjectName("verticalLayout1")
+        self.group_selection_layout = QtWidgets.QHBoxLayout()
+        self.group_selection_layout.setObjectName("group_selection_layout")
+        self.group_label = QtWidgets.QLabel(self.tab_3)
+        self.group_label.setObjectName("group_label")
+        self.group_selection_layout.addWidget(self.group_label)
+        self.groupComboBox = QtWidgets.QComboBox(self.tab_3)
+        self.groupComboBox.setObjectName("groupComboBox")
+        self.group_selection_layout.addWidget(self.groupComboBox)
+        self.verticalLayout1.addLayout(self.group_selection_layout)
+        self.groupPaymentsTable = QtWidgets.QTableWidget(self.tab_3)
+        self.groupPaymentsTable.setStyleSheet("QWidget{\n"
+"background-color: rgb(243, 249, 254);\n"
+"}\n"
+"\n"
+"\n"
+"QLabel{\n"
+"color: rgb(18, 65, 141);\n"
+"font-size:16px;\n"
+"padding-bottom: 0px;\n"
+"text-align: center;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"background-color: rgb(255, 255, 255);\n"
+"border: 2px solid; \n"
+"border-radius: 6px; \n"
+"border-color:rgb(18, 65, 141);\n"
+"padding: 8px;\n"
+"color: rgb(18, 65, 141);\n"
+"font-size:14px;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"color:#fff;\n"
+"border: 0px;\n"
+"font-size: 16px;\n"
+"padding: 5px;\n"
+"background-color: rgb(18, 65, 141);\n"
+"border-radius:4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgb(47, 142, 228);\n"
+"}\n"
+"\n"
+"")
+        self.groupPaymentsTable.setObjectName("groupPaymentsTable")
+        self.groupPaymentsTable.setColumnCount(5)
+        self.groupPaymentsTable.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.groupPaymentsTable.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.groupPaymentsTable.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.groupPaymentsTable.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.groupPaymentsTable.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.groupPaymentsTable.setHorizontalHeaderItem(4, item)
+        self.verticalLayout1.addWidget(self.groupPaymentsTable)
+        self.paymentFormLayout = QtWidgets.QFormLayout()
+        self.paymentFormLayout.setObjectName("paymentFormLayout")
+        self.labelDate = QtWidgets.QLabel(self.tab_3)
+        self.labelDate.setObjectName("labelDate")
+        self.paymentFormLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.labelDate)
+        self.paymentDateEdit = QtWidgets.QDateEdit(self.tab_3)
+        self.paymentDateEdit.setCalendarPopup(True)
+        self.paymentDateEdit.setObjectName("paymentDateEdit")
+        self.paymentFormLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.paymentDateEdit)
+        self.labelType = QtWidgets.QLabel(self.tab_3)
+        self.labelType.setObjectName("labelType")
+        self.paymentFormLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.labelType)
+        self.paymentTypeComboBox = QtWidgets.QComboBox(self.tab_3)
+        self.paymentTypeComboBox.setObjectName("paymentTypeComboBox")
+        self.paymentTypeComboBox.addItem("")
+        self.paymentTypeComboBox.addItem("")
+        self.paymentTypeComboBox.addItem("")
+        self.paymentFormLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.paymentTypeComboBox)
+        self.labelAmount = QtWidgets.QLabel(self.tab_3)
+        self.labelAmount.setObjectName("labelAmount")
+        self.paymentFormLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.labelAmount)
+        self.paymentAmountSpinBox = QtWidgets.QDoubleSpinBox(self.tab_3)
+        self.paymentAmountSpinBox.setDecimals(2)
+        self.paymentAmountSpinBox.setMaximum(10000.0)
+        self.paymentAmountSpinBox.setObjectName("paymentAmountSpinBox")
+        self.paymentFormLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.paymentAmountSpinBox)
+        self.verticalLayout1.addLayout(self.paymentFormLayout)
+        self.horizontalPaymentButtons = QtWidgets.QHBoxLayout()
+        self.horizontalPaymentButtons.setObjectName("horizontalPaymentButtons")
+        self.addPaymentButton = QtWidgets.QPushButton(self.tab_3)
+        self.addPaymentButton.setObjectName("addPaymentButton")
+        self.horizontalPaymentButtons.addWidget(self.addPaymentButton)
+        self.deletePaymentButton = QtWidgets.QPushButton(self.tab_3)
+        self.deletePaymentButton.setObjectName("deletePaymentButton")
+        self.horizontalPaymentButtons.addWidget(self.deletePaymentButton)
+        self.editPaymentButton = QtWidgets.QPushButton(self.tab_3)
+        self.editPaymentButton.setObjectName("editPaymentButton")
+        self.horizontalPaymentButtons.addWidget(self.editPaymentButton)
+        self.verticalLayout1.addLayout(self.horizontalPaymentButtons)
+        self.paymentStatusLabel = QtWidgets.QLabel(self.tab_3)
+        self.paymentStatusLabel.setStyleSheet("font-weight: bold; padding-top: 10px;")
+        self.paymentStatusLabel.setObjectName("paymentStatusLabel")
+        self.verticalLayout1.addWidget(self.paymentStatusLabel)
         self.tabWidget.addTab(self.tab_3, "")
         self.horizontalLayout.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -243,8 +556,9 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "number of people"))
         self.label_4.setText(_translate("MainWindow", "hotel"))
         self.label_5.setText(_translate("MainWindow", "payment type"))
-        self.comboBox_2.setItemText(0, _translate("MainWindow", "card"))
-        self.comboBox_2.setItemText(1, _translate("MainWindow", "cash"))
+        self.paymentComboBox.setItemText(0, _translate("MainWindow", "card"))
+        self.paymentComboBox.setItemText(1, _translate("MainWindow", "cash"))
+        self.add_reservation_pushButton.setText(_translate("MainWindow", "Make Reservation"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.reservationTab), _translate("MainWindow", "Reservation"))
         self.PhoneNumberLabel.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Phone Number</span></p></body></html>"))
         self.LastNameLabel.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Last name</span></p></body></html>"))
@@ -253,4 +567,26 @@ class Ui_MainWindow(object):
         self.FirstNameLabel.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">First Name</span></p></body></html>"))
         self.EmailLabel.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Email</span></p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.clientsTab), _translate("MainWindow", "Clients"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Page"))
+        self.group_label.setText(_translate("MainWindow", "Choose Reservation/ Group:"))
+        item = self.groupPaymentsTable.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "id"))
+        item = self.groupPaymentsTable.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "group_id"))
+        item = self.groupPaymentsTable.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "payment_date"))
+        item = self.groupPaymentsTable.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "amount"))
+        item = self.groupPaymentsTable.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "type"))
+        self.labelDate.setText(_translate("MainWindow", "Date of Payment"))
+        self.labelType.setText(_translate("MainWindow", "Type of Payment"))
+        self.paymentTypeComboBox.setItemText(0, _translate("MainWindow", "Prepayment"))
+        self.paymentTypeComboBox.setItemText(1, _translate("MainWindow", "Ιnstallment"))
+        self.paymentTypeComboBox.setItemText(2, _translate("MainWindow", "Final Payment"))
+        self.labelAmount.setText(_translate("MainWindow", "Amount Payed"))
+        self.paymentAmountSpinBox.setPrefix(_translate("MainWindow", "€ "))
+        self.addPaymentButton.setText(_translate("MainWindow", "Add Payment"))
+        self.deletePaymentButton.setText(_translate("MainWindow", "Delete Payment"))
+        self.editPaymentButton.setText(_translate("MainWindow", "Edit Payment"))
+        self.paymentStatusLabel.setText(_translate("MainWindow", "Καταβληθέν: 0 / 0 € | Κατάσταση: Unpaid"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Group Payments"))

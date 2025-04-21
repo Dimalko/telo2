@@ -282,6 +282,20 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.label_2, 0, 0, 1, 3)
         self.stackedWidget.addWidget(self.homePage)
         self.reservationsPage = QtWidgets.QWidget()
+        self.reservationsPage.setStyleSheet("QListWidget {\n"
+"    border: none;\n"
+"    background-color: white;\n"
+"    alternate-background-color: #f0f0f0;\n"
+"}\n"
+"\n"
+"QListWidget::item {\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QListWidget::item:selected {\n"
+"    background-color: #0078d7;  /* Μπλε highlight */\n"
+"    color: white;\n"
+"}")
         self.reservationsPage.setObjectName("reservationsPage")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.reservationsPage)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -290,13 +304,31 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.reservationsPage)
         self.label.setObjectName("label")
         self.verticalLayout_2.addWidget(self.label)
-        self.listWidget = QtWidgets.QListWidget(self.reservationsPage)
-        self.listWidget.setObjectName("listWidget")
-        self.verticalLayout_2.addWidget(self.listWidget)
-        self.lineEdit = QtWidgets.QLineEdit(self.reservationsPage)
-        self.lineEdit.setStyleSheet("")
-        self.lineEdit.setObjectName("lineEdit")
-        self.verticalLayout_2.addWidget(self.lineEdit)
+        self.TourlistWidget = QtWidgets.QListWidget(self.reservationsPage)
+        self.TourlistWidget.setStyleSheet("QListWidget {\n"
+"        font-size: 16px;\n"
+"        color: rgb(18, 65, 141);\n"
+"        background-color: white;\n"
+"        border: 2px solid rgb(18, 65, 141);\n"
+"        border-radius: 6px;\n"
+"    }\n"
+"    QListWidget::item {\n"
+"        padding: 6px;\n"
+"    }\n"
+"    QListWidget::item:selected {\n"
+"        background-color: rgb(18, 65, 141);\n"
+"        color: white;\n"
+"        border-radius: 4px;\n"
+"    }")
+        self.TourlistWidget.setObjectName("TourlistWidget")
+        self.verticalLayout_2.addWidget(self.TourlistWidget)
+        self.TourslineEdit = QtWidgets.QLineEdit(self.reservationsPage)
+        self.TourslineEdit.setStyleSheet("QLineEdit{\n"
+"    border: 1px solid rgb(18, 65, 141);    \n"
+"    border-radius: 9px;\n"
+"}")
+        self.TourslineEdit.setObjectName("TourslineEdit")
+        self.verticalLayout_2.addWidget(self.TourslineEdit)
         self.add_Reservation_Button = QtWidgets.QPushButton(self.reservationsPage)
         self.add_Reservation_Button.setStyleSheet("QPushButton{\n"
 "color:#fff;\n"
@@ -316,23 +348,23 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setContentsMargins(0, -1, -1, -1)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.tableWidget = QtWidgets.QTableWidget(self.reservationsPage)
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(6)
-        self.tableWidget.setRowCount(0)
+        self.ReservationtableWidget = QtWidgets.QTableWidget(self.reservationsPage)
+        self.ReservationtableWidget.setObjectName("ReservationtableWidget")
+        self.ReservationtableWidget.setColumnCount(6)
+        self.ReservationtableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
+        self.ReservationtableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, item)
+        self.ReservationtableWidget.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, item)
+        self.ReservationtableWidget.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(3, item)
+        self.ReservationtableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(4, item)
+        self.ReservationtableWidget.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(5, item)
-        self.verticalLayout_3.addWidget(self.tableWidget)
+        self.ReservationtableWidget.setHorizontalHeaderItem(5, item)
+        self.verticalLayout_3.addWidget(self.ReservationtableWidget)
         self.widget_3 = QtWidgets.QWidget(self.reservationsPage)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_3.addWidget(self.widget_3)
@@ -344,8 +376,16 @@ class Ui_MainWindow(object):
         self.widget_4 = QtWidgets.QWidget(self.reservationsPage)
         self.widget_4.setMinimumSize(QtCore.QSize(246, 32))
         self.widget_4.setMaximumSize(QtCore.QSize(246, 32))
-        self.widget_4.setStyleSheet("border: 1px solid rgb(161, 161, 161);    \n"
-"    border-radius:10px;")
+        self.widget_4.setStyleSheet("QWidget {\n"
+"    border: 1px solid rgb(161, 161, 161);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"QWidget QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: rgb(18, 65, 141);\n"
+"}")
         self.widget_4.setObjectName("widget_4")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.widget_4)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
@@ -353,10 +393,10 @@ class Ui_MainWindow(object):
         self.label_4.setStyleSheet("border: none;")
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_4.addWidget(self.label_4)
-        self.label_5 = QtWidgets.QLabel(self.widget_4)
-        self.label_5.setStyleSheet("border:none;")
-        self.label_5.setObjectName("label_5")
-        self.horizontalLayout_4.addWidget(self.label_5)
+        self.TotalCostlabel = QtWidgets.QLabel(self.widget_4)
+        self.TotalCostlabel.setStyleSheet("border:none;")
+        self.TotalCostlabel.setObjectName("TotalCostlabel")
+        self.horizontalLayout_4.addWidget(self.TotalCostlabel)
         self.horizontalLayout_4.setStretch(0, 4)
         self.horizontalLayout_4.setStretch(1, 6)
         self.horizontalLayout_3.addWidget(self.widget_4)
@@ -542,20 +582,20 @@ class Ui_MainWindow(object):
         self.label.setToolTip(_translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Scheduled Tours</p></body></html>"))
         self.add_Reservation_Button.setText(_translate("MainWindow", "Create Reservation"))
-        item = self.tableWidget.horizontalHeaderItem(0)
+        item = self.ReservationtableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Id"))
-        item = self.tableWidget.horizontalHeaderItem(1)
+        item = self.ReservationtableWidget.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Client Name"))
-        item = self.tableWidget.horizontalHeaderItem(2)
+        item = self.ReservationtableWidget.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "Number Of People"))
-        item = self.tableWidget.horizontalHeaderItem(3)
+        item = self.ReservationtableWidget.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Hotel"))
-        item = self.tableWidget.horizontalHeaderItem(4)
+        item = self.ReservationtableWidget.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Cost"))
-        item = self.tableWidget.horizontalHeaderItem(5)
+        item = self.ReservationtableWidget.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Payment Type"))
         self.label_4.setText(_translate("MainWindow", "Total Cost:"))
-        self.label_5.setText(_translate("MainWindow", "--"))
+        self.TotalCostlabel.setText(_translate("MainWindow", "--"))
         item = self.travelagentTableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Id"))
         item = self.travelagentTableWidget.horizontalHeaderItem(1)

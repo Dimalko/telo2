@@ -420,6 +420,22 @@ background-color: rgb(136, 205, 255);
        </layout>
       </widget>
       <widget class="QWidget" name="reservationsPage">
+       <property name="styleSheet">
+        <string notr="true">QListWidget {
+    border: none;
+    background-color: white;
+    alternate-background-color: #f0f0f0;
+}
+
+QListWidget::item {
+    padding: 5px;
+}
+
+QListWidget::item:selected {
+    background-color: #0078d7;  /* Μπλε highlight */
+    color: white;
+}</string>
+       </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,8">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -434,12 +450,33 @@ background-color: rgb(136, 205, 255);
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="listWidget"/>
+           <widget class="QListWidget" name="TourlistWidget">
+            <property name="styleSheet">
+             <string notr="true">QListWidget {
+        font-size: 16px;
+        color: rgb(18, 65, 141);
+        background-color: white;
+        border: 2px solid rgb(18, 65, 141);
+        border-radius: 6px;
+    }
+    QListWidget::item {
+        padding: 6px;
+    }
+    QListWidget::item:selected {
+        background-color: rgb(18, 65, 141);
+        color: white;
+        border-radius: 4px;
+    }</string>
+            </property>
+           </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit">
+           <widget class="QLineEdit" name="TourslineEdit">
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">QLineEdit{
+	border: 1px solid rgb(18, 65, 141);	
+	border-radius: 9px;
+}</string>
             </property>
            </widget>
           </item>
@@ -472,7 +509,7 @@ background-color: rgb(47, 142, 228);
            <number>0</number>
           </property>
           <item>
-           <widget class="QTableWidget" name="tableWidget">
+           <widget class="QTableWidget" name="ReservationtableWidget">
             <column>
              <property name="text">
               <string>Id</string>
@@ -541,8 +578,16 @@ background-color: rgb(47, 142, 228);
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">border: 1px solid rgb(161, 161, 161);	
-	border-radius:10px;</string>
+               <string notr="true">QWidget {
+    border: 1px solid rgb(161, 161, 161);
+    border-radius: 10px;
+}
+
+QWidget QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(18, 65, 141);
+}</string>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="4,6">
                <item>
@@ -556,7 +601,7 @@ background-color: rgb(47, 142, 228);
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_5">
+                <widget class="QLabel" name="TotalCostlabel">
                  <property name="styleSheet">
                   <string notr="true">border:none;</string>
                  </property>
