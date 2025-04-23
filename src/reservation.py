@@ -267,7 +267,7 @@ class ReservationWindow(QMainWindow):
                 self.cursor.execute("""
                     INSERT INTO GroupPayments (group_id, payment_date, type, amount)
                     VALUES (?, DATE('now'), ?, ?)
-                """, (group_id, "Προκαταβολή", deposit))
+                """, (group_id, "Prepayment", deposit))
 
                 # Ενημέρωση amount_paid στο group
                 self.cursor.execute("""
