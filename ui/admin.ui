@@ -73,7 +73,13 @@ QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
 
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none; /* Keeps empty space color same */
-}</string>
+}
+
+QListWidget{
+	border: 1px solid rgb(161, 161, 161);	
+	border-radius:10px;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -363,7 +369,7 @@ background-color:rgb(240, 168, 0);
        <string notr="true">background-color: rgb(243, 249, 254);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout">
@@ -536,7 +542,25 @@ border-radius: 7px;</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidget"/>
+           <widget class="QListWidget" name="TourlistWidget">
+            <property name="styleSheet">
+             <string notr="true">QListWidget {
+        font-size: 16px;
+        color: rgb(18, 65, 141);
+        background-color: white;
+        border: 2px solid rgb(18, 65, 141);
+        border-radius: 6px;
+    }
+    QListWidget::item {
+        padding: 6px;
+    }
+    QListWidget::item:selected {
+        background-color: rgb(18, 65, 141);
+        color: white;
+        border-radius: 4px;
+    }</string>
+            </property>
+           </widget>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">

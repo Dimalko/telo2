@@ -46,7 +46,7 @@ class ReservationWindow(QMainWindow):
         self.loadClients()
         self.loadFreeTours()
         self.loadGroups()
-       # self.loadGroupPayments()
+        #self.loadGroupPayments()
         
     #connect buttons
         self.add_Client_button.clicked.connect(self.addClient)    
@@ -297,6 +297,9 @@ class ReservationWindow(QMainWindow):
             self.peopleSpinBox.setValue(1)
             self.paymentComboBox.setCurrentIndex(0)
             self.Hotels_comboBox.setCurrentIndex(0)
+
+            self.loadGroups()
+            
 
         except Exception as e:
             print("Reservation error:", e)

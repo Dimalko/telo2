@@ -1,6 +1,6 @@
 import sys
 import sqlite3
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem,QListWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
@@ -77,6 +77,7 @@ class AdminWindow(QMainWindow):
         self.populate_driver_table()
         self.populate_buses_table()
         self.populate_hotels_table()
+        self.loadFreeTours()
 
     #Connect Other Windows
         self.TravelAgentRegister = TravelAgentRegisterWindow()
@@ -172,7 +173,16 @@ class AdminWindow(QMainWindow):
     def populate_hotels_table(self):
         self.populate_table.populate_table(self.hotelTableWidget, "SELECT * FROM Hotels", 5)
 
+    def loadFreeTours(self):
+        self.TourlistWidget.clear()
+        self.cursor.execute("SELECT id, destination FROM Tours WHERE status = 'Free'")
+        tours = self.cursor.fetchall()
 
+        for tour in tours:
+            item = QListWidgetItem(f"{tour[0]} - {tour[1]}")
+            item.setData(Qt.UserRole, tour[0])  # Αποθήκευση tour_id
+            self.TourlistWidget.addItem(item)
+    
 #--Display Windows----------
     #Add Windows
     def addTravelAgent(self):

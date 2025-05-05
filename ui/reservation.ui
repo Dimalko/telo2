@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>874</width>
-    <height>665</height>
+    <height>710</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -203,7 +203,7 @@ QListWidget::item:selected {
 </string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="reservationTab">
        <property name="styleSheet">
@@ -685,12 +685,12 @@ background-color: rgb(47, 142, 228);
           </column>
           <column>
            <property name="text">
-            <string>payment_date</string>
+            <string>amount</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>amount</string>
+            <string>payment_date</string>
            </property>
           </column>
           <column>
