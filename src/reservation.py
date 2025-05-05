@@ -241,35 +241,49 @@ class ReservationWindow(QMainWindow):
                 return
             price_per_person = result[0]
 
-            total_cost = price_per_person * people
+            # Βρες τις ημερομηνίες της εκδρομής
+            self.cursor.execute("SELECT start_date, end_date FROM Tours WHERE id = ?", (tour_id,))
+            date_result = self.cursor.fetchone()
 
-            # Δημιούργησε το Reservation
+            if not date_result:
+                QMessageBox.warning(self, "Error", "Could not find tour dates.")
+                return
+
+            start_date_str, end_date_str = date_result
+            start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
+            end_date = datetime.strptime(end_date_str, "%Y-%m-%d")
+
+            # Υπολογισμός ημερών (συμπεριλαμβανομένης και της τελευταίας μέρας)
+            number_of_days = (end_date - start_date).days + 1
+            if number_of_days <= 0:
+                QMessageBox.warning(self, "Error", "Invalid tour dates.")
+                return
+
+            # Τελικό κόστος: τιμή * άτομα * ημέρες
+            total_cost = price_per_person * people * number_of_days
+
+            # Δημιουργία κράτησης
             self.cursor.execute("""
                 INSERT INTO Reservations (tour_id, client_n, people_numb, hotel_id, cost, payment_type)
                 VALUES (?, ?, ?, ?, ?, ?)
             """, (tour_id, client_phone, people, hotel_id, total_cost, payment_type))
             reservation_id = self.cursor.lastrowid
 
-            # Αν είναι group (πάνω από 1 άτομο), δημιούργησε και εγγραφή στο ReservationGroup
+            # Αν είναι group (πάνω από 1 άτομο), δημιούργησε εγγραφή group και προκαταβολή
             if people > 1:
-                # Δημιουργία group
                 self.cursor.execute("""
                     INSERT INTO ReservationGroup (reservation_id, total_people, total_cost)
                     VALUES (?, ?, ?)
                 """, (reservation_id, people, total_cost))
-
+                # Εδώ υπολογίζουμε την προκαταβολή (30% του συνολικού κόστους)
                 group_id = self.cursor.lastrowid
-
-                # Υπολογισμός προκαταβολής 30%
                 deposit = round(total_cost * 0.30, 2)
 
-                # Καταχώρηση πληρωμής προκαταβολής
                 self.cursor.execute("""
                     INSERT INTO GroupPayments (group_id, payment_date, type, amount)
                     VALUES (?, DATE('now'), ?, ?)
                 """, (group_id, "Prepayment", deposit))
 
-                # Ενημέρωση amount_paid στο group
                 self.cursor.execute("""
                     UPDATE ReservationGroup
                     SET amount_paid = ?
@@ -277,9 +291,9 @@ class ReservationWindow(QMainWindow):
                 """, (deposit, group_id))
 
             self.connection.commit()
-            QMessageBox.information(self, "Success", "Reservation completed successfully!")
+            QMessageBox.information(self, "Success", f"Reservation completed successfully!\n({number_of_days} days tour)")
 
-            # Προαιρετικό reset πεδίων
+            # Reset πεδίων
             self.peopleSpinBox.setValue(1)
             self.paymentComboBox.setCurrentIndex(0)
             self.Hotels_comboBox.setCurrentIndex(0)
@@ -288,6 +302,7 @@ class ReservationWindow(QMainWindow):
             print("Reservation error:", e)
             QMessageBox.critical(self, "Error", "An error occurred while adding the reservation.")
             self.connection.rollback()
+
 
 
 
