@@ -418,30 +418,25 @@ class Ui_MainWindow(object):
         self.requestPage.setObjectName(u"requestPage")
         self.gridLayout_8 = QGridLayout(self.requestPage)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
+        self.totalCostLabel = QLabel(self.requestPage)
+        self.totalCostLabel.setObjectName(u"totalCostLabel")
+
+        self.gridLayout_8.addWidget(self.totalCostLabel, 9, 1, 1, 1)
+
         self.profitLabel = QLabel(self.requestPage)
         self.profitLabel.setObjectName(u"profitLabel")
 
-        self.gridLayout_8.addWidget(self.profitLabel, 11, 1, 1, 1)
-
-        self.vehicleCostLabel = QLabel(self.requestPage)
-        self.vehicleCostLabel.setObjectName(u"vehicleCostLabel")
-
-        self.gridLayout_8.addWidget(self.vehicleCostLabel, 7, 1, 1, 1)
+        self.gridLayout_8.addWidget(self.profitLabel, 10, 1, 1, 1)
 
         self.guideCostLabel = QLabel(self.requestPage)
         self.guideCostLabel.setObjectName(u"guideCostLabel")
 
         self.gridLayout_8.addWidget(self.guideCostLabel, 8, 1, 1, 1)
 
-        self.revenueLabel = QLabel(self.requestPage)
-        self.revenueLabel.setObjectName(u"revenueLabel")
+        self.vehicleCostLabel = QLabel(self.requestPage)
+        self.vehicleCostLabel.setObjectName(u"vehicleCostLabel")
 
-        self.gridLayout_8.addWidget(self.revenueLabel, 10, 1, 1, 1)
-
-        self.totalCostLabel = QLabel(self.requestPage)
-        self.totalCostLabel.setObjectName(u"totalCostLabel")
-
-        self.gridLayout_8.addWidget(self.totalCostLabel, 9, 1, 1, 1)
+        self.gridLayout_8.addWidget(self.vehicleCostLabel, 7, 1, 1, 1)
 
         self.tourSummaryTable = QTableWidget(self.requestPage)
         if (self.tourSummaryTable.columnCount() < 2):
@@ -453,6 +448,11 @@ class Ui_MainWindow(object):
         self.tourSummaryTable.setObjectName(u"tourSummaryTable")
 
         self.gridLayout_8.addWidget(self.tourSummaryTable, 1, 1, 1, 1)
+
+        self.driverCostLabel = QLabel(self.requestPage)
+        self.driverCostLabel.setObjectName(u"driverCostLabel")
+
+        self.gridLayout_8.addWidget(self.driverCostLabel, 6, 1, 1, 1)
 
         self.LabelLayout = QHBoxLayout()
         self.LabelLayout.setObjectName(u"LabelLayout")
@@ -582,11 +582,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_8.addItem(self.horizontalSpacer, 3, 1, 1, 1)
 
-        self.driverCostLabel = QLabel(self.requestPage)
-        self.driverCostLabel.setObjectName(u"driverCostLabel")
-
-        self.gridLayout_8.addWidget(self.driverCostLabel, 6, 1, 1, 1)
-
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, -1, -1, -1)
@@ -613,9 +608,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(-1, 0, -1, -1)
-        self.pushButton_18 = QPushButton(self.requestPage)
-        self.pushButton_18.setObjectName(u"pushButton_18")
-        self.pushButton_18.setStyleSheet(u"QPushButton{\n"
+        self.acceptTourButton = QPushButton(self.requestPage)
+        self.acceptTourButton.setObjectName(u"acceptTourButton")
+        self.acceptTourButton.setStyleSheet(u"QPushButton{\n"
 "color:#fff;\n"
 "border: 0px;\n"
 "font-size: 14px;\n"
@@ -628,11 +623,11 @@ class Ui_MainWindow(object):
 "background-color: rgb(47, 142, 228);\n"
 "}")
 
-        self.horizontalLayout_2.addWidget(self.pushButton_18)
+        self.horizontalLayout_2.addWidget(self.acceptTourButton)
 
-        self.pushButton_17 = QPushButton(self.requestPage)
-        self.pushButton_17.setObjectName(u"pushButton_17")
-        self.pushButton_17.setStyleSheet(u"QPushButton{\n"
+        self.declineTourButton = QPushButton(self.requestPage)
+        self.declineTourButton.setObjectName(u"declineTourButton")
+        self.declineTourButton.setStyleSheet(u"QPushButton{\n"
 "color:#fff;\n"
 "border: 0px;\n"
 "font-size: 14px;\n"
@@ -645,7 +640,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(47, 142, 228);\n"
 "}")
 
-        self.horizontalLayout_2.addWidget(self.pushButton_17)
+        self.horizontalLayout_2.addWidget(self.declineTourButton)
 
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
@@ -1159,22 +1154,21 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Hotels", None));
         self.createTourDescriptionBtn.setText(QCoreApplication.translate("MainWindow", u"Create Tour Description \ud83d\udcdd", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#12418d;\">Tours</span></p></body></html>", None))
-        self.profitLabel.setText(QCoreApplication.translate("MainWindow", u"Profit:", None))
-        self.vehicleCostLabel.setText(QCoreApplication.translate("MainWindow", u"Vehicle Cost:", None))
-        self.guideCostLabel.setText(QCoreApplication.translate("MainWindow", u" Guide Cost:", None))
-        self.revenueLabel.setText(QCoreApplication.translate("MainWindow", u"Total Revenue:", None))
         self.totalCostLabel.setText(QCoreApplication.translate("MainWindow", u"Total Cost:", None))
+        self.profitLabel.setText(QCoreApplication.translate("MainWindow", u"Profit:", None))
+        self.guideCostLabel.setText(QCoreApplication.translate("MainWindow", u" Guide Cost:", None))
+        self.vehicleCostLabel.setText(QCoreApplication.translate("MainWindow", u"Vehicle Cost:", None))
         ___qtablewidgetitem10 = self.tourSummaryTable.horizontalHeaderItem(0)
         ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"Total People", None));
         ___qtablewidgetitem11 = self.tourSummaryTable.horizontalHeaderItem(1)
         ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"Total Cost", None));
+        self.driverCostLabel.setText(QCoreApplication.translate("MainWindow", u"Driver Cost:", None))
         self.Driver_label.setText(QCoreApplication.translate("MainWindow", u"Select Driver", None))
         self.Vehicle_label.setText(QCoreApplication.translate("MainWindow", u"Select vehicle", None))
         self.Tour_Guide_label.setText(QCoreApplication.translate("MainWindow", u"Select Tour Guide", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#12418d;\">Requests</span></p></body></html>", None))
-        self.driverCostLabel.setText(QCoreApplication.translate("MainWindow", u"Driver Cost:", None))
-        self.pushButton_18.setText(QCoreApplication.translate("MainWindow", u"Accept", None))
-        self.pushButton_17.setText(QCoreApplication.translate("MainWindow", u"Decline", None))
+        self.acceptTourButton.setText(QCoreApplication.translate("MainWindow", u"Accept", None))
+        self.declineTourButton.setText(QCoreApplication.translate("MainWindow", u"Decline", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; color:#12418d;\">Ongoing Trips</span></p></body></html>", None))
         self.add_Travel_Agent_button.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"Edit", None))

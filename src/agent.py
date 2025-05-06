@@ -143,6 +143,7 @@ class AgentWindow(QMainWindow):
             JOIN Client ON Reservations.client_n = Client.phone_number
             JOIN Hotels ON Reservations.hotel_id = Hotels.id
             WHERE Reservations.tour_id = ?
+            AND Reservations.status = 'Active'
         """, (tour_id,))
         
         results = self.cursor.fetchall()

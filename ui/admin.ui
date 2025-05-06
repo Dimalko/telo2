@@ -543,17 +543,17 @@ border-radius: 7px;</string>
       </widget>
       <widget class="QWidget" name="requestPage">
        <layout class="QGridLayout" name="gridLayout_8" columnstretch="2,0">
-        <item row="11" column="1">
-         <widget class="QLabel" name="profitLabel">
+        <item row="9" column="1">
+         <widget class="QLabel" name="totalCostLabel">
           <property name="text">
-           <string>Profit:</string>
+           <string>Total Cost:</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="1">
-         <widget class="QLabel" name="vehicleCostLabel">
+        <item row="10" column="1">
+         <widget class="QLabel" name="profitLabel">
           <property name="text">
-           <string>Vehicle Cost:</string>
+           <string>Profit:</string>
           </property>
          </widget>
         </item>
@@ -564,17 +564,10 @@ border-radius: 7px;</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="1">
-         <widget class="QLabel" name="revenueLabel">
+        <item row="7" column="1">
+         <widget class="QLabel" name="vehicleCostLabel">
           <property name="text">
-           <string>Total Revenue:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
-         <widget class="QLabel" name="totalCostLabel">
-          <property name="text">
-           <string>Total Cost:</string>
+           <string>Vehicle Cost:</string>
           </property>
          </widget>
         </item>
@@ -590,6 +583,13 @@ border-radius: 7px;</string>
             <string>Total Cost</string>
            </property>
           </column>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="driverCostLabel">
+          <property name="text">
+           <string>Driver Cost:</string>
+          </property>
          </widget>
         </item>
         <item row="2" column="1">
@@ -746,13 +746,6 @@ border-radius: 7px;</string>
           </property>
          </spacer>
         </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="driverCostLabel">
-          <property name="text">
-           <string>Driver Cost:</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="leftMargin">
@@ -785,7 +778,7 @@ border-radius: 7px;</string>
              <number>0</number>
             </property>
             <item>
-             <widget class="QPushButton" name="pushButton_18">
+             <widget class="QPushButton" name="acceptTourButton">
               <property name="styleSheet">
                <string notr="true">QPushButton{
 color:#fff;
@@ -806,7 +799,7 @@ background-color: rgb(47, 142, 228);
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_17">
+             <widget class="QPushButton" name="declineTourButton">
               <property name="styleSheet">
                <string notr="true">QPushButton{
 color:#fff;

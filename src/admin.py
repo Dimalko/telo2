@@ -1,6 +1,6 @@
 import sys
 import sqlite3
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem,QListWidgetItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem,QListWidgetItem,QMessageBox
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
@@ -78,6 +78,9 @@ class AdminWindow(QMainWindow):
         self.driverComboBox.setCurrentIndex(0)
         self.vehicleComboBox.setCurrentIndex(0)
         self.guideComboBox.setCurrentIndex(0)
+        #Accept/Decline Tour Buttons
+        self.acceptTourButton.clicked.connect(self.accept_tour)
+        self.declineTourButton.clicked.connect(self.decline_tour)
 
 
 
@@ -252,16 +255,22 @@ class AdminWindow(QMainWindow):
             self.cursor.execute("""
                 SELECT SUM(people_numb), SUM(cost)
                 FROM Reservations
-                WHERE tour_id = ?
+                WHERE tour_id = ? AND status = 'Active'
             """, (tour_id,))
             result = self.cursor.fetchone()
 
-            total_people = result[0] if result[0] else 0
-            total_cost = result[1] if result[1] else 0.0
-
             self.tourSummaryTable.setRowCount(1)
-            self.tourSummaryTable.setItem(0, 0, QTableWidgetItem(str(total_people)))
-            self.tourSummaryTable.setItem(0, 1, QTableWidgetItem(f"€{total_cost:.2f}"))
+            self.tourSummaryTable.setColumnCount(2)
+
+            if not result or result[0] is None:
+                self.tourSummaryTable.setItem(0, 0, QTableWidgetItem("No Reservations were made"))
+                self.tourSummaryTable.setItem(0, 1, QTableWidgetItem("€0.00"))
+                
+            else:
+                total_people = result[0]
+                total_cost = result[1]
+                self.tourSummaryTable.setItem(0, 0, QTableWidgetItem(str(total_people)))
+                self.tourSummaryTable.setItem(0, 1, QTableWidgetItem(f"€{total_cost:.2f}"))
 
         except Exception as e:
             print("Error loading tour summary:", e)
@@ -434,6 +443,40 @@ class AdminWindow(QMainWindow):
 
         except Exception as e:
             print("Error calculating all costs:", e)
+
+    def accept_tour(self):
+        try:
+            if not hasattr(self, "selected_tour_id"):
+                return
+
+            tour_id = self.selected_tour_id
+            self.cursor.execute("UPDATE Tours SET status = 'Accepted' WHERE id = ?", (tour_id,))
+            self.connection.commit()
+            QMessageBox.information(self, "Success", f"Tour {tour_id} has been accepted.")
+            self.loadFreeTours()
+            self.populate_tour_table()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Could not accept tour.\n{e}")
+            self.connection.rollback()
+
+    def decline_tour(self):
+        try:
+            if not hasattr(self, "selected_tour_id"):
+                return
+
+            tour_id = self.selected_tour_id
+
+            # Αλλαγή των κρατήσεων σε Cancelled
+            self.cursor.execute("UPDATE Reservations SET status = 'Cancelled' WHERE tour_id = ?", (tour_id,))
+            self.connection.commit()
+            QMessageBox.information(self, "Declined", f"All reservations for tour {tour_id} were cancelled.")
+            self.load_tour_summary(tour_id)
+            self.calculate_all_costs()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Could not decline tour.\n{e}")
+            self.connection.rollback()
 
 
                 
