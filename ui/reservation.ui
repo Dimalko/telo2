@@ -121,7 +121,15 @@ QListWidget{
 QLineEdit{
 	border: 1px solid rgb(18, 65, 141);	
 	border-radius: 9px;
-}</string>
+}
+QLabel {
+    color: #12418d;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -328,7 +336,28 @@ QListWidget::item:selected {
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="peopleSpinBox"/>
+            <widget class="QSpinBox" name="peopleSpinBox">
+             <property name="styleSheet">
+              <string notr="true">QSpinBox {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QSpinBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}
+
+
+</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_4">
@@ -338,7 +367,28 @@ QListWidget::item:selected {
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="Hotels_comboBox"/>
+            <widget class="QComboBox" name="Hotels_comboBox">
+             <property name="styleSheet">
+              <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}
+
+
+</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_5">
@@ -349,6 +399,26 @@ QListWidget::item:selected {
            </item>
            <item>
             <widget class="QComboBox" name="paymentComboBox">
+             <property name="styleSheet">
+              <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}
+
+
+</string>
+             </property>
              <item>
               <property name="text">
                <string>card</string>
@@ -623,13 +693,44 @@ QListWidget::item:selected {
          <layout class="QHBoxLayout" name="group_selection_layout">
           <item>
            <widget class="QLabel" name="group_label">
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    color: #12418d;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}
+</string>
+            </property>
             <property name="text">
              <string>Choose Reservation/ Group:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="groupComboBox"/>
+           <widget class="QComboBox" name="groupComboBox">
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}
+
+
+</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -711,6 +812,23 @@ background-color: rgb(47, 142, 228);
           </item>
           <item row="0" column="1">
            <widget class="QDateEdit" name="paymentDateEdit">
+            <property name="styleSheet">
+             <string notr="true">QDateEdit {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QDateEdit::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}</string>
+            </property>
             <property name="calendarPopup">
              <bool>true</bool>
             </property>
@@ -725,6 +843,26 @@ background-color: rgb(47, 142, 228);
           </item>
           <item row="1" column="1">
            <widget class="QComboBox" name="paymentTypeComboBox">
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}
+
+
+</string>
+            </property>
             <item>
              <property name="text">
               <string>Prepayment</string>
@@ -751,6 +889,26 @@ background-color: rgb(47, 142, 228);
           </item>
           <item row="2" column="1">
            <widget class="QDoubleSpinBox" name="paymentAmountSpinBox">
+            <property name="styleSheet">
+             <string notr="true">QDoubleSpinBox {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QDoubleSpinBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}
+
+
+</string>
+            </property>
             <property name="prefix">
              <string>€ </string>
             </property>

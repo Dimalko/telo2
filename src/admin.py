@@ -69,6 +69,17 @@ class AdminWindow(QMainWindow):
         self.removeHotelBtn.clicked.connect(self.removeHotel)
         #Create Tour Description Button
         self.createTourDescriptionBtn.clicked.connect(self.createTourDescription)
+        self.TourlistWidget.itemClicked.connect(self.on_tour_selected)
+        self.driverComboBox.currentIndexChanged.connect(self.calculate_all_costs)
+        self.vehicleComboBox.currentIndexChanged.connect(self.calculate_all_costs)
+        self.guideComboBox.currentIndexChanged.connect(self.calculate_all_costs)
+        self.driverComboBox.currentIndexChanged.connect(self.calculate_all_costs)
+        # Τέλος load_comboboxes_for_tour
+        self.driverComboBox.setCurrentIndex(0)
+        self.vehicleComboBox.setCurrentIndex(0)
+        self.guideComboBox.setCurrentIndex(0)
+
+
 
     #Populate Tables/Lists
         self.populate_tour_table()
@@ -236,6 +247,196 @@ class AdminWindow(QMainWindow):
         self.open_delete.emit()
         self.removeHotelShow.show()
 
+    def load_tour_summary(self, tour_id):
+        try:
+            self.cursor.execute("""
+                SELECT SUM(people_numb), SUM(cost)
+                FROM Reservations
+                WHERE tour_id = ?
+            """, (tour_id,))
+            result = self.cursor.fetchone()
+
+            total_people = result[0] if result[0] else 0
+            total_cost = result[1] if result[1] else 0.0
+
+            self.tourSummaryTable.setRowCount(1)
+            self.tourSummaryTable.setItem(0, 0, QTableWidgetItem(str(total_people)))
+            self.tourSummaryTable.setItem(0, 1, QTableWidgetItem(f"€{total_cost:.2f}"))
+
+        except Exception as e:
+            print("Error loading tour summary:", e)
+
+
+    def on_tour_selected(self, item):
+        try:
+            tour_text = item.text()
+            tour_id = tour_text.split(" ")[0].replace("#", "").strip()
+            self.selected_tour_id = tour_id
+
+            self.load_tour_summary(tour_id)
+            self.load_comboboxes_for_tour(tour_id)
+            self.calculate_all_costs()
+
+        except Exception as e:
+            print("Error selecting tour:", e)
+
+            
+
+    def calculate_guide_cost(self, guide_row, tour_days):
+        monthly_salary = guide_row[3]
+        working_days_month = 22  # όπως στους οδηγούς
+        return (monthly_salary / working_days_month) * tour_days
+
+       
+
+
+    def calculate_driver_cost(self, driver_row, tour_days):
+        driver_type = driver_row[3]
+        salary = driver_row[4]
+
+        if driver_type == 'Freelancer':
+            return salary * tour_days
+        else:
+            working_days_month = 22
+            return (salary / working_days_month) * tour_days
+
+
+    def calculate_bus_cost(self, bus_row, tour_km):
+        rental_cost = bus_row[5] or 0
+        consumption = bus_row[6]
+        fuel_price_per_liter = 1.80
+
+        fuel_cost = (tour_km * consumption / 100) * fuel_price_per_liter
+        return rental_cost + fuel_cost
+    
+
+    def calculate_driver_cost(self, driver_row, tour_days):
+
+        driver_type = driver_row[3]  # 'Permanent' or 'Freelancer'
+        salary = driver_row[4]
+
+        if driver_type == 'Freelancer':
+            return salary * tour_days  # salary είναι ημερομίσθιο
+        else:
+            working_days_month = 22
+    
+            return (salary / working_days_month) * tour_days
+
+
+    def calculate_tour_days(self, start_date, end_date):
+        from datetime import datetime
+        fmt = "%Y-%m-%d"
+        start = datetime.strptime(start_date, fmt)
+        end = datetime.strptime(end_date, fmt)
+        return (end - start).days + 1
+
+    def load_comboboxes_for_tour(self, tour_id):
+        try:
+            self.cursor.execute("SELECT transportation FROM Tours WHERE id = ?", (tour_id,))
+            result = self.cursor.fetchone()
+            if not result:
+                return
+            transportation = result[0].lower()
+
+            self.driverComboBox.clear()
+            self.vehicleComboBox.clear()
+            self.guideComboBox.clear()
+
+            if transportation == "bus":
+                self.cursor.execute("""
+                    SELECT tax_code, f_name, l_name 
+                    FROM Drivers 
+                    WHERE status = 'Available'
+                """)
+                for tax_code, f_name, l_name in self.cursor.fetchall():
+                    full_name = f"{f_name} {l_name}"
+                    self.driverComboBox.addItem(full_name, tax_code)
+
+                self.cursor.execute("""
+                    SELECT plate_number, model 
+                    FROM Buses 
+                    WHERE status = 'Available'
+                """)
+                for plate, model in self.cursor.fetchall():
+                    display = f"{plate} - {model}"
+                    self.vehicleComboBox.addItem(display, plate)
+
+            elif transportation == "airplane":
+                self.vehicleComboBox.addItem("Airplane", "Airplane")
+            elif transportation == "boat":
+                self.vehicleComboBox.addItem("Boat", "Boat")
+
+            self.cursor.execute("""
+                SELECT id, f_name, l_name 
+                FROM TeamLeaders
+            """)
+            for tid, f_name, l_name in self.cursor.fetchall():
+                full_name = f"{f_name} {l_name}"
+                self.guideComboBox.addItem(full_name, tid)
+
+        except Exception as e:
+            print("Error loading comboboxes:", e)
+
+
+    
+    def calculate_all_costs(self):
+        try:
+            tour_id = self.selected_tour_id
+
+            self.cursor.execute("SELECT start_date, end_date, km FROM Tours WHERE id = ?", (tour_id,))
+            result = self.cursor.fetchone()
+            if not result:
+                return
+            start_date, end_date, tour_km = result
+            tour_days = self.calculate_tour_days(start_date, end_date)
+
+            driver_code = self.driverComboBox.currentData()
+            if driver_code:
+                self.cursor.execute("SELECT * FROM Drivers WHERE tax_code = ?", (driver_code,))
+                driver_row = self.cursor.fetchone()
+                driver_cost = self.calculate_driver_cost(driver_row, tour_days)
+            else:
+                driver_cost = 0.0
+
+            vehicle_plate = self.vehicleComboBox.currentData()
+            if vehicle_plate and vehicle_plate not in ['Boat', 'Airplane']:
+                self.cursor.execute("SELECT * FROM Buses WHERE plate_number = ?", (vehicle_plate,))
+                bus_row = self.cursor.fetchone()
+                vehicle_cost = self.calculate_bus_cost(bus_row, tour_km)
+            else:
+                vehicle_cost = 0.0
+
+            guide_id = self.guideComboBox.currentData()
+            if guide_id:
+                self.cursor.execute("SELECT * FROM TeamLeaders WHERE id = ?", (guide_id,))
+                guide_row = self.cursor.fetchone()
+                guide_cost = self.calculate_guide_cost(guide_row, tour_days)
+            else:
+                guide_cost = 0.0
+
+            total_service_cost = driver_cost + vehicle_cost + guide_cost
+
+            self.cursor.execute("SELECT SUM(cost) FROM Reservations WHERE tour_id = ?", (tour_id,))
+            total_income = self.cursor.fetchone()[0] or 0.0
+
+            if total_income > 0:
+                profit_amount = total_income - total_service_cost
+                profit_percent = (profit_amount / total_income) * 100
+            else:
+                profit_amount = 0
+                profit_percent = 0
+
+            self.driverCostLabel.setText(f"Driver Cost: €{driver_cost:.2f}")
+            self.vehicleCostLabel.setText(f"Vehicle Cost: €{vehicle_cost:.2f}")
+            self.guideCostLabel.setText(f"Guide Cost: €{guide_cost:.2f}")
+            self.totalCostLabel.setText(f"Total Cost: €{total_service_cost:.2f}")
+            self.profitLabel.setText(f"Profit: €{profit_amount:.2f} ({profit_percent:.1f}%)")
+
+        except Exception as e:
+            print("Error calculating all costs:", e)
+
+
+                
     
     #Create Tour Description Window
     def createTourDescription(self):

@@ -79,13 +79,20 @@ QListWidget{
 	border: 1px solid rgb(161, 161, 161);	
 	border-radius:10px;
 }
+QLabel {
+    color: #12418d;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
     <string notr="true"/>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,8">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -535,7 +542,217 @@ border-radius: 7px;</string>
        </layout>
       </widget>
       <widget class="QWidget" name="requestPage">
-       <layout class="QGridLayout" name="gridLayout_8" columnstretch="2,8">
+       <layout class="QGridLayout" name="gridLayout_8" columnstretch="2,0">
+        <item row="11" column="1">
+         <widget class="QLabel" name="profitLabel">
+          <property name="text">
+           <string>Profit:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="vehicleCostLabel">
+          <property name="text">
+           <string>Vehicle Cost:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLabel" name="guideCostLabel">
+          <property name="text">
+           <string> Guide Cost:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="QLabel" name="revenueLabel">
+          <property name="text">
+           <string>Total Revenue:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QLabel" name="totalCostLabel">
+          <property name="text">
+           <string>Total Cost:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QTableWidget" name="tourSummaryTable">
+          <column>
+           <property name="text">
+            <string>Total People</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Total Cost</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <layout class="QHBoxLayout" name="LabelLayout">
+          <item>
+           <widget class="QLabel" name="Driver_label">
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    color: #12418d;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Select Driver</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="Vehicle_label">
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    color: #12418d;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Select vehicle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="Tour_Guide_label">
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    color: #12418d;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Select Tour Guide</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="5" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QComboBox" name="driverComboBox">
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}
+
+
+</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="vehicleComboBox">
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}
+
+
+</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="guideComboBox">
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #12418d;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #12418d;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #12418d;
+}
+
+
+</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label_7">
+          <property name="styleSheet">
+           <string notr="true">background-color:rgb(170, 217, 231);
+padding: 5px;
+border-radius: 7px;</string>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#12418d;&quot;&gt;Requests&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="driverCostLabel">
+          <property name="text">
+           <string>Driver Cost:</string>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="leftMargin">
@@ -612,21 +829,6 @@ background-color: rgb(47, 142, 228);
            </layout>
           </item>
          </layout>
-        </item>
-        <item row="1" column="1">
-         <widget class="QTableWidget" name="tableWidget_4"/>
-        </item>
-        <item row="0" column="0" colspan="2">
-         <widget class="QLabel" name="label_7">
-          <property name="styleSheet">
-           <string notr="true">background-color:rgb(170, 217, 231);
-padding: 5px;
-border-radius: 7px;</string>
-          </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#12418d;&quot;&gt;Requests&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>

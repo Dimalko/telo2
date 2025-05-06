@@ -260,7 +260,8 @@ class ReservationWindow(QMainWindow):
                 return
 
             # Τελικό κόστος: τιμή * άτομα * ημέρες
-            total_cost = price_per_person * people * number_of_days
+            total_cost = (price_per_person * people * number_of_days) + (50 * people)
+
 
             # Δημιουργία κράτησης
             self.cursor.execute("""

@@ -136,7 +136,15 @@ class Ui_MainWindow(object):
 "QLineEdit{\n"
 "	border: 1px solid rgb(18, 65, 141);	\n"
 "	border-radius: 9px;\n"
-"}")
+"}\n"
+"QLabel {\n"
+"    color: #12418d;\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    padding: 4px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setStyleSheet(u"")
@@ -321,6 +329,24 @@ class Ui_MainWindow(object):
 
         self.peopleSpinBox = QSpinBox(self.horizontalLayoutWidget)
         self.peopleSpinBox.setObjectName(u"peopleSpinBox")
+        self.peopleSpinBox.setStyleSheet(u"QSpinBox {\n"
+"    background-color: white;\n"
+"    border: 2px solid #12418d;\n"
+"    border-radius: 6px;\n"
+"    padding: 4px 8px;\n"
+"    font-size: 14px;\n"
+"    color: #12418d;\n"
+"}\n"
+"\n"
+"QSpinBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px;\n"
+"    border-left: 1px solid #12418d;\n"
+"}\n"
+"\n"
+"\n"
+"")
 
         self.verticalLayout_4.addWidget(self.peopleSpinBox)
 
@@ -331,6 +357,24 @@ class Ui_MainWindow(object):
 
         self.Hotels_comboBox = QComboBox(self.horizontalLayoutWidget)
         self.Hotels_comboBox.setObjectName(u"Hotels_comboBox")
+        self.Hotels_comboBox.setStyleSheet(u"QComboBox {\n"
+"    background-color: white;\n"
+"    border: 2px solid #12418d;\n"
+"    border-radius: 6px;\n"
+"    padding: 4px 8px;\n"
+"    font-size: 14px;\n"
+"    color: #12418d;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px;\n"
+"    border-left: 1px solid #12418d;\n"
+"}\n"
+"\n"
+"\n"
+"")
 
         self.verticalLayout_4.addWidget(self.Hotels_comboBox)
 
@@ -343,6 +387,24 @@ class Ui_MainWindow(object):
         self.paymentComboBox.addItem("")
         self.paymentComboBox.addItem("")
         self.paymentComboBox.setObjectName(u"paymentComboBox")
+        self.paymentComboBox.setStyleSheet(u"QComboBox {\n"
+"    background-color: white;\n"
+"    border: 2px solid #12418d;\n"
+"    border-radius: 6px;\n"
+"    padding: 4px 8px;\n"
+"    font-size: 14px;\n"
+"    color: #12418d;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px;\n"
+"    border-left: 1px solid #12418d;\n"
+"}\n"
+"\n"
+"\n"
+"")
 
         self.verticalLayout_4.addWidget(self.paymentComboBox)
 
@@ -519,11 +581,37 @@ class Ui_MainWindow(object):
         self.group_selection_layout.setObjectName(u"group_selection_layout")
         self.group_label = QLabel(self.tab_3)
         self.group_label.setObjectName(u"group_label")
+        self.group_label.setStyleSheet(u"QLabel {\n"
+"    color: #12418d;\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    padding: 4px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"")
 
         self.group_selection_layout.addWidget(self.group_label)
 
         self.groupComboBox = QComboBox(self.tab_3)
         self.groupComboBox.setObjectName(u"groupComboBox")
+        self.groupComboBox.setStyleSheet(u"QComboBox {\n"
+"    background-color: white;\n"
+"    border: 2px solid #12418d;\n"
+"    border-radius: 6px;\n"
+"    padding: 4px 8px;\n"
+"    font-size: 14px;\n"
+"    color: #12418d;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px;\n"
+"    border-left: 1px solid #12418d;\n"
+"}\n"
+"\n"
+"\n"
+"")
 
         self.group_selection_layout.addWidget(self.groupComboBox)
 
@@ -592,6 +680,21 @@ class Ui_MainWindow(object):
 
         self.paymentDateEdit = QDateEdit(self.tab_3)
         self.paymentDateEdit.setObjectName(u"paymentDateEdit")
+        self.paymentDateEdit.setStyleSheet(u"QDateEdit {\n"
+"    background-color: white;\n"
+"    border: 2px solid #12418d;\n"
+"    border-radius: 6px;\n"
+"    padding: 4px 8px;\n"
+"    font-size: 14px;\n"
+"    color: #12418d;\n"
+"}\n"
+"\n"
+"QDateEdit::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px;\n"
+"    border-left: 1px solid #12418d;\n"
+"}")
         self.paymentDateEdit.setCalendarPopup(True)
 
         self.paymentFormLayout.setWidget(0, QFormLayout.FieldRole, self.paymentDateEdit)
@@ -606,6 +709,24 @@ class Ui_MainWindow(object):
         self.paymentTypeComboBox.addItem("")
         self.paymentTypeComboBox.addItem("")
         self.paymentTypeComboBox.setObjectName(u"paymentTypeComboBox")
+        self.paymentTypeComboBox.setStyleSheet(u"QComboBox {\n"
+"    background-color: white;\n"
+"    border: 2px solid #12418d;\n"
+"    border-radius: 6px;\n"
+"    padding: 4px 8px;\n"
+"    font-size: 14px;\n"
+"    color: #12418d;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px;\n"
+"    border-left: 1px solid #12418d;\n"
+"}\n"
+"\n"
+"\n"
+"")
 
         self.paymentFormLayout.setWidget(1, QFormLayout.FieldRole, self.paymentTypeComboBox)
 
@@ -616,6 +737,24 @@ class Ui_MainWindow(object):
 
         self.paymentAmountSpinBox = QDoubleSpinBox(self.tab_3)
         self.paymentAmountSpinBox.setObjectName(u"paymentAmountSpinBox")
+        self.paymentAmountSpinBox.setStyleSheet(u"QDoubleSpinBox {\n"
+"    background-color: white;\n"
+"    border: 2px solid #12418d;\n"
+"    border-radius: 6px;\n"
+"    padding: 4px 8px;\n"
+"    font-size: 14px;\n"
+"    color: #12418d;\n"
+"}\n"
+"\n"
+"QDoubleSpinBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px;\n"
+"    border-left: 1px solid #12418d;\n"
+"}\n"
+"\n"
+"\n"
+"")
         self.paymentAmountSpinBox.setDecimals(2)
         self.paymentAmountSpinBox.setMaximum(10000.000000000000000)
 
