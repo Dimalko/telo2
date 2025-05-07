@@ -328,7 +328,6 @@ class AdminWindow(QMainWindow):
             return salary * tour_days  # salary είναι ημερομίσθιο
         else:
             working_days_month = 22
-    
             return (salary / working_days_month) * tour_days
 
 
