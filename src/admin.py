@@ -183,7 +183,7 @@ class AdminWindow(QMainWindow):
         self.populate_table.populate_table(self.travelagentTableWidget, "SELECT * FROM Staff WHERE role='Travel_Agent'", 8)
     
     def populate_teamleader_table(self):
-        self.populate_table.populate_table(self.teamleaderTableWidget, "SELECT * FROM TeamLeaders", 5)  
+        self.populate_table.populate_table(self.teamleaderTableWidget, "SELECT * FROM TeamLeaders", 6)  
     
     def populate_driver_table(self):
         self.populate_table.populate_table(self.driverTableWidget, "SELECT * FROM Drivers", 6)    
@@ -384,6 +384,7 @@ class AdminWindow(QMainWindow):
             self.cursor.execute("""
                 SELECT id, f_name, l_name 
                 FROM TeamLeaders
+                WHERE status = 'Available'
             """)
             for tid, f_name, l_name in self.cursor.fetchall():
                 full_name = f"{f_name} {l_name}"
@@ -398,13 +399,14 @@ class AdminWindow(QMainWindow):
         try:
             tour_id = self.selected_tour_id
 
-            self.cursor.execute("SELECT start_date, end_date, km FROM Tours WHERE id = ?", (tour_id,))
+            self.cursor.execute("SELECT start_date, end_date, km, transportation FROM Tours WHERE id = ?", (tour_id,))
             result = self.cursor.fetchone()
             if not result:
                 return
-            start_date, end_date, tour_km = result
+            start_date, end_date, tour_km, transportation = result
             tour_days = self.calculate_tour_days(start_date, end_date)
 
+            # Driver
             driver_code = self.driverComboBox.currentData()
             if driver_code:
                 self.cursor.execute("SELECT * FROM Drivers WHERE tax_code = ?", (driver_code,))
@@ -413,14 +415,7 @@ class AdminWindow(QMainWindow):
             else:
                 driver_cost = 0.0
 
-            vehicle_plate = self.vehicleComboBox.currentData()
-            if vehicle_plate and vehicle_plate not in ['Boat', 'Airplane']:
-                self.cursor.execute("SELECT * FROM Buses WHERE plate_number = ?", (vehicle_plate,))
-                bus_row = self.cursor.fetchone()
-                vehicle_cost = self.calculate_bus_cost(bus_row, tour_km)
-            else:
-                vehicle_cost = 0.0
-
+            # Guide
             guide_id = self.guideComboBox.currentData()
             if guide_id:
                 self.cursor.execute("SELECT * FROM TeamLeaders WHERE id = ?", (guide_id,))
@@ -429,9 +424,30 @@ class AdminWindow(QMainWindow):
             else:
                 guide_cost = 0.0
 
+            # Vehicle OR Transportation cost
+            transportation = transportation.strip()
+            if transportation == "Bus":
+                vehicle_plate = self.vehicleComboBox.currentData()
+                if vehicle_plate:
+                    self.cursor.execute("SELECT * FROM Buses WHERE plate_number = ?", (vehicle_plate,))
+                    bus_row = self.cursor.fetchone()
+                    vehicle_cost = self.calculate_bus_cost(bus_row, tour_km)
+                else:
+                    vehicle_cost = 0.0
+                vehicle_label = f"Vehicle Cost: €{vehicle_cost:.2f}"
+            else:
+                # Get number of active people
+                self.cursor.execute("SELECT SUM(people_numb) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
+                total_people = self.cursor.fetchone()[0] or 0
+
+                ticket_price = 120 if transportation == "Airplain" else 60 if transportation == "Boat" else 0
+                vehicle_cost = ticket_price * total_people
+                vehicle_label = f"Transportation Cost: €{vehicle_cost:.2f}"
+
+            # Final costs
             total_service_cost = driver_cost + vehicle_cost + guide_cost
 
-            self.cursor.execute("SELECT SUM(cost) FROM Reservations WHERE tour_id = ?", (tour_id,))
+            self.cursor.execute("SELECT SUM(cost) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
             total_income = self.cursor.fetchone()[0] or 0.0
 
             if total_income > 0:
@@ -441,8 +457,9 @@ class AdminWindow(QMainWindow):
                 profit_amount = 0
                 profit_percent = 0
 
+            # Show on UI
             self.driverCostLabel.setText(f"Driver Cost: €{driver_cost:.2f}")
-            self.vehicleCostLabel.setText(f"Vehicle Cost: €{vehicle_cost:.2f}")
+            self.vehicleCostLabel.setText(vehicle_label)
             self.guideCostLabel.setText(f"Guide Cost: €{guide_cost:.2f}")
             self.totalCostLabel.setText(f"Total Cost: €{total_service_cost:.2f}")
             self.profitLabel.setText(f"Profit: €{profit_amount:.2f} ({profit_percent:.1f}%)")
@@ -450,21 +467,57 @@ class AdminWindow(QMainWindow):
         except Exception as e:
             print("Error calculating all costs:", e)
 
+
     def accept_tour(self):
         try:
             if not hasattr(self, "selected_tour_id"):
                 return
 
             tour_id = self.selected_tour_id
+
+            # Update tour status
             self.cursor.execute("UPDATE Tours SET status = 'Accepted' WHERE id = ?", (tour_id,))
+
+            # Get selected driver, vehicle, and guide from comboboxes
+            driver_code = self.driverComboBox.currentData()
+            vehicle_plate = self.vehicleComboBox.currentData()
+            guide_id = self.guideComboBox.currentData()
+
+            # Update Driver status to Busy
+            if driver_code:
+                self.cursor.execute("UPDATE Drivers SET status = 'Busy' WHERE tax_code = ?", (driver_code,))
+                self.populate_driver_table()
+
+            # Update Bus status to On Tour AND update mileage
+            if vehicle_plate and vehicle_plate not in ['Airplane', 'Boat']:
+                self.cursor.execute("UPDATE Buses SET status = 'On Tour' WHERE plate_number = ?", (vehicle_plate,))
+                # Get km from the tour
+                self.cursor.execute("SELECT km FROM Tours WHERE id = ?", (tour_id,))
+                result = self.cursor.fetchone()
+                if result:
+                    tour_km = result[0]
+                    self.cursor.execute(
+                        "UPDATE Buses SET mileage = mileage + ? WHERE plate_number = ?",
+                        (tour_km, vehicle_plate)
+                    )
+                self.populate_buses_table()
+
+            # Update TeamLeader status to Busy
+            if guide_id:
+                self.cursor.execute("UPDATE TeamLeaders SET status = 'Busy' WHERE id = ?", (guide_id,))
+                self.populate_teamleader_table()
+
             self.connection.commit()
             QMessageBox.information(self, "Success", f"Tour {tour_id} has been accepted.")
+
             self.loadFreeTours()
             self.populate_tour_table()
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Could not accept tour.\n{e}")
             self.connection.rollback()
+
+
 
     def decline_tour(self):
         try:

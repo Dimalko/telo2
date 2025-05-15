@@ -242,14 +242,14 @@ class ReservationWindow(QMainWindow):
             price_per_person = result[0]
 
             # Βρες τις ημερομηνίες της εκδρομής
-            self.cursor.execute("SELECT start_date, end_date FROM Tours WHERE id = ?", (tour_id,))
+            self.cursor.execute("SELECT start_date, end_date, transportation FROM Tours WHERE id = ?", (tour_id,))
             date_result = self.cursor.fetchone()
 
             if not date_result:
-                QMessageBox.warning(self, "Error", "Could not find tour dates.")
+                QMessageBox.warning(self, "Error", "Could not find tour details.")
                 return
 
-            start_date_str, end_date_str = date_result
+            start_date_str, end_date_str, transportation = date_result
             start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
             end_date = datetime.strptime(end_date_str, "%Y-%m-%d")
 
@@ -259,16 +259,36 @@ class ReservationWindow(QMainWindow):
                 QMessageBox.warning(self, "Error", "Invalid tour dates.")
                 return
 
-            # Τελικό κόστος: τιμή * άτομα * ημέρες
-            total_cost = (price_per_person * people * number_of_days) + (50 * people)
+            # Κόστος μεταφοράς (αν είναι αεροπλάνο ή πλοίο)
+            transportation_cost = 0
+            if transportation == 'Airplain':
+                transportation_cost = 120 * people
+            elif transportation == 'Boat':
+                transportation_cost = 60 * people
 
+            # Τελικό κόστος: τιμή * άτομα * ημέρες + extra 50€/άτομο
+            total_cost = (price_per_person * people * number_of_days) + (50 * people) + transportation_cost
 
             # Δημιουργία κράτησης
             self.cursor.execute("""
-                INSERT INTO Reservations (tour_id, client_n, people_numb, hotel_id, cost, payment_type)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO Reservations (tour_id, client_n, people_numb, hotel_id, cost, payment_type, status)
+                VALUES (?, ?, ?, ?, ?, ?, 'Active')
             """, (tour_id, client_phone, people, hotel_id, total_cost, payment_type))
             reservation_id = self.cursor.lastrowid
+
+            # Εισαγωγή Ticket αν υπάρχει μεταφορά με Airplain ή Boat
+            if transportation == "Airplain":
+                ticket_price = 120
+                self.cursor.execute("""
+                    INSERT INTO Tickets (reservation_id, type, price_per_person, total_price)
+                    VALUES (?, ?, ?, ?)
+                """, (reservation_id, "Airplain", ticket_price, ticket_price * people))
+            elif transportation == "Boat":
+                ticket_price = 60
+                self.cursor.execute("""
+                    INSERT INTO Tickets (reservation_id, type, price_per_person, total_price)
+                    VALUES (?, ?, ?, ?)
+                """, (reservation_id, "Boat", ticket_price, ticket_price * people))
 
             # Αν είναι group (πάνω από 1 άτομο), δημιούργησε εγγραφή group και προκαταβολή
             if people > 1:
@@ -276,7 +296,6 @@ class ReservationWindow(QMainWindow):
                     INSERT INTO ReservationGroup (reservation_id, total_people, total_cost)
                     VALUES (?, ?, ?)
                 """, (reservation_id, people, total_cost))
-                # Εδώ υπολογίζουμε την προκαταβολή (30% του συνολικού κόστους)
                 group_id = self.cursor.lastrowid
                 deposit = round(total_cost * 0.30, 2)
 
@@ -292,7 +311,11 @@ class ReservationWindow(QMainWindow):
                 """, (deposit, group_id))
 
             self.connection.commit()
-            QMessageBox.information(self, "Success", f"Reservation completed successfully!\n({number_of_days} days tour)")
+            QMessageBox.information(
+                self,
+                "Success",
+                f"Reservation completed successfully!\n({number_of_days} days tour)\nTransportation: {transportation} | Ticket Cost: €{transportation_cost:.2f}"
+            )
 
             # Reset πεδίων
             self.peopleSpinBox.setValue(1)
@@ -300,12 +323,14 @@ class ReservationWindow(QMainWindow):
             self.Hotels_comboBox.setCurrentIndex(0)
 
             self.loadGroups()
-            
 
         except Exception as e:
             print("Reservation error:", e)
             QMessageBox.critical(self, "Error", "An error occurred while adding the reservation.")
             self.connection.rollback()
+
+
+
 
 
 
