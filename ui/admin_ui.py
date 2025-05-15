@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QHBoxLayout,
-    QHeaderView, QLabel, QListWidget, QListWidgetItem,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QStackedWidget, QTabWidget, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QGridLayout,
+    QHBoxLayout, QHeaderView, QLabel, QListWidget,
+    QListWidgetItem, QMainWindow, QPushButton, QSizePolicy,
+    QSpacerItem, QStackedWidget, QTabWidget, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -383,6 +383,8 @@ class Ui_MainWindow(object):
         self.tourTableWidget.setHorizontalHeaderItem(9, __qtablewidgetitem9)
         self.tourTableWidget.setObjectName(u"tourTableWidget")
         self.tourTableWidget.setStyleSheet(u"")
+        self.tourTableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tourTableWidget.setAlternatingRowColors(True)
         self.tourTableWidget.setCornerButtonEnabled(True)
 
         self.gridLayout.addWidget(self.tourTableWidget, 1, 0, 1, 3)
