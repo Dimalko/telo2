@@ -1,6 +1,6 @@
 import sys
 import sqlite3
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem,QListWidgetItem,QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem,QListWidgetItem,QMessageBox, QInputDialog
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
@@ -67,8 +67,11 @@ class AdminWindow(QMainWindow):
         self.removeDriverBtn.clicked.connect(self.removeDriver)
         self.removeBusBtn.clicked.connect(self.removeBus)
         self.removeHotelBtn.clicked.connect(self.removeHotel)
+        #Edit Buttons
+        self.editTourBtn.clicked.connect(self.tourEdit)
         #Create Tour Description Button
         self.createTourDescriptionBtn.clicked.connect(self.createTourDescription)
+        #Reservation Buttons
         self.TourlistWidget.itemClicked.connect(self.on_tour_selected)
         self.driverComboBox.currentIndexChanged.connect(self.calculate_all_costs)
         self.vehicleComboBox.currentIndexChanged.connect(self.calculate_all_costs)
@@ -81,6 +84,10 @@ class AdminWindow(QMainWindow):
         #Accept/Decline Tour Buttons
         self.acceptTourButton.clicked.connect(self.accept_tour)
         self.declineTourButton.clicked.connect(self.decline_tour)
+        #---------------
+        #LogOut Button
+        self.logOutBtn.clicked.connect(self.to_login_window)
+        #---------------
 
 
 
@@ -478,12 +485,36 @@ class AdminWindow(QMainWindow):
             self.connection.rollback()
 
 
-                
+
+    def tourEdit(self):
+        id_to_edit, ok = QInputDialog.getText(self, "Edit Row", "Enter ID to edit:")
+        if ok and id_to_edit:
+            for row in range(self.tourTableWidget.rowCount()):
+                item_id = self.tourTableWidget.item(row, 0)
+                if item_id and item_id.text() == id_to_edit:
+                    # Enable editing for all columns EXCEPT ID
+                    for col in range(1, self.tourTableWidget.columnCount()):
+                        item = self.tourTableWidget.item(row, col)
+                        item.setFlags(item.flags() | Qt.ItemIsEditable)
+                    return
+            print("ID not found")
+
+             
     
     #Create Tour Description Window
     def createTourDescription(self):
         self.open_createDescription.emit()
         self.createDescriptionShow.show()
+        
+    
+
+#--LogOut----------
+    def to_login_window(self):
+        from login import LoginWindow
+        login_window_instance = LoginWindow()
+        login_window_instance.show()
+        self.hide()
+        self.login_window_instance = login_window_instance
 
     
 
