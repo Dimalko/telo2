@@ -7,9 +7,12 @@ from PyQt5.QtGui import QPixmap
 
 from classes.populate_table import PopulateTable
 from reservation import ReservationWindow
+from createDescription import CreateTourDescriptionWindow
 
 class AgentWindow(QMainWindow):
     open_ReservationtReg = pyqtSignal()
+    open_createDescription = pyqtSignal()
+
     def __init__(self, agent="agent1"): #REMOVE BEFORE FINAL VERSION
         super().__init__()
 
@@ -35,6 +38,12 @@ class AgentWindow(QMainWindow):
         self.statsBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(4))
         self.TourslineEdit.textChanged.connect(self.filterFreeTours)
         self.TourlistWidget.itemClicked.connect(self.handleTourSelection)
+        #Add Buttons
+        self.add_Reservation_Button.clicked.connect(self.addReservation) 
+        #LogOut Button
+        self.logOutBtn.clicked.connect(self.to_login_window)
+        #Create Tour Description Button
+        self.createTourDescriptionBtn.clicked.connect(self.createTourDescription)
 
     #Populate Tables/Lists
         self.populate_tour_table()
@@ -44,9 +53,8 @@ class AgentWindow(QMainWindow):
         self.populate_buses_table()
     #Connect Other Windows
         self.ReservationRegister = ReservationWindow()
-        self.ReservationRegister.finished.connect(lambda: self)
-    #Add Buttons
-        self.add_Reservation_Button.clicked.connect(self.addReservation)        
+        self.ReservationRegister.finished.connect(lambda: self)  
+        self.createDescriptionShow = CreateTourDescriptionWindow()    
 
 
 
@@ -165,6 +173,24 @@ class AgentWindow(QMainWindow):
         result = self.cursor.fetchone()
         total = result[0] if result[0] is not None else 0.0
         self.TotalCostlabel.setText(f"€ {total:.2f}")
+
+
+
+    #Create Tour Description Window
+    def createTourDescription(self):
+        self.open_createDescription.emit()
+        self.createDescriptionShow.show()
+
+
+
+#--LogOut----------
+    def to_login_window(self):
+        from login import LoginWindow
+        login_window_instance = LoginWindow()
+        login_window_instance.show()
+        self.hide()
+        self.login_window_instance = login_window_instance
+
 
 
 #!REMOVE BEFORE FINAL VERSION---------------------------------------------------------------------------------------------------------------------------

@@ -9,7 +9,7 @@ fix most registers 2nd input error
 ------------------------------------------------------
 add edit functions .malko
 
-na valw ton agent na kanei tour description .malko
+--na valw ton agent na kanei tour description .malko
 
 na valoume ston team leader status .panos Check
 
@@ -19,9 +19,13 @@ meta to tour na ginontai update ta xiliometra twn levforiwn .panos
 
 na valw eisitiria gia plane kai ship .panos
 
-sto tour description na valoume kai perigrafi .malko
+--sto tour description na valoume kai perigrafi .malko
+
+--logout .malko
 
 na valoume tour drastiriotites .malko~
+
+automatopoihmena ids opou xreiazetai .malko
 
 
 ------------------------------------------------------

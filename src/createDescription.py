@@ -35,14 +35,14 @@ class CreateTourDescriptionWindow(QMainWindow):
             tourDescId = self.tourIdDInput.text()
             price = self.startingPriceDInput.text()
             
-            self.cursor.execute("SELECT start_date, end_date, destination FROM Tours WHERE id = ?", (tourDescId,))
+            self.cursor.execute("SELECT start_date, end_date, destination, description FROM Tours WHERE id = ?", (tourDescId,))
             result = self.cursor.fetchone()
             
             if not result:
                 QMessageBox.warning(self, "Error", "Tour ID not found")
                 return
             
-            s_date, e_date, location = result
+            s_date, e_date, location, description = result
             
             background_image = f"file:///{self.image_path.replace('\\', '/')}"
             html_content = f"""
@@ -81,7 +81,7 @@ class CreateTourDescriptionWindow(QMainWindow):
                         position: fixed;
                         bottom: 20%;
                     }}
-                    .dates, .price{{
+                    .dates, .price, .description{{
                         padding: 20px;
                         border-radius: 10px;
                         background-color: rgba(0,0,0,0.2);
@@ -98,7 +98,8 @@ class CreateTourDescriptionWindow(QMainWindow):
                             <div>End date:</div>
                             <div>{e_date}</div>
                         </div>
-                        <div class="price">{price}€</div>
+                        <div class="price">Starting price from:<br>{price}€</div>
+                        <div class="description">{description}</div>
                     </div>
                 </div>
             </body>
