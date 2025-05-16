@@ -168,11 +168,13 @@ class AgentWindow(QMainWindow):
 
     def updateTotalCostLabel(self, tour_id):
         self.cursor.execute("""
-            SELECT SUM(cost) FROM Reservations WHERE tour_id = ?
+            SELECT SUM(cost) FROM Reservations 
+            WHERE tour_id = ? AND status = 'Active'
         """, (tour_id,))
         result = self.cursor.fetchone()
         total = result[0] if result[0] is not None else 0.0
         self.TotalCostlabel.setText(f"€ {total:.2f}")
+
 
 
 

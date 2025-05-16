@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>907</width>
+    <width>1055</width>
     <height>665</height>
    </rect>
   </property>
@@ -376,7 +376,7 @@ background-color:rgb(240, 168, 0);
        <string notr="true">background-color: rgb(243, 249, 254);</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout">
@@ -447,12 +447,6 @@ background-color:rgb(240, 168, 0);
          <widget class="QTableWidget" name="tourTableWidget">
           <property name="styleSheet">
            <string notr="true"/>
-          </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
-          </property>
-          <property name="alternatingRowColors">
-           <bool>true</bool>
           </property>
           <property name="cornerButtonEnabled">
            <bool>true</bool>
@@ -832,22 +826,110 @@ background-color: rgb(47, 142, 228);
        </layout>
       </widget>
       <widget class="QWidget" name="ongoingPage">
-       <widget class="QLabel" name="label">
+       <widget class="QListWidget" name="ongoingTourListWidget">
         <property name="geometry">
          <rect>
-          <x>280</x>
-          <y>50</y>
-          <width>251</width>
-          <height>41</height>
+          <x>0</x>
+          <y>10</y>
+          <width>155</width>
+          <height>569</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:rgb(170, 217, 231);
+         <string notr="true">QListWidget {
+        font-size: 16px;
+        color: rgb(18, 65, 141);
+        background-color: white;
+        border: 2px solid rgb(18, 65, 141);
+        border-radius: 6px;
+    }
+    QListWidget::item {
+        padding: 6px;
+    }
+    QListWidget::item:selected {
+        background-color: rgb(18, 65, 141);
+        color: white;
+        border-radius: 4px;
+    }</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="ongoingTourDetailsTable">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>0</y>
+          <width>801</width>
+          <height>347</height>
+         </rect>
+        </property>
+        <column>
+         <property name="text">
+          <string>Destination</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Dates</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Total Income</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Participants</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Transportation</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Transportation Cost</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Driver</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Tour Guide</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QPushButton" name="completeTourButton">
+        <property name="geometry">
+         <rect>
+          <x>510</x>
+          <y>490</y>
+          <width>131</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+color:#fff;
+border: 0px;
+font-size: 14px;
 padding: 5px;
-border-radius: 7px;</string>
+border-radius: 0px;
+background-color: rgb(8, 123, 225);
+}
+
+QPushButton:hover{
+background-color: rgb(18, 65, 141);
+border-radius: 10px;
+border-bottom: 2px solid #74b9ff;
+}</string>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#12418d;&quot;&gt;Ongoing Trips&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Complete Tour</string>
         </property>
        </widget>
       </widget>
