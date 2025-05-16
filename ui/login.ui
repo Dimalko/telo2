@@ -199,6 +199,12 @@ padding: 8px;
 color:rgb(243, 249, 254);
 font-size:14px;</string>
          </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
         </widget>
        </item>
        <item>

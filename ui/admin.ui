@@ -376,7 +376,7 @@ background-color:rgb(240, 168, 0);
        <string notr="true">background-color: rgb(243, 249, 254);</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout">
@@ -921,7 +921,7 @@ background-color: rgb(47, 142, 228);
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QPushButton" name="pushButton_10">
+             <widget class="QPushButton" name="editAgentBtn">
               <property name="styleSheet">
                <string notr="true">QPushButton{
 color:#fff;
@@ -1096,19 +1096,19 @@ background-color: rgb(47, 142, 228);
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QPushButton" name="pushButton_13">
+             <widget class="QPushButton" name="editLeaderBtn">
               <property name="styleSheet">
                <string notr="true">QPushButton{
 color:#fff;
 border: 0px;
 font-size: 14px;
 padding: 5px;
-background-color: rgb(8, 123, 225);
+background-color:rgb(234, 129, 0);
 border-radius: 4px;
 }
 
 QPushButton:hover{
-background-color: rgb(47, 142, 228);
+background-color:rgb(240, 168, 0);
 }</string>
               </property>
               <property name="text">
@@ -1200,19 +1200,19 @@ background-color: rgb(47, 142, 228);
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QPushButton" name="pushButton_16">
+             <widget class="QPushButton" name="editDriverBtn">
               <property name="styleSheet">
                <string notr="true">QPushButton{
 color:#fff;
 border: 0px;
 font-size: 14px;
 padding: 5px;
-background-color: rgb(8, 123, 225);
+background-color:rgb(234, 129, 0);
 border-radius: 4px;
 }
 
 QPushButton:hover{
-background-color: rgb(47, 142, 228);
+background-color:rgb(240, 168, 0);
 }</string>
               </property>
               <property name="text">
@@ -1304,23 +1304,23 @@ background-color: rgb(47, 142, 228);
          </widget>
         </item>
         <item row="2" column="2">
-         <widget class="QPushButton" name="pushButton_22">
+         <widget class="QPushButton" name="editVehicleBtn">
           <property name="styleSheet">
            <string notr="true">QPushButton{
 color:#fff;
 border: 0px;
 font-size: 14px;
 padding: 5px;
-background-color: rgb(8, 123, 225);
+background-color:rgb(234, 129, 0);
 border-radius: 4px;
 }
 
 QPushButton:hover{
-background-color: rgb(47, 142, 228);
+background-color:rgb(240, 168, 0);
 }</string>
           </property>
           <property name="text">
-           <string>PushButton</string>
+           <string>Edit</string>
           </property>
          </widget>
         </item>

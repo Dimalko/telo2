@@ -18,6 +18,7 @@ class TravelAgentRegisterWindow(QMainWindow):
         self.cursor = self.connection.cursor()
 
         self.add_Travel_Agent_button.clicked.connect(self.addTravelAgent)
+        
         #keep list of created ids
         self.generateId = set()
 

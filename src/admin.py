@@ -1,6 +1,6 @@
 import sys
 import sqlite3
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem,QListWidgetItem,QMessageBox, QInputDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem,QListWidgetItem,QMessageBox, QDialog, QDialogButtonBox, QFormLayout, QLineEdit
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
@@ -68,7 +68,42 @@ class AdminWindow(QMainWindow):
         self.removeBusBtn.clicked.connect(self.removeBus)
         self.removeHotelBtn.clicked.connect(self.removeHotel)
         #Edit Buttons
-        self.editTourBtn.clicked.connect(self.tourEdit)
+        teq = """
+                UPDATE Tours 
+                SET destination=?, start_date=?, end_date=?, description=?, km=?, agent=?, transportation=?, status=? 
+                WHERE id=?
+             """
+        self.editTourBtn.clicked.connect(lambda: self.editSelectedRow(self.tourTableWidget, teq, 2, readonly_fields=["Id"]))
+        aeq = """
+                UPDATE Staff 
+                SET username=?, password=?, f_name=?, l_name=?, role=?, work_hours=?, salary=?
+                WHERE id=?
+             """
+        self.editAgentBtn.clicked.connect(lambda: self.editSelectedRow(self.travelagentTableWidget, aeq, readonly_fields=["Id"]))
+        leq = """
+                UPDATE TeamLeaders 
+                SET f_name=?, l_name=?, payment=?, skills=?, status=?
+                WHERE id=?
+             """
+        self.editLeaderBtn.clicked.connect(lambda: self.editSelectedRow(self.teamleaderTableWidget, leq, readonly_fields=["Id"]))
+        deq = """
+                UPDATE Drivers 
+                SET f_name=?, l_name=?, type=?, salary=?, status=?
+                WHERE tax_code=?
+             """
+        self.editDriverBtn.clicked.connect(lambda: self.editSelectedRow(self.driverTableWidget, deq, readonly_fields=["Tax Code"]))
+        veq = """
+                UPDATE Buses 
+                SET model=?, year=?, mileage=?, company=?, rental_cost=?, consumption=?, seats=?, status=?, contract_date=?
+                WHERE plate_number=?
+             """
+        self.editVehicleBtn.clicked.connect(lambda: self.editSelectedRow(self.busesTableWidget, veq, readonly_fields=["Plate Number"]))
+        heq = """
+                UPDATE Hotels 
+                SET name=?, city=?, address=?, price_pp=?
+                WHERE id=?
+             """
+        self.editHotelBtn.clicked.connect(lambda: self.editSelectedRow(self.hotelTableWidget, heq, readonly_fields=["Id"]))
         #Create Tour Description Button
         self.createTourDescriptionBtn.clicked.connect(self.createTourDescription)
         #Reservation Buttons
@@ -345,6 +380,7 @@ class AdminWindow(QMainWindow):
         end = datetime.strptime(end_date, fmt)
         return (end - start).days + 1
 
+
     def load_comboboxes_for_tour(self, tour_id):
         try:
             self.cursor.execute("SELECT transportation FROM Tours WHERE id = ?", (tour_id,))
@@ -539,18 +575,87 @@ class AdminWindow(QMainWindow):
 
 
 
-    def tourEdit(self):
-        id_to_edit, ok = QInputDialog.getText(self, "Edit Row", "Enter ID to edit:")
-        if ok and id_to_edit:
-            for row in range(self.tourTableWidget.rowCount()):
-                item_id = self.tourTableWidget.item(row, 0)
-                if item_id and item_id.text() == id_to_edit:
-                    # Enable editing for all columns EXCEPT ID
-                    for col in range(1, self.tourTableWidget.columnCount()):
-                        item = self.tourTableWidget.item(row, col)
-                        item.setFlags(item.flags() | Qt.ItemIsEditable)
-                    return
-            print("ID not found")
+    def editSelectedRow(self, table_widget, query, q_num=1, readonly_fields=None):
+        selected_row = table_widget.currentRow()
+        if selected_row == -1:
+            QMessageBox.warning(self, "No Selection", "Please select a row to edit.")
+            return
+
+        readonly_fields = readonly_fields or []
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Edit")
+        layout = QFormLayout(dialog)
+        inputs = {}
+
+        if q_num == 2:
+            for col in range(table_widget.columnCount()-1):
+                header = table_widget.horizontalHeaderItem(col).text()
+                item = table_widget.item(selected_row, col)
+                value = item.text() if item else ""
+
+                field = QLineEdit(value)
+                if header in readonly_fields:
+                    field.setReadOnly(True)
+
+                layout.addRow(f"{header}:", field)
+                inputs[header] = field
+        else:
+            for col in range(table_widget.columnCount()):
+                header = table_widget.horizontalHeaderItem(col).text()
+                item = table_widget.item(selected_row, col)
+                value = item.text() if item else ""
+
+                field = QLineEdit(value)
+                if header in readonly_fields:
+                    field.setReadOnly(True)
+
+                layout.addRow(f"{header}:", field)
+                inputs[header] = field
+
+        buttons = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        layout.addWidget(buttons)
+
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+
+        if dialog.exec_() == QDialog.Accepted:
+            updated_values = []
+            id_value = None
+
+            if q_num == 2:
+                for col in range(table_widget.columnCount()-1):
+                    header = table_widget.horizontalHeaderItem(col).text()
+                    new_value = inputs[header].text()
+                    if header in readonly_fields:
+                        id_value = new_value
+                    else:
+                        updated_values.append(new_value)
+                    table_widget.setItem(selected_row, col, QTableWidgetItem(new_value))
+            else:
+                for col in range(table_widget.columnCount()):
+                    header = table_widget.horizontalHeaderItem(col).text()
+                    new_value = inputs[header].text()
+                    if header in readonly_fields:
+                        id_value = new_value
+                    else:
+                        updated_values.append(new_value)
+                    table_widget.setItem(selected_row, col, QTableWidgetItem(new_value))
+
+            if id_value is None:
+                QMessageBox.critical(self, "Error", "No ID value found.")
+                return
+
+            updated_values.append(id_value)
+
+            try:
+                self.cursor.execute(query, updated_values)
+                self.connection.commit()
+            except Exception as e:
+                QMessageBox.critical(self, "Database Error", f"Failed to update database:\n{str(e)}")
+                        
+
+        
 
              
     
