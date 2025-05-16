@@ -112,6 +112,8 @@ class AdminWindow(QMainWindow):
         self.vehicleComboBox.currentIndexChanged.connect(self.calculate_all_costs)
         self.guideComboBox.currentIndexChanged.connect(self.calculate_all_costs)
         self.driverComboBox.currentIndexChanged.connect(self.calculate_all_costs)
+        self.guideComboBox.currentIndexChanged.connect(self.calculate_all_costs)
+
         # Τέλος load_comboboxes_for_tour
         self.driverComboBox.setCurrentIndex(0)
         self.vehicleComboBox.setCurrentIndex(0)
@@ -123,6 +125,18 @@ class AdminWindow(QMainWindow):
         #LogOut Button
         self.logOutBtn.clicked.connect(self.to_login_window)
         #---------------
+        self.ongoingTourListWidget.itemClicked.connect(self.on_ongoing_tour_selected)
+        self.ongoingTourListWidget.itemClicked.connect(self.on_ongoing_tour_selected)
+        self.guideComboBox.currentIndexChanged.connect(lambda: self.calculate_all_costs())
+        self.driverComboBox.currentIndexChanged.connect(lambda: self.calculate_all_costs())
+        self.vehicleComboBox.currentIndexChanged.connect(lambda: self.calculate_all_costs())
+
+        #Complete Tour Button 
+        self.completeTourButton.clicked.connect(self.complete_tour)
+
+
+
+
 
 
 
@@ -134,6 +148,8 @@ class AdminWindow(QMainWindow):
         self.populate_buses_table()
         self.populate_hotels_table()
         self.loadFreeTours()
+        self.loadOngoingTours()
+        #self.loadOngoingTourDetails()
 
     #Connect Other Windows
         self.TravelAgentRegister = TravelAgentRegisterWindow()
@@ -333,9 +349,8 @@ class AdminWindow(QMainWindow):
 
             
 
-    def calculate_guide_cost(self, guide_row, tour_days):
-        monthly_salary = guide_row[3]
-        working_days_month = 22  # όπως στους οδηγούς
+    def calculate_guide_cost(self, monthly_salary, tour_days):
+        working_days_month = 22
         return (monthly_salary / working_days_month) * tour_days
 
        
@@ -431,14 +446,111 @@ class AdminWindow(QMainWindow):
 
 
     
-    def calculate_all_costs(self):
+    def calculate_guide_cost(self, monthly_salary, tour_days):
+        working_days_month = 22
+        return (monthly_salary / working_days_month) * tour_days
+
+       
+
+
+    def calculate_driver_cost(self, driver_row, tour_days):
+        driver_type = driver_row[3]
+        salary = driver_row[4]
+
+        if driver_type == 'Freelancer':
+            return salary * tour_days
+        else:
+            working_days_month = 22
+            return (salary / working_days_month) * tour_days
+
+
+    def calculate_bus_cost(self, bus_row, tour_km):
+        rental_cost = bus_row[5] or 0
+        consumption = bus_row[6]
+        fuel_price_per_liter = 1.80
+
+        fuel_cost = (tour_km * consumption / 100) * fuel_price_per_liter
+        return rental_cost + fuel_cost
+    
+
+    def calculate_driver_cost(self, driver_row, tour_days):
+
+        driver_type = driver_row[3]  # 'Permanent' or 'Freelancer'
+        salary = driver_row[4]
+
+        if driver_type == 'Freelancer':
+            return salary * tour_days  # salary είναι ημερομίσθιο
+        else:
+            working_days_month = 22
+            return (salary / working_days_month) * tour_days
+
+
+    def calculate_tour_days(self, start_date, end_date):
+        from datetime import datetime
+        fmt = "%Y-%m-%d"
+        start = datetime.strptime(start_date, fmt)
+        end = datetime.strptime(end_date, fmt)
+        return (end - start).days + 1
+
+    def load_comboboxes_for_tour(self, tour_id):
+        try:
+            self.cursor.execute("SELECT transportation FROM Tours WHERE id = ?", (tour_id,))
+            result = self.cursor.fetchone()
+            if not result:
+                return
+            transportation = result[0].lower()
+
+            self.driverComboBox.clear()
+            self.vehicleComboBox.clear()
+            self.guideComboBox.clear()
+
+            if transportation == "bus":
+                self.cursor.execute("""
+                    SELECT tax_code, f_name, l_name 
+                    FROM Drivers 
+                    WHERE status = 'Available'
+                """)
+                for tax_code, f_name, l_name in self.cursor.fetchall():
+                    full_name = f"{f_name} {l_name}"
+                    self.driverComboBox.addItem(full_name, tax_code)
+
+                self.cursor.execute("""
+                    SELECT plate_number, model 
+                    FROM Buses 
+                    WHERE status = 'Available'
+                """)
+                for plate, model in self.cursor.fetchall():
+                    display = f"{plate} - {model}"
+                    self.vehicleComboBox.addItem(display, plate)
+
+            elif transportation == "airplane":
+                self.vehicleComboBox.addItem("Airplane", "Airplane")
+            elif transportation == "boat":
+                self.vehicleComboBox.addItem("Boat", "Boat")
+
+            self.cursor.execute("""
+                SELECT id, f_name, l_name 
+                FROM TeamLeaders
+                WHERE status = 'Available'
+            """)
+            for tid, f_name, l_name in self.cursor.fetchall():
+                full_name = f"{f_name} {l_name}"
+                self.guideComboBox.addItem(full_name, tid)
+
+        except Exception as e:
+            print("Error loading comboboxes:", e)
+
+
+    
+    def calculate_all_costs(self, return_values_only=False):
         try:
             tour_id = self.selected_tour_id
 
             self.cursor.execute("SELECT start_date, end_date, km, transportation FROM Tours WHERE id = ?", (tour_id,))
             result = self.cursor.fetchone()
             if not result:
-                return
+                return None
+
             start_date, end_date, tour_km, transportation = result
             tour_days = self.calculate_tour_days(start_date, end_date)
 
@@ -460,7 +572,7 @@ class AdminWindow(QMainWindow):
             else:
                 guide_cost = 0.0
 
-            # Vehicle OR Transportation cost
+            # Vehicle or Transportation cost
             transportation = transportation.strip()
             if transportation == "Bus":
                 vehicle_plate = self.vehicleComboBox.currentData()
@@ -472,17 +584,19 @@ class AdminWindow(QMainWindow):
                     vehicle_cost = 0.0
                 vehicle_label = f"Vehicle Cost: €{vehicle_cost:.2f}"
             else:
-                # Get number of active people
                 self.cursor.execute("SELECT SUM(people_numb) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
                 total_people = self.cursor.fetchone()[0] or 0
-
                 ticket_price = 120 if transportation == "Airplain" else 60 if transportation == "Boat" else 0
                 vehicle_cost = ticket_price * total_people
                 vehicle_label = f"Transportation Cost: €{vehicle_cost:.2f}"
 
-            # Final costs
-            total_service_cost = driver_cost + vehicle_cost + guide_cost
+            # Total business cost (exclude ticket cost if not Bus)
+            if transportation == "Bus":
+                total_service_cost = driver_cost + vehicle_cost + guide_cost
+            else:
+                total_service_cost = driver_cost + guide_cost
 
+            # Total income
             self.cursor.execute("SELECT SUM(cost) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
             total_income = self.cursor.fetchone()[0] or 0.0
 
@@ -490,8 +604,21 @@ class AdminWindow(QMainWindow):
                 profit_amount = total_income - total_service_cost
                 profit_percent = (profit_amount / total_income) * 100
             else:
-                profit_amount = 0
-                profit_percent = 0
+                profit_amount = 0.0
+                profit_percent = 0.0
+
+            # Return results if requested
+            if return_values_only:
+                return {
+                    "tour_id": tour_id,
+                    "total_income": total_income,
+                    "profit_amount": profit_amount,
+                    "profit_percent": profit_percent,
+                    "driver_cost": driver_cost,
+                    "vehicle_cost": vehicle_cost,
+                    "guide_cost": guide_cost,
+                    "total_cost": total_service_cost
+                }
 
             # Show on UI
             self.driverCostLabel.setText(f"Driver Cost: €{driver_cost:.2f}")
@@ -500,8 +627,11 @@ class AdminWindow(QMainWindow):
             self.totalCostLabel.setText(f"Total Cost: €{total_service_cost:.2f}")
             self.profitLabel.setText(f"Profit: €{profit_amount:.2f} ({profit_percent:.1f}%)")
 
+            return True
+
         except Exception as e:
             print("Error calculating all costs:", e)
+            return False
 
 
     def accept_tour(self):
@@ -511,23 +641,35 @@ class AdminWindow(QMainWindow):
 
             tour_id = self.selected_tour_id
 
-            # Update tour status
-            self.cursor.execute("UPDATE Tours SET status = 'Accepted' WHERE id = ?", (tour_id,))
+            # Υπολογισμός οικονομικών με επιστροφή τιμών
+            financials = self.calculate_all_costs(return_values_only=True)
+            if not financials:
+                QMessageBox.warning(self, "Error", "Could not calculate tour financials.")
+                return
 
-            # Get selected driver, vehicle, and guide from comboboxes
+            # Βασικά στοιχεία του Tour
+            self.cursor.execute("SELECT start_date, end_date, transportation, destination FROM Tours WHERE id = ?", (tour_id,))
+            tour_data = self.cursor.fetchone()
+            if not tour_data:
+                return
+            start_date, end_date, transportation, destination = tour_data
+            tour_days = self.calculate_tour_days(start_date, end_date)
+
+            # ComboBox selections
             driver_code = self.driverComboBox.currentData()
+            driver_name = self.driverComboBox.currentText()
             vehicle_plate = self.vehicleComboBox.currentData()
             guide_id = self.guideComboBox.currentData()
+            guide_name = self.guideComboBox.currentText()
 
-            # Update Driver status to Busy
-            if driver_code:
+            # Ενημέρωση Driver
+            if transportation == "Bus" and driver_code:
                 self.cursor.execute("UPDATE Drivers SET status = 'Busy' WHERE tax_code = ?", (driver_code,))
                 self.populate_driver_table()
 
-            # Update Bus status to On Tour AND update mileage
-            if vehicle_plate and vehicle_plate not in ['Airplane', 'Boat']:
+            # Ενημέρωση Bus + mileage
+            if transportation == "Bus" and vehicle_plate:
                 self.cursor.execute("UPDATE Buses SET status = 'On Tour' WHERE plate_number = ?", (vehicle_plate,))
-                # Get km from the tour
                 self.cursor.execute("SELECT km FROM Tours WHERE id = ?", (tour_id,))
                 result = self.cursor.fetchone()
                 if result:
@@ -538,20 +680,243 @@ class AdminWindow(QMainWindow):
                     )
                 self.populate_buses_table()
 
-            # Update TeamLeader status to Busy
+            # Ενημέρωση Guide
             if guide_id:
                 self.cursor.execute("UPDATE TeamLeaders SET status = 'Busy' WHERE id = ?", (guide_id,))
                 self.populate_teamleader_table()
+
+            # Ενημέρωση κατάστασης Tour
+            self.cursor.execute("UPDATE Tours SET status = 'Accepted' WHERE id = ?", (tour_id,))
+
+            # Transportation field για τον πίνακα (Bus → πινακίδα, αλλιώς τύπος)
+            transportation_value = vehicle_plate if transportation == "Bus" else transportation
+
+            # Συμμετέχοντες
+            self.cursor.execute("SELECT SUM(people_numb) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
+            total_people = self.cursor.fetchone()[0] or 0
+
+            # Εισαγωγή στον πίνακα TourFinancials
+            self.cursor.execute("""
+                INSERT OR REPLACE INTO TourFinancials (
+                    tour_id, destination, start_date, end_date, total_income, participants,
+                    transportation, transportation_cost, driver, guide,
+                    driver_cost, guide_cost, vehicle_cost, total_cost,
+                    profit_amount, profit_percent
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                tour_id,
+                destination,
+                start_date,
+                end_date,
+                financials["total_income"],
+                total_people,
+                transportation_value,
+                financials["vehicle_cost"],
+                driver_name if transportation == "Bus" else "",
+                guide_name,
+                financials["driver_cost"],
+                financials["guide_cost"],
+                financials["vehicle_cost"],
+                financials["total_cost"],
+                financials["profit_amount"],
+                financials["profit_percent"]
+            ))
 
             self.connection.commit()
             QMessageBox.information(self, "Success", f"Tour {tour_id} has been accepted.")
 
             self.loadFreeTours()
+            self.loadOngoingTours()
             self.populate_tour_table()
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Could not accept tour.\n{e}")
             self.connection.rollback()
+
+    def calculate_all_costs(self, return_values_only=False):
+        try:
+            tour_id = self.selected_tour_id
+
+            self.cursor.execute("SELECT start_date, end_date, km, transportation FROM Tours WHERE id = ?", (tour_id,))
+            result = self.cursor.fetchone()
+            if not result:
+                return None
+
+            start_date, end_date, tour_km, transportation = result
+            tour_days = self.calculate_tour_days(start_date, end_date)
+
+            # Driver
+            driver_code = self.driverComboBox.currentData()
+            if driver_code:
+                self.cursor.execute("SELECT * FROM Drivers WHERE tax_code = ?", (driver_code,))
+                driver_row = self.cursor.fetchone()
+                driver_cost = self.calculate_driver_cost(driver_row, tour_days)
+            else:
+                driver_cost = 0.0
+
+            # Guide (διορθωμένο)
+            guide_id = self.guideComboBox.currentData()
+            if guide_id:
+                self.cursor.execute("SELECT * FROM TeamLeaders WHERE id = ?", (guide_id,))
+                guide_row = self.cursor.fetchone()
+                if guide_row:
+                    monthly_salary = guide_row[3]  # π.χ. payment στήλη
+                    guide_cost = self.calculate_guide_cost(monthly_salary, tour_days)
+                else:
+                    guide_cost = 0.0
+            else:
+                guide_cost = 0.0
+
+            # Vehicle or Transportation cost
+            transportation = transportation.strip()
+            if transportation == "Bus":
+                vehicle_plate = self.vehicleComboBox.currentData()
+                if vehicle_plate:
+                    self.cursor.execute("SELECT * FROM Buses WHERE plate_number = ?", (vehicle_plate,))
+                    bus_row = self.cursor.fetchone()
+                    vehicle_cost = self.calculate_bus_cost(bus_row, tour_km)
+                else:
+                    vehicle_cost = 0.0
+                vehicle_label = f"Vehicle Cost: €{vehicle_cost:.2f}"
+            else:
+                self.cursor.execute("SELECT SUM(people_numb) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
+                total_people = self.cursor.fetchone()[0] or 0
+                ticket_price = 120 if transportation == "Airplain" else 60 if transportation == "Boat" else 0
+                vehicle_cost = ticket_price * total_people
+                vehicle_label = f"Transportation Cost: €{vehicle_cost:.2f}"
+
+            # Total business cost (exclude ticket cost if not Bus)
+            if transportation == "Bus":
+                total_service_cost = driver_cost + vehicle_cost + guide_cost
+            else:
+                total_service_cost = driver_cost + guide_cost
+
+            # Total income
+            self.cursor.execute("SELECT SUM(cost) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
+            total_income = self.cursor.fetchone()[0] or 0.0
+
+            if total_income > 0:
+                profit_amount = total_income - total_service_cost
+                profit_percent = (profit_amount / total_income) * 100
+            else:
+                profit_amount = 0.0
+                profit_percent = 0.0
+
+            # Return results if requested
+            if return_values_only:
+                return {
+                    "tour_id": tour_id,
+                    "total_income": total_income,
+                    "profit_amount": profit_amount,
+                    "profit_percent": profit_percent,
+                    "driver_cost": driver_cost,
+                    "vehicle_cost": vehicle_cost,
+                    "guide_cost": guide_cost,
+                    "total_cost": total_service_cost
+                }
+
+            # Show on UI
+            self.driverCostLabel.setText(f"Driver Cost: €{driver_cost:.2f}")
+            self.vehicleCostLabel.setText(vehicle_label)
+            self.guideCostLabel.setText(f"Guide Cost: €{guide_cost:.2f}")
+            self.totalCostLabel.setText(f"Total Cost: €{total_service_cost:.2f}")
+            self.profitLabel.setText(f"Profit: €{profit_amount:.2f} ({profit_percent:.1f}%)")
+
+            return True
+
+        except Exception as e:
+            print("Error calculating all costs:", e)
+            return False
+
+
+    def accept_tour(self):
+        try:
+            if not hasattr(self, "selected_tour_id"):
+                return
+
+            tour_id = self.selected_tour_id
+
+            # Υπολογισμός οικονομικών
+            financials = self.calculate_all_costs(return_values_only=True)
+            if not financials:
+                QMessageBox.warning(self, "Error", "Could not calculate tour financials.")
+                return
+
+            # Πληροφορίες Tour
+            self.cursor.execute("SELECT start_date, end_date, transportation, destination FROM Tours WHERE id = ?", (tour_id,))
+            tour_data = self.cursor.fetchone()
+            if not tour_data:
+                return
+            start_date, end_date, transportation, destination = tour_data
+
+            # Επιλογές χρήστη
+            driver_code = self.driverComboBox.currentData()
+            vehicle_plate = self.vehicleComboBox.currentData()
+            guide_id = self.guideComboBox.currentData()
+
+            # Ενημέρωση προσωπικού
+            if transportation == "Bus" and driver_code:
+                self.cursor.execute("UPDATE Drivers SET status = 'Busy' WHERE tax_code = ?", (driver_code,))
+                self.populate_driver_table()
+
+            if transportation == "Bus" and vehicle_plate:
+                self.cursor.execute("UPDATE Buses SET status = 'On Tour' WHERE plate_number = ?", (vehicle_plate,))
+                self.cursor.execute("SELECT km FROM Tours WHERE id = ?", (tour_id,))
+                result = self.cursor.fetchone()
+                if result:
+                    tour_km = result[0]
+                    self.cursor.execute(
+                        "UPDATE Buses SET mileage = mileage + ? WHERE plate_number = ?",
+                        (tour_km, vehicle_plate)
+                    )
+                self.populate_buses_table()
+
+            if guide_id:
+                self.cursor.execute("UPDATE TeamLeaders SET status = 'Busy' WHERE id = ?", (guide_id,))
+                self.populate_teamleader_table()
+
+            # Update tour status
+            self.cursor.execute("UPDATE Tours SET status = 'Accepted' WHERE id = ?", (tour_id,))
+
+            # Transportation field (plate or string)
+            transportation_value = vehicle_plate if transportation == "Bus" else transportation
+
+            # Συμμετέχοντες
+            self.cursor.execute("SELECT SUM(people_numb) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
+            total_people = self.cursor.fetchone()[0] or 0
+
+            # Εισαγωγή στον TourFinancials (μόνο τα πεδία του πίνακα)
+            self.cursor.execute("""
+                INSERT OR REPLACE INTO TourFinancials (
+                    tour_id, destination, start_date, end_date, total_income, participants,
+                    transportation, transportation_cost, driver, guide
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                tour_id,
+                destination,
+                start_date,
+                end_date,
+                financials["total_income"],
+                total_people,
+                transportation_value,
+                financials["vehicle_cost"],
+                driver_code if transportation == "Bus" else "",
+                guide_id or ""
+            ))
+
+            self.connection.commit()
+            QMessageBox.information(self, "Success", f"Tour {tour_id} has been accepted.")
+            self.loadFreeTours()
+            self.loadOngoingTours()
+            self.populate_tour_table()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Could not accept tour.\n{e}")
+            self.connection.rollback()
+
+
 
 
 
@@ -656,6 +1021,112 @@ class AdminWindow(QMainWindow):
                         
 
         
+
+
+    def loadOngoingTours(self):
+        self.ongoingTourListWidget.clear()
+        self.cursor.execute("SELECT id, destination FROM Tours WHERE status = 'Accepted'")
+        tours = self.cursor.fetchall()
+
+        for tour_id, destination in tours:
+            self.ongoingTourListWidget.addItem(f"{tour_id} - {destination}")
+
+
+    def loadOngoingTourDetails(self, tour_id):
+        try:
+            self.ongoingTourDetailsTable.setRowCount(0)
+
+            self.cursor.execute("""
+                SELECT 
+                    destination,
+                    start_date || ' ➝ ' || end_date,
+                    total_income,
+                    participants,
+                    transportation,
+                    transportation_cost,
+                    driver,
+                    guide
+                FROM TourFinancials
+                WHERE tour_id = ?
+            """, (tour_id,))
+
+            result = self.cursor.fetchone()
+
+            if result:
+                self.ongoingTourDetailsTable.insertRow(0)
+                for col, value in enumerate(result):
+                    self.ongoingTourDetailsTable.setItem(0, col, QTableWidgetItem(str(value)))
+            else:
+                QMessageBox.warning(self, "No Data", "No financial data found for this tour.")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to load tour details.\n{e}")
+
+    def on_ongoing_tour_selected(self, item):
+        tour_text = item.text()
+        tour_id = tour_text.split(" ")[0].strip()  # π.χ. "t12"
+        self.selected_tour_id = tour_id
+        self.loadOngoingTourDetails(tour_id)
+
+
+    def complete_tour(self):
+        try:
+            selected_item = self.ongoingTourListWidget.currentItem()
+            if not selected_item:
+                QMessageBox.warning(self, "Warning", "No tour selected.")
+                return
+
+            tour_id = selected_item.text().split(" - ")[0].strip()
+
+            # Πάρε Transportation και Driver από τον πίνακα TourFinancials
+            self.cursor.execute("""
+                SELECT transportation, driver, guide FROM TourFinancials WHERE tour_id = ?
+            """, (tour_id,))
+            result = self.cursor.fetchone()
+
+            if not result:
+                QMessageBox.warning(self, "Warning", "Tour information not found in TourFinancials.")
+                return
+
+            transportation, driver_code, guide_id = result
+
+            # Αν είναι Bus (τότε transportation περιέχει πινακίδα)
+            if transportation not in ["Airplain", "Boat"]:
+                # Επαναφορά κατάστασης λεωφορείου
+                self.cursor.execute("UPDATE Buses SET status = 'Available' WHERE plate_number = ?", (transportation,))
+                
+                # Επαναφορά οδηγού (αν υπάρχει)
+                if driver_code:
+                    self.cursor.execute("UPDATE Drivers SET status = 'Available' WHERE tax_code = ?", (driver_code,))
+
+            # Επαναφορά ξεναγού (αν υπάρχει)
+            if guide_id:
+                self.cursor.execute("UPDATE TeamLeaders SET status = 'Available' WHERE id = ?", (guide_id,))
+
+            # Ενημέρωση του status του Tour
+            self.cursor.execute("UPDATE Tours SET status = 'Completed' WHERE id = ?", (tour_id,))
+
+            # ✅ Ενημέρωση όλων των κρατήσεων σε Completed
+            self.cursor.execute("""
+                UPDATE Reservations SET status = 'Completed' WHERE tour_id = ? AND status = 'Active'
+            """, (tour_id,))
+            self.loadOngoingTours()
+            self.populate_teamleader_table()
+            self.populate_driver_table()
+            self.populate_buses_table()
+            self.connection.commit()
+            QMessageBox.information(self, "Success", f"Tour {tour_id} has been completed.")
+            self.loadFreeTours()
+            self.populate_tour_table()
+            self.ongoingTourDetailsTable.setRowCount(0)
+
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to complete tour.\n{e}")
+            self.connection.rollback()
+
+
+
 
              
     
