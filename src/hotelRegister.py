@@ -1,4 +1,5 @@
 import sqlite3
+import random
 from datetime import datetime
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtCore import QObject, pyqtSignal
@@ -20,6 +21,9 @@ class HotelRegisterWindow(QMainWindow):
 
             self.add_Hotel_button.clicked.connect(self.addHotel)    
 
+            #keep list of created ids
+            self.generateId = set()
+
 
     def input_clear(self):
             self.hotelIdInput.setText("")
@@ -28,11 +32,21 @@ class HotelRegisterWindow(QMainWindow):
             self.hotelAddressInput.setText("")
             self.hotelPriceInput.setText("") 
 
+    
+    def createItemID(self):
+        min_id = 10**5  
+        max_id = (10**6) - 1 
+        
+        while True:
+            new_id = f"HTL{random.randint(min_id, max_id)}"
+            if new_id not in self.generateId:
+                self.generateId.add(new_id)
+                return new_id
 
 
     def addHotel(self):
             try:
-                id = self.hotelIdInput.text()
+                id = self.createItemID()
                 name = self.hotelNameInput.text()
                 city = self.hotelCityInput.text()
                 address = self.hotelAddressInput.text()

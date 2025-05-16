@@ -22,6 +22,9 @@ class ToursRegisterWindow(QMainWindow):
 
         self.destinationInput.textChanged.connect(self.addHotels)
         self.add_Tour_button.clicked.connect(self.addTour)
+
+        #keep list of created ids
+        self.generateId = set()
     
 
 
@@ -33,6 +36,17 @@ class ToursRegisterWindow(QMainWindow):
         for cb in self.checkboxes:
             cb.setParent(None)
         self.checkboxes.clear()
+
+    
+    def createItemID(self):
+        min_id = 10**5  
+        max_id = (10**6) - 1 
+        
+        while True:
+            new_id = f"TO{random.randint(min_id, max_id)}"
+            if new_id not in self.generateId:
+                self.generateId.add(new_id)
+                return new_id
 
     
     def addHotels(self):
@@ -50,7 +64,7 @@ class ToursRegisterWindow(QMainWindow):
 
     def addTour(self):
         try:
-            id = self.idInput.text()
+            id = self.createItemID()
             destination = self.destinationInput.text()
             start_date = self.start_dateEdit.date().toString("yyyy-MM-dd")  
             end_date = self.end_dateEdit.date().toString("yyyy-MM-dd")
