@@ -72,10 +72,11 @@ class ToursRegisterWindow(QMainWindow):
             km = self.kmInput.text()
             transportation = self.transportationInput.currentText()
             status = "Free"    
+            activities = self.activitiesInput.text()
 
 
-            self.cursor.execute("INSERT INTO Tours (id, destination, start_date, end_date, description, km, transportation, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                                (id, destination, start_date, end_date, description, km, transportation, status))
+            self.cursor.execute("INSERT INTO Tours (id, destination, start_date, end_date, description, km, transportation, status, activities) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                                (id, destination, start_date, end_date, description, km, transportation, status, activities))
             
             for cb in self.checkboxes:
                 if cb.isChecked():

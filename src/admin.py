@@ -70,7 +70,7 @@ class AdminWindow(QMainWindow):
         #Edit Buttons
         teq = """
                 UPDATE Tours 
-                SET destination=?, start_date=?, end_date=?, description=?, km=?, agent=?, transportation=?, status=? 
+                SET destination=?, start_date=?, end_date=?, description=?, km=?, agent=?, transportation=?, status=?, activities=? 
                 WHERE id=?
              """
         self.editTourBtn.clicked.connect(lambda: self.editSelectedRow(self.tourTableWidget, teq, 2, readonly_fields=["Id"]))
@@ -228,7 +228,7 @@ class AdminWindow(QMainWindow):
 
 #--Populate Tables----------  
     def populate_tour_table(self):
-        self.populate_table.populate_table(self.tourTableWidget, "SELECT * FROM Tours", 10, 2)
+        self.populate_table.populate_table(self.tourTableWidget, "SELECT * FROM Tours", 11, 2)
         
     def populate_travelagent_table(self):
         self.populate_table.populate_table(self.travelagentTableWidget, "SELECT * FROM Staff WHERE role='Travel_Agent'", 8)
@@ -541,7 +541,6 @@ class AdminWindow(QMainWindow):
             print("Error loading comboboxes:", e)
 
 
-    
     def calculate_all_costs(self, return_values_only=False):
         try:
             tour_id = self.selected_tour_id
@@ -734,6 +733,7 @@ class AdminWindow(QMainWindow):
             QMessageBox.critical(self, "Error", f"Could not accept tour.\n{e}")
             self.connection.rollback()
 
+
     def calculate_all_costs(self, return_values_only=False):
         try:
             tour_id = self.selected_tour_id
@@ -915,9 +915,6 @@ class AdminWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Could not accept tour.\n{e}")
             self.connection.rollback()
-
-
-
 
 
     def decline_tour(self):

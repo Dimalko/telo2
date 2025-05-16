@@ -38,7 +38,7 @@ class PopulateTable:
                 hotel_names = [hotel[0] for hotel in hotels]
                 hotel_cell = ", ".join(hotel_names)
 
-                table_widget.setItem(row_num, 9, QTableWidgetItem(hotel_cell))
+                table_widget.setItem(row_num, 10, QTableWidgetItem(hotel_cell))
         else:
             for row_num, row_data in enumerate(data):
                 for col_num, col_data in enumerate(row_data):
