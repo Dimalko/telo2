@@ -81,7 +81,7 @@ class CreateTourDescriptionWindow(QMainWindow):
                         position: fixed;
                         bottom: 20%;
                     }}
-                    .dates, .price, .description, activities{{
+                    .dates, .price, .description, .activities{{
                         padding: 20px;
                         border-radius: 10px;
                         background-color: rgba(0,0,0,0.2);
