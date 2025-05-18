@@ -373,7 +373,7 @@ background-color:rgb(240, 168, 0);
        <string notr="true">background-color: rgb(243, 249, 254);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout">
@@ -852,6 +852,39 @@ border-bottom: 2px solid #74b9ff;
           </property>
          </widget>
         </item>
+        <item row="1" column="0" rowspan="2">
+         <widget class="QListWidget" name="ongoingTourListWidget">
+          <property name="styleSheet">
+           <string notr="true">QListWidget {
+        font-size: 16px;
+        color: rgb(18, 65, 141);
+        background-color: white;
+        border: 2px solid rgb(18, 65, 141);
+        border-radius: 6px;
+    }
+    QListWidget::item {
+        padding: 6px;
+    }
+    QListWidget::item:selected {
+        background-color: rgb(18, 65, 141);
+        color: white;
+        border-radius: 4px;
+    }</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label">
+          <property name="styleSheet">
+           <string notr="true">background-color:rgb(170, 217, 231);
+padding: 5px;
+border-radius: 7px;</string>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Ongoing Trips&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="1">
          <widget class="QTableWidget" name="ongoingTourDetailsTable">
           <column>
@@ -894,39 +927,6 @@ border-bottom: 2px solid #74b9ff;
             <string>Tour Guide</string>
            </property>
           </column>
-         </widget>
-        </item>
-        <item row="1" column="0" rowspan="2">
-         <widget class="QListWidget" name="ongoingTourListWidget">
-          <property name="styleSheet">
-           <string notr="true">QListWidget {
-        font-size: 16px;
-        color: rgb(18, 65, 141);
-        background-color: white;
-        border: 2px solid rgb(18, 65, 141);
-        border-radius: 6px;
-    }
-    QListWidget::item {
-        padding: 6px;
-    }
-    QListWidget::item:selected {
-        background-color: rgb(18, 65, 141);
-        color: white;
-        border-radius: 4px;
-    }</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="2">
-         <widget class="QLabel" name="label">
-          <property name="styleSheet">
-           <string notr="true">background-color:rgb(170, 217, 231);
-padding: 5px;
-border-radius: 7px;</string>
-          </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Ongoing Trips&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
          </widget>
         </item>
        </layout>
