@@ -340,18 +340,24 @@ class ReservationWindow(QMainWindow):
         try:
             self.groupComboBox.clear()
             self.cursor.execute("""
-                SELECT g.id, g.reservation_id, g.total_people, g.total_cost
+                SELECT g.id, g.reservation_id, g.total_people, g.total_cost,
+                    t.destination, t.id
                 FROM ReservationGroup g
                 JOIN Reservations r ON g.reservation_id = r.id
+                JOIN Tours t ON r.tour_id = t.id
                 WHERE r.status = 'Active'
             """)
             groups = self.cursor.fetchall()
 
-            for group_id, reservation_id, people, total_cost in groups:
-                display_text = f"Group #{group_id} | Reservation: {reservation_id} | People: {people} | Cost: €{total_cost:.2f}"
+            for group_id, reservation_id, people, total_cost, destination, tour_id in groups:
+                display_text = (
+                    f"Group #{group_id} | Reservation: {reservation_id} | People: {people} "
+                    f"| Cost: €{total_cost:.2f} | Tour: #{tour_id} - {destination}"
+                )
                 self.groupComboBox.addItem(display_text, userData=group_id)
         except Exception as e:
             print("Error loading groups:", e)
+
 
 
 
