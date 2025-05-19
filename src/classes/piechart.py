@@ -11,11 +11,15 @@ class PieChart():
         self.series = None
         
         
-    def create_piechart(self, query, layout):
+    def create_piechart(self, query, layout, key = None):
         try:
             connection = sqlite3.connect("data//database.db")
             cursor = connection.cursor()
-            cursor.execute(query)
+            if key==None:
+                cursor.execute(query)
+            else:
+                cursor.execute(query,(key,))
+            
             data = cursor.fetchall()
             
             if self.series is None:
@@ -48,7 +52,10 @@ class PieChart():
             chart = QChart()
             chart.addSeries(self.series)
             chart.setAnimationOptions(QChart.SeriesAnimations)
-            chart.legend().setAlignment(Qt.AlignRight)
+            if key==None:
+                chart.legend().setAlignment(Qt.AlignRight)
+            else:
+                chart.legend().setAlignment(Qt.AlignBottom)
 
             self.chartview.setChart(chart)
             self.chartview.setRenderHint(QPainter.Antialiasing)

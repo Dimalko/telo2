@@ -1617,24 +1617,21 @@ QTabBar::tab:hover {
                </item>
                <item>
                 <layout class="QFormLayout" name="formLayout">
-                 <item row="0" column="0">
+                 <item row="1" column="0">
                   <widget class="QLabel" name="label_3">
                    <property name="text">
                     <string>Average People / Tour:</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit"/>
-                 </item>
-                 <item row="1" column="0">
+                 <item row="2" column="0">
                   <widget class="QLabel" name="label_6">
                    <property name="text">
                     <string>Most Profitable Tour:</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
+                 <item row="3" column="0">
                   <widget class="QLabel" name="label_8">
                    <property name="text">
                     <string>Tour With Most People:</string>
@@ -1642,10 +1639,25 @@ QTabBar::tab:hover {
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QLineEdit" name="lineEdit_2"/>
+                  <widget class="QLabel" name="avgPeoplePTLbl">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
                  </item>
                  <item row="2" column="1">
-                  <widget class="QLineEdit" name="lineEdit_3"/>
+                  <widget class="QLabel" name="mostProfTourLbl">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLabel" name="tourWthMosPplLbl">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
@@ -1663,7 +1675,7 @@ QTabBar::tab:hover {
              <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5">
               <item>
                <widget class="QWidget" name="widget_8" native="true">
-                <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,7,3">
+                <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,9,1">
                  <item>
                   <widget class="QLabel" name="label_14">
                    <property name="text">
@@ -1684,7 +1696,11 @@ QTabBar::tab:hover {
                     </widget>
                    </item>
                    <item row="0" column="1">
-                    <widget class="QLineEdit" name="lineEdit_4"/>
+                    <widget class="QLabel" name="avgBusCostLbl">
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -1704,7 +1720,7 @@ QTabBar::tab:hover {
              <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="5,5">
               <item>
                <widget class="QWidget" name="widget_10" native="true">
-                <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,7,3">
+                <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,9,1">
                  <item>
                   <widget class="QLabel" name="label_15">
                    <property name="text">
@@ -1724,18 +1740,44 @@ QTabBar::tab:hover {
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="1">
-                    <widget class="QLineEdit" name="lineEdit_7"/>
-                   </item>
                    <item row="1" column="0">
                     <widget class="QLabel" name="label_17">
                      <property name="text">
-                      <string>Least Expensive Driver (By Day):</string>
+                      <string>Cheapest Driver (By Day):</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QLabel" name="driverWithMostKmLbl">
+                     <property name="styleSheet">
+                      <string notr="true">QLabel {
+    color: #12418d;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}</string>
+                     </property>
+                     <property name="text">
+                      <string/>
                      </property>
                     </widget>
                    </item>
                    <item row="1" column="1">
-                    <widget class="QLineEdit" name="lineEdit_8"/>
+                    <widget class="QLabel" name="leastExpensiveDriverLbl">
+                     <property name="styleSheet">
+                      <string notr="true">QLabel {
+    color: #12418d;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -1770,10 +1812,38 @@ QTabBar::tab:hover {
                     </widget>
                    </item>
                    <item>
-                    <widget class="QListWidget" name="listWidget"/>
+                    <widget class="QListWidget" name="driverStatsListWidget">
+                     <property name="styleSheet">
+                      <string notr="true">QListWidget {
+        font-size: 16px;
+        color: rgb(18, 65, 141);
+        background-color: white;
+        border: 1px solid rgb(18, 65, 141);
+        border-radius: 6px;
+    }
+    QListWidget::item {
+        padding: 6px;
+    }
+    QListWidget::item:selected {
+        background-color: rgb(18, 65, 141);
+        color: white;
+        border-radius: 4px;
+    }</string>
+                     </property>
+                    </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_9"/>
+                    <widget class="QLineEdit" name="lineEdit_9">
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit {
+        font-size: 16px;
+        color: rgb(18, 65, 141);
+        background-color: white;
+        border: 1px solid rgb(18, 65, 141);
+        border-radius: 6px;
+    }</string>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -1788,7 +1858,7 @@ QTabBar::tab:hover {
                      </widget>
                     </item>
                     <item>
-                     <widget class="QWidget" name="widget_14" native="true"/>
+                     <layout class="QVBoxLayout" name="driversFavPie"/>
                     </item>
                     <item>
                      <widget class="QLabel" name="label_10">
@@ -1798,7 +1868,23 @@ QTabBar::tab:hover {
                      </widget>
                     </item>
                     <item>
-                     <widget class="QListWidget" name="listWidget_3"/>
+                     <widget class="QTableWidget" name="driverTourStatList">
+                      <column>
+                       <property name="text">
+                        <string>Tour ID</string>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Destination</string>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Cost</string>
+                       </property>
+                      </column>
+                     </widget>
                     </item>
                    </layout>
                   </widget>
@@ -1819,7 +1905,7 @@ QTabBar::tab:hover {
              <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="5,5">
               <item>
                <widget class="QWidget" name="widget_15" native="true">
-                <layout class="QVBoxLayout" name="verticalLayout_9" stretch="0,7,3">
+                <layout class="QVBoxLayout" name="verticalLayout_9" stretch="0,9,1">
                  <item>
                   <widget class="QLabel" name="label_20">
                    <property name="text">
@@ -1835,22 +1921,48 @@ QTabBar::tab:hover {
                    <item row="0" column="0">
                     <widget class="QLabel" name="label_21">
                      <property name="text">
-                      <string>Team Leader With Most Tours:</string>
+                      <string>T. Leader With Most Tours:</string>
                      </property>
                     </widget>
-                   </item>
-                   <item row="0" column="1">
-                    <widget class="QLineEdit" name="lineEdit_10"/>
                    </item>
                    <item row="1" column="0">
                     <widget class="QLabel" name="label_22">
                      <property name="text">
-                      <string>Least Expensive Team Leader (By Day):</string>
+                      <string>Cheapest T. Leader (By Day):</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QLabel" name="leaderWithMostTourLbl">
+                     <property name="styleSheet">
+                      <string notr="true">QLabel {
+    color: #12418d;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}</string>
+                     </property>
+                     <property name="text">
+                      <string/>
                      </property>
                     </widget>
                    </item>
                    <item row="1" column="1">
-                    <widget class="QLineEdit" name="lineEdit_11"/>
+                    <widget class="QLabel" name="leastExpensiveLeaderLbl">
+                     <property name="styleSheet">
+                      <string notr="true">QLabel {
+    color: #12418d;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -1885,10 +1997,38 @@ QTabBar::tab:hover {
                     </widget>
                    </item>
                    <item>
-                    <widget class="QListWidget" name="listWidget_2"/>
+                    <widget class="QListWidget" name="leaderStatsListWidget">
+                     <property name="styleSheet">
+                      <string notr="true">QListWidget {
+        font-size: 16px;
+        color: rgb(18, 65, 141);
+        background-color: white;
+        border: 1px solid rgb(18, 65, 141);
+        border-radius: 6px;
+    }
+    QListWidget::item {
+        padding: 6px;
+    }
+    QListWidget::item:selected {
+        background-color: rgb(18, 65, 141);
+        color: white;
+        border-radius: 4px;
+    }</string>
+                     </property>
+                    </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_12"/>
+                    <widget class="QLineEdit" name="lineEdit_12">
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit {
+        font-size: 16px;
+        color: rgb(18, 65, 141);
+        background-color: white;
+        border: 1px solid rgb(18, 65, 141);
+        border-radius: 6px;
+    }</string>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -1903,7 +2043,7 @@ QTabBar::tab:hover {
                      </widget>
                     </item>
                     <item>
-                     <widget class="QWidget" name="widget_19" native="true"/>
+                     <layout class="QVBoxLayout" name="leadersFavPie"/>
                     </item>
                     <item>
                      <widget class="QLabel" name="label_11">
@@ -1913,7 +2053,23 @@ QTabBar::tab:hover {
                      </widget>
                     </item>
                     <item>
-                     <widget class="QListWidget" name="listWidget_4"/>
+                     <widget class="QTableWidget" name="leaderTourStatList">
+                      <column>
+                       <property name="text">
+                        <string>Tour ID</string>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Destination</string>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Cost</string>
+                       </property>
+                      </column>
+                     </widget>
                     </item>
                    </layout>
                   </widget>

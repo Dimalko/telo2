@@ -8,8 +8,12 @@ class PopulateTable:
         self.cursor = self.connection.cursor()
 
 
-    def populate_table(self, table_widget, query, col, q_num = 1):
-        self.cursor.execute(query)
+    def populate_table(self, table_widget, query, col, q_num = 1, key=None):
+        if key == None:
+            self.cursor.execute(query)
+        else:
+            self.cursor.execute(query,(key,))
+
         data = self.cursor.fetchall()
 
         if not data:

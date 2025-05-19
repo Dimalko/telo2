@@ -12,7 +12,7 @@ class BarChart():
         
         
 
-    def create_barchart(self,query, layout):
+    def create_barchart(self, query, layout):
         connection = sqlite3.connect("data//database.db")
         cursor = connection.cursor()
         cursor.execute(query)

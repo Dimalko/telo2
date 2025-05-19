@@ -34,6 +34,8 @@ class AdminWindow(QMainWindow):
     busBarc = BarChart()
     driversBarc = BarChart()
     leadersBarc = BarChart()
+    driversDestPiec = PieChart()
+    leadersDestPiec = PieChart()
     
     def __init__(self):
         super().__init__()
@@ -51,7 +53,7 @@ class AdminWindow(QMainWindow):
     #initialize classes
         self.populate_table = PopulateTable()
 
-    #create charts
+    #create stats
         tourPieQuery =  """
                         SELECT CASE 
                         WHEN transportation IN (SELECT plate_number FROM Buses) THEN 'Bus'
@@ -97,6 +99,64 @@ class AdminWindow(QMainWindow):
                             ORDER BY total_tours DESC
                             """
         self.leadersBarc.create_barchart(leadersBarQuery, self.leadersBar)
+
+        avgPlpTourQuery =   """
+                            SELECT AVG(participants) 
+                            FROM TourFinancials
+                            """
+        self.create_label_stats(avgPlpTourQuery, self.avgPeoplePTLbl)
+
+        mostProfTourQuery = """
+                            SELECT tour_id, destination, profit_amount
+                            FROM TourFinancials
+                            ORDER BY profit_amount DESC
+                            LIMIT 1
+                            """
+        self.create_label_stats(mostProfTourQuery, self.mostProfTourLbl)
+
+        tourWithMostPplQuery =  """
+                                SELECT tour_id, destination, participants
+                                FROM TourFinancials
+                                ORDER BY participants DESC
+                                LIMIT 1
+                                """
+        self.create_label_stats(tourWithMostPplQuery, self.tourWthMosPplLbl)
+
+        driverWithMostKmQuery = """
+                                SELECT d.tax_code, d.f_name || ' ' || d.l_name AS name, SUM(t.km) AS total_km
+                                FROM TourFinancials tf
+                                JOIN Drivers d ON tf.driver = d.tax_code
+                                JOIN Tours t ON tf.tour_id = t.id
+                                GROUP BY d.tax_code
+                                ORDER BY total_km DESC
+                                LIMIT 1
+                                """
+        self.create_label_stats(driverWithMostKmQuery, self.driverWithMostKmLbl)
+
+        leastExpensiveDriverQuery = """
+                                    SELECT tax_code, f_name || ' ' || l_name AS name, MIN(salary / 22.0) AS cost_per_day
+                                    FROM Drivers
+                                    WHERE type = 'Permanent'
+                                    """
+        self.create_label_stats(leastExpensiveDriverQuery, self.leastExpensiveDriverLbl)
+
+        teamLeadersWithMostToursQuery = """
+                                        SELECT tl.id, tl.f_name || ' ' || tl.l_name AS name, COUNT(tf.tour_id) AS total_tours
+                                        FROM TourFinancials tf
+                                        JOIN TeamLeaders tl ON tf.guide = tl.id
+                                        GROUP BY tl.id
+                                        ORDER BY total_tours DESC
+                                        LIMIT 1
+                                        """
+        self.create_label_stats(teamLeadersWithMostToursQuery, self.leaderWithMostTourLbl)
+
+        leastExpensiveLeaderQuery = """
+                                    SELECT id, f_name || ' ' || l_name AS name, ROUND(payment / 22.0, 2) AS cost_per_day
+                                    FROM TeamLeaders
+                                    ORDER BY cost_per_day ASC
+                                    LIMIT 1
+                                    """
+        self.create_label_stats(leastExpensiveLeaderQuery, self.leastExpensiveLeaderLbl)
 
 
 
@@ -169,7 +229,6 @@ class AdminWindow(QMainWindow):
         self.guideComboBox.currentIndexChanged.connect(self.calculate_all_costs)
         self.driverComboBox.currentIndexChanged.connect(self.calculate_all_costs)
         self.guideComboBox.currentIndexChanged.connect(self.calculate_all_costs)
-
         # Τέλος load_comboboxes_for_tour
         self.driverComboBox.setCurrentIndex(0)
         self.vehicleComboBox.setCurrentIndex(0)
@@ -177,22 +236,46 @@ class AdminWindow(QMainWindow):
         #Accept/Decline Tour Buttons
         self.acceptTourButton.clicked.connect(self.accept_tour)
         self.declineTourButton.clicked.connect(self.decline_tour)
-        #---------------
         #LogOut Button
         self.logOutBtn.clicked.connect(self.to_login_window)
-        #---------------
+
         self.ongoingTourListWidget.itemClicked.connect(self.on_ongoing_tour_selected)
         self.ongoingTourListWidget.itemClicked.connect(self.on_ongoing_tour_selected)
         self.guideComboBox.currentIndexChanged.connect(lambda: self.calculate_all_costs())
         self.driverComboBox.currentIndexChanged.connect(lambda: self.calculate_all_costs())
         self.vehicleComboBox.currentIndexChanged.connect(lambda: self.calculate_all_costs())
-
+        #Stats List Selection
+        driversFavPieQuery =    """
+                                SELECT destination, COUNT(*) AS times
+                                FROM TourFinancials
+                                WHERE driver = ?
+                                GROUP BY destination
+                                ORDER BY times DESC
+                                LIMIT 3
+                                """
+        driversTourHistoryQuery =   """
+                                    SELECT tour_id, destination, driver_cost
+                                    FROM TourFinancials
+                                    WHERE driver = ?
+                                    """
+        self.driverStatsListWidget.itemClicked.connect(lambda item: self.select_list_stats(item, self.driversDestPiec, self.driversFavPie, self.driverTourStatList, driversFavPieQuery, driversTourHistoryQuery))
+        
+        leadersFavPieQuery =    """
+                                SELECT destination, COUNT(*) AS times
+                                FROM TourFinancials
+                                WHERE guide = ?
+                                GROUP BY destination
+                                ORDER BY times DESC
+                                LIMIT 3
+                                """
+        leadersTourHistoryQuery =   """
+                                    SELECT tour_id, destination, driver_cost
+                                    FROM TourFinancials
+                                    WHERE guide = ?
+                                    """
+        self.leaderStatsListWidget.itemClicked.connect(lambda item: self.select_list_stats(item, self.leadersDestPiec, self.leadersFavPie, self.leaderTourStatList, leadersFavPieQuery, leadersTourHistoryQuery))
         #Complete Tour Button 
         self.completeTourButton.clicked.connect(self.complete_tour)
-
-
-
-
 
 
 
@@ -205,7 +288,19 @@ class AdminWindow(QMainWindow):
         self.populate_hotels_table()
         self.loadFreeTours()
         self.loadOngoingTours()
-        #self.loadOngoingTourDetails()
+
+        driverStatsListQuery =  """
+                                SELECT tax_code, f_name || ' ' || l_name AS name
+                                FROM Drivers
+                                """
+        self.load_stats_lists(self.driverStatsListWidget, driverStatsListQuery)
+
+        leaderStatsListQuery =  """
+                                SELECT id, f_name || ' ' || l_name AS name
+                                FROM TeamLeaders
+                                """
+        self.load_stats_lists(self.leaderStatsListWidget, leaderStatsListQuery)
+
 
     #Connect Other Windows
         self.TravelAgentRegister = TravelAgentRegisterWindow()
@@ -259,11 +354,13 @@ class AdminWindow(QMainWindow):
         self.createDescriptionShow = CreateTourDescriptionWindow()
 
 
+
 #--Style----------   
     def uiStyle(self):
         pixmap = QPixmap("data//images//logo_image.png")
         self.logoLabel.setPixmap(pixmap)
         self.logoLabel.setStyleSheet("padding-top: 20px; padding-bottom: 20px;")
+
 
 
 #--Update Tables After An Action----------
@@ -280,6 +377,7 @@ class AdminWindow(QMainWindow):
             self.populate_tour_table()
         elif table_name == "Hotels":
             self.populate_hotels_table()
+
 
 
 #--Populate Tables----------  
@@ -311,6 +409,8 @@ class AdminWindow(QMainWindow):
             item.setData(Qt.UserRole, tour[0])  # Αποθήκευση tour_id
             self.TourlistWidget.addItem(item)
     
+
+
 #--Display Windows----------
     #Add Windows
     def addTravelAgent(self):
@@ -364,6 +464,14 @@ class AdminWindow(QMainWindow):
         self.open_delete.emit()
         self.removeHotelShow.show()
 
+    #Create Tour Description Window
+    def createTourDescription(self):
+        self.open_createDescription.emit()
+        self.createDescriptionShow.show()
+
+
+
+#--Functions To Categorize!!!----------
     def load_tour_summary(self, tour_id):
         try:
             self.cursor.execute("""
@@ -389,7 +497,6 @@ class AdminWindow(QMainWindow):
         except Exception as e:
             print("Error loading tour summary:", e)
 
-
     def on_tour_selected(self, item):
         try:
             tour_text = item.text()
@@ -403,14 +510,9 @@ class AdminWindow(QMainWindow):
         except Exception as e:
             print("Error selecting tour:", e)
 
-            
-
     def calculate_guide_cost(self, monthly_salary, tour_days):
         working_days_month = 22
         return (monthly_salary / working_days_month) * tour_days
-
-       
-
 
     def calculate_driver_cost(self, driver_row, tour_days):
         driver_type = driver_row[3]
@@ -422,7 +524,6 @@ class AdminWindow(QMainWindow):
             working_days_month = 22
             return (salary / working_days_month) * tour_days
 
-
     def calculate_bus_cost(self, bus_row, tour_km):
         rental_cost = bus_row[5] or 0
         consumption = bus_row[6]
@@ -431,7 +532,6 @@ class AdminWindow(QMainWindow):
         fuel_cost = (tour_km * consumption / 100) * fuel_price_per_liter
         return rental_cost + fuel_cost
     
-
     def calculate_driver_cost(self, driver_row, tour_days):
 
         driver_type = driver_row[3]  # 'Permanent' or 'Freelancer'
@@ -443,14 +543,12 @@ class AdminWindow(QMainWindow):
             working_days_month = 22
             return (salary / working_days_month) * tour_days
 
-
     def calculate_tour_days(self, start_date, end_date):
         from datetime import datetime
         fmt = "%Y-%m-%d"
         start = datetime.strptime(start_date, fmt)
         end = datetime.strptime(end_date, fmt)
         return (end - start).days + 1
-
 
     def load_comboboxes_for_tour(self, tour_id):
         try:
@@ -499,9 +597,6 @@ class AdminWindow(QMainWindow):
 
         except Exception as e:
             print("Error loading comboboxes:", e)
-
-
-
 
     def calculate_all_costs(self, return_values_only=False):
         try:
@@ -605,9 +700,6 @@ class AdminWindow(QMainWindow):
         except Exception as e:
             print("Error calculating all costs:", e)
             return False
-
-    
-
 
     def accept_tour(self):
         try:
@@ -721,9 +813,110 @@ class AdminWindow(QMainWindow):
         except Exception as e:
                 QMessageBox.critical(self, "Error", f"Could not decline tour.\n{e}")
                 self.connection.rollback()
+                        
+    def loadOngoingTours(self):
+        self.ongoingTourListWidget.clear()
+        self.cursor.execute("SELECT id, destination FROM Tours WHERE status = 'Accepted'")
+        tours = self.cursor.fetchall()
+
+        for tour_id, destination in tours:
+            self.ongoingTourListWidget.addItem(f"{tour_id} - {destination}")
+
+    def loadOngoingTourDetails(self, tour_id):
+        try:
+            self.ongoingTourDetailsTable.setRowCount(0)
+
+            self.cursor.execute("""
+                SELECT 
+                    destination,
+                    start_date || ' ➝ ' || end_date,
+                    total_income,
+                    participants,
+                    transportation,
+                    transportation_cost,
+                    driver,
+                    guide
+                FROM TourFinancials
+                WHERE tour_id = ?
+            """, (tour_id,))
+
+            result = self.cursor.fetchone()
+
+            if result:
+                self.ongoingTourDetailsTable.insertRow(0)
+                for col, value in enumerate(result):
+                    self.ongoingTourDetailsTable.setItem(0, col, QTableWidgetItem(str(value)))
+            else:
+                QMessageBox.warning(self, "No Data", "No financial data found for this tour.")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to load tour details.\n{e}")
+
+    def on_ongoing_tour_selected(self, item):
+        tour_text = item.text()
+        tour_id = tour_text.split(" ")[0].strip()  # π.χ. "t12"
+        self.selected_tour_id = tour_id
+        self.loadOngoingTourDetails(tour_id)
+
+    def complete_tour(self):
+        try:
+            selected_item = self.ongoingTourListWidget.currentItem()
+            if not selected_item:
+                QMessageBox.warning(self, "Warning", "No tour selected.")
+                return
+
+            tour_id = selected_item.text().split(" - ")[0].strip()
+
+            # Πάρε Transportation και Driver από τον πίνακα TourFinancials
+            self.cursor.execute("""
+                SELECT transportation, driver, guide FROM TourFinancials WHERE tour_id = ?
+            """, (tour_id,))
+            result = self.cursor.fetchone()
+
+            if not result:
+                QMessageBox.warning(self, "Warning", "Tour information not found in TourFinancials.")
+                return
+
+            transportation, driver_code, guide_id = result
+
+            # Αν είναι Bus (τότε transportation περιέχει πινακίδα)
+            if transportation not in ["Airplain", "Boat"]:
+                # Επαναφορά κατάστασης λεωφορείου
+                self.cursor.execute("UPDATE Buses SET status = 'Available' WHERE plate_number = ?", (transportation,))
+                
+                # Επαναφορά οδηγού (αν υπάρχει)
+                if driver_code:
+                    self.cursor.execute("UPDATE Drivers SET status = 'Available' WHERE tax_code = ?", (driver_code,))
+
+            # Επαναφορά ξεναγού (αν υπάρχει)
+            if guide_id:
+                self.cursor.execute("UPDATE TeamLeaders SET status = 'Available' WHERE id = ?", (guide_id,))
+
+            # Ενημέρωση του status του Tour
+            self.cursor.execute("UPDATE Tours SET status = 'Completed' WHERE id = ?", (tour_id,))
+
+            # ✅ Ενημέρωση όλων των κρατήσεων σε Completed
+            self.cursor.execute("""
+                UPDATE Reservations SET status = 'Completed' WHERE tour_id = ? AND status = 'Active'
+            """, (tour_id,))
+            self.loadOngoingTours()
+            self.populate_teamleader_table()
+            self.populate_driver_table()
+            self.populate_buses_table()
+            self.connection.commit()
+            QMessageBox.information(self, "Success", f"Tour {tour_id} has been completed.")
+            self.loadFreeTours()
+            self.populate_tour_table()
+            self.ongoingTourDetailsTable.setRowCount(0)
+
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to complete tour.\n{e}")
+            self.connection.rollback()
 
 
 
+#--Edit Function----------
     def editSelectedRow(self, table_widget, query, q_num=1, readonly_fields=None):
         selected_row = table_widget.currentRow()
         if selected_row == -1:
@@ -802,124 +995,41 @@ class AdminWindow(QMainWindow):
                 self.connection.commit()
             except Exception as e:
                 QMessageBox.critical(self, "Database Error", f"Failed to update database:\n{str(e)}")
-                        
+
 
         
+#--Stats Functions----------
+    def create_label_stats(self, query, label):
+        self.cursor.execute(query)
+        data = self.cursor.fetchone()
+        fdata = ""
+        if data and data[0] is not None:
+            for i in range(len(data)):
+                if isinstance(data[i], float):
+                    fdata += f"{data[i]:.2f} "
+                else:
+                    fdata += str(data[i]) + " "
+            
+            label.setText(str(fdata))
+        else:
+            label.setText("N/A")
 
+    def load_stats_lists(self, list, query):
+        list.clear()
+        self.cursor.execute(query)
+        data = self.cursor.fetchall()
 
-    def loadOngoingTours(self):
-        self.ongoingTourListWidget.clear()
-        self.cursor.execute("SELECT id, destination FROM Tours WHERE status = 'Accepted'")
-        tours = self.cursor.fetchall()
+        for data1, data2 in data:
+            list.addItem(f"{data1} - {data2}")
 
-        for tour_id, destination in tours:
-            self.ongoingTourListWidget.addItem(f"{tour_id} - {destination}")
+    def select_list_stats(self, item, pie, p_layout, l_layout, p_query, l_query):
+        text = item.text()
+        text_id = text.split(" ")[0].strip()
+        self.selected_text_id = text_id
+        pie.create_piechart(p_query, p_layout, text_id)
 
+        self.populate_table.populate_table(l_layout, l_query, 3, 1, text_id)
 
-    def loadOngoingTourDetails(self, tour_id):
-        try:
-            self.ongoingTourDetailsTable.setRowCount(0)
-
-            self.cursor.execute("""
-                SELECT 
-                    destination,
-                    start_date || ' ➝ ' || end_date,
-                    total_income,
-                    participants,
-                    transportation,
-                    transportation_cost,
-                    driver,
-                    guide
-                FROM TourFinancials
-                WHERE tour_id = ?
-            """, (tour_id,))
-
-            result = self.cursor.fetchone()
-
-            if result:
-                self.ongoingTourDetailsTable.insertRow(0)
-                for col, value in enumerate(result):
-                    self.ongoingTourDetailsTable.setItem(0, col, QTableWidgetItem(str(value)))
-            else:
-                QMessageBox.warning(self, "No Data", "No financial data found for this tour.")
-
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to load tour details.\n{e}")
-
-    def on_ongoing_tour_selected(self, item):
-        tour_text = item.text()
-        tour_id = tour_text.split(" ")[0].strip()  # π.χ. "t12"
-        self.selected_tour_id = tour_id
-        self.loadOngoingTourDetails(tour_id)
-
-
-    def complete_tour(self):
-        try:
-            selected_item = self.ongoingTourListWidget.currentItem()
-            if not selected_item:
-                QMessageBox.warning(self, "Warning", "No tour selected.")
-                return
-
-            tour_id = selected_item.text().split(" - ")[0].strip()
-
-            # Πάρε Transportation και Driver από τον πίνακα TourFinancials
-            self.cursor.execute("""
-                SELECT transportation, driver, guide FROM TourFinancials WHERE tour_id = ?
-            """, (tour_id,))
-            result = self.cursor.fetchone()
-
-            if not result:
-                QMessageBox.warning(self, "Warning", "Tour information not found in TourFinancials.")
-                return
-
-            transportation, driver_code, guide_id = result
-
-            # Αν είναι Bus (τότε transportation περιέχει πινακίδα)
-            if transportation not in ["Airplain", "Boat"]:
-                # Επαναφορά κατάστασης λεωφορείου
-                self.cursor.execute("UPDATE Buses SET status = 'Available' WHERE plate_number = ?", (transportation,))
-                
-                # Επαναφορά οδηγού (αν υπάρχει)
-                if driver_code:
-                    self.cursor.execute("UPDATE Drivers SET status = 'Available' WHERE tax_code = ?", (driver_code,))
-
-            # Επαναφορά ξεναγού (αν υπάρχει)
-            if guide_id:
-                self.cursor.execute("UPDATE TeamLeaders SET status = 'Available' WHERE id = ?", (guide_id,))
-
-            # Ενημέρωση του status του Tour
-            self.cursor.execute("UPDATE Tours SET status = 'Completed' WHERE id = ?", (tour_id,))
-
-            # ✅ Ενημέρωση όλων των κρατήσεων σε Completed
-            self.cursor.execute("""
-                UPDATE Reservations SET status = 'Completed' WHERE tour_id = ? AND status = 'Active'
-            """, (tour_id,))
-            self.loadOngoingTours()
-            self.populate_teamleader_table()
-            self.populate_driver_table()
-            self.populate_buses_table()
-            self.connection.commit()
-            QMessageBox.information(self, "Success", f"Tour {tour_id} has been completed.")
-            self.loadFreeTours()
-            self.populate_tour_table()
-            self.ongoingTourDetailsTable.setRowCount(0)
-
-
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to complete tour.\n{e}")
-            self.connection.rollback()
-
-
-
-
-             
-    
-    #Create Tour Description Window
-    def createTourDescription(self):
-        self.open_createDescription.emit()
-        self.createDescriptionShow.show()
-        
-    
 
 #--LogOut----------
     def to_login_window(self):
