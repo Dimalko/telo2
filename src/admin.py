@@ -791,11 +791,15 @@ class AdminWindow(QMainWindow):
             self.loadFreeTours()
             self.loadOngoingTours()
             self.populate_tour_table()
+            self.populate_teamleader_table()
+            self.populate_driver_table()
+            self.populate_buses_table()
+    
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Could not accept tour.\n{e}")
             self.connection.rollback()
-
+            s
     def decline_tour(self):
         try:
                 if not hasattr(self, "selected_tour_id"):
@@ -907,6 +911,9 @@ class AdminWindow(QMainWindow):
             QMessageBox.information(self, "Success", f"Tour {tour_id} has been completed.")
             self.loadFreeTours()
             self.populate_tour_table()
+            self.populate_teamleader_table()
+            self.populate_driver_table()
+            self.populate_buses_table()
             self.ongoingTourDetailsTable.setRowCount(0)
 
 
