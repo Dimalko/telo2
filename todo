@@ -7,6 +7,14 @@ fix most registers 2nd input error
 
 fix tour payment
 
+create triggers about db
+
+group payments na deixnoun kai tour
+
+na dinoume kai kana fragkom sta jenodoxeia
+
+after complete tour o team leader den vgainei apo busy katastash
+
 
 ------------------------------------------------------
 --add edit functions .malko
@@ -38,31 +46,31 @@ fix tour payment
 ----statistika----
 
 .tour
-posa tour ginane ana typo metaforas
-meso arithmo atomon ana tour
-pio kerdoforo tour
-tour me perissotera atoma
-kerdos ana destination
+posa tour ginane ana typo metaforas/
+meso arithmo atomon ana tour/
+pio kerdoforo tour/
+tour me perissotera atoma/
+kerdos ana destination/
 
 .leoforeia
-meso kostos 
-tours ana lewf
+tours/bus/
+meso kostos /
 mesa xiliometra ana tour
 
 .drivers
-tours ana odigo
+tours ana odigo\
 kostos ana odigo (meso|sinoliko)
 Σύγκριση Permanent vs Freelancer:
   Πόσα Tours έγιναν με τον καθένα και ποιο κόστισε λιγότερο
-odigos me perissotera xiliometra
-fthinoteros odigos ana mera
-fav proorismoi
+odigos me perissotera xiliometra\
+fthinoteros odigos ana mera\
+fav 3 proorismoi\
 
 .tour leaders
-tours ana leader
-leader me perissoteres ekdromes
-fthinoteros leader ana mera
-fav proorismoi
+tours ana leader\
+leader me perissoteres ekdromes\
+fthinoteros leader ana mera\
+fav proorismoi\
 
 
 ----------------------------------------------------------

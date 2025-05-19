@@ -26,7 +26,6 @@ class HotelRegisterWindow(QMainWindow):
 
 
     def input_clear(self):
-            self.hotelIdInput.setText("")
             self.hotelNameInput.setText("")
             self.hotelCityInput.setText("")
             self.hotelAddressInput.setText("")

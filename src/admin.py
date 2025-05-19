@@ -15,6 +15,8 @@ from hotelRegister import HotelRegisterWindow
 from createDescription import CreateTourDescriptionWindow
 
 from classes.populate_table import PopulateTable
+from classes.piechart import PieChart
+from classes.barchart import BarChart
 
 
 class AdminWindow(QMainWindow):
@@ -27,6 +29,11 @@ class AdminWindow(QMainWindow):
     open_createDescription = pyqtSignal()
     open_delete = pyqtSignal()
     switch_login = pyqtSignal()
+    tourPiec = PieChart()
+    tourBarc = BarChart()
+    busBarc = BarChart()
+    driversBarc = BarChart()
+    leadersBarc = BarChart()
     
     def __init__(self):
         super().__init__()
@@ -43,6 +50,55 @@ class AdminWindow(QMainWindow):
 
     #initialize classes
         self.populate_table = PopulateTable()
+
+    #create charts
+        tourPieQuery =  """
+                        SELECT CASE 
+                        WHEN transportation IN (SELECT plate_number FROM Buses) THEN 'Bus'
+                        ELSE transportation
+                        END AS transport_type,
+                        COUNT(*) AS count
+                        FROM TourFinancials
+                        GROUP BY transport_type
+                        """
+        self.tourPiec.create_piechart(tourPieQuery, self.toursPie)
+
+        tourBarQuery =  """
+                        SELECT destination, SUM(profit_amount) AS total_profit
+                        FROM TourFinancials
+                        GROUP BY destination
+                        ORDER BY total_profit DESC
+                        """
+        self.tourBarc.create_barchart(tourBarQuery, self.toursBar)
+        
+        busBarQuery =   """
+                        SELECT transportation AS bus_plate, COUNT(*) AS total_tours
+                        FROM TourFinancials
+                        WHERE transportation NOT IN ('Airplain', 'Boat')
+                        GROUP BY transportation
+                        ORDER BY total_tours DESC
+                        """
+        self.busBarc.create_barchart(busBarQuery, self.busBar)
+
+        driversBarQuery =   """
+                            SELECT driver, COUNT(*) AS total_tours
+                            FROM TourFinancials
+                            WHERE driver != ''
+                            GROUP BY driver
+                            ORDER BY total_tours DESC
+                            """
+        self.driversBarc.create_barchart(driversBarQuery, self.driversBar)
+
+        leadersBarQuery =   """
+                            SELECT tl.id, COUNT(tf.tour_id) AS total_tours
+                            FROM TourFinancials tf
+                            JOIN TeamLeaders tl ON tf.guide = tl.id
+                            GROUP BY tl.id
+                            ORDER BY total_tours DESC
+                            """
+        self.leadersBarc.create_barchart(leadersBarQuery, self.leadersBar)
+
+
 
     #Connect Buttons
         #Navigation Buttons

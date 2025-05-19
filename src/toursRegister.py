@@ -29,7 +29,6 @@ class ToursRegisterWindow(QMainWindow):
 
 
     def input_clear(self):
-        self.idInput.setText("")
         self.destinationInput.setText("")
         self.descriptionInput.setText("")
         self.kmInput.setText("")

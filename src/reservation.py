@@ -267,7 +267,8 @@ class ReservationWindow(QMainWindow):
                 transportation_cost = 60 * people
 
             # Τελικό κόστος: τιμή * άτομα * ημέρες + extra 50€/άτομο
-            total_cost = (price_per_person * people * number_of_days) + (50 * people) + transportation_cost
+            f_total_cost = (price_per_person * people * number_of_days) + (50 * people) + transportation_cost
+            total_cost = (price_per_person * people * number_of_days)*0.3 + (50 * people) + transportation_cost
 
             # Δημιουργία κράτησης
             self.cursor.execute("""
