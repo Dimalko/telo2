@@ -15,6 +15,8 @@ class DeleteWindow(QMainWindow):
         #connect to db
         self.conn = sqlite3.connect("data//database.db")
         self.c = self.conn.cursor()
+        #enable foreign keys
+        self.c.execute("PRAGMA foreign_keys = ON;")
         
         #initializations
         self.user = user
