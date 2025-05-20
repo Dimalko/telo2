@@ -799,7 +799,7 @@ class AdminWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Could not accept tour.\n{e}")
             self.connection.rollback()
-            s
+            
     def decline_tour(self):
         try:
                 if not hasattr(self, "selected_tour_id"):
