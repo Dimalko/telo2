@@ -236,6 +236,9 @@ class AdminWindow(QMainWindow):
         #Accept/Decline Tour Buttons
         self.acceptTourButton.clicked.connect(self.accept_tour)
         self.declineTourButton.clicked.connect(self.decline_tour)
+        #Load Drivers/Team Leaders
+       
+        
         #LogOut Button
         self.logOutBtn.clicked.connect(self.to_login_window)
 
@@ -244,6 +247,7 @@ class AdminWindow(QMainWindow):
         self.guideComboBox.currentIndexChanged.connect(lambda: self.calculate_all_costs())
         self.driverComboBox.currentIndexChanged.connect(lambda: self.calculate_all_costs())
         self.vehicleComboBox.currentIndexChanged.connect(lambda: self.calculate_all_costs())
+        
         #Stats List Selection
         driversFavPieQuery =    """
                                 SELECT destination, COUNT(*) AS times
@@ -294,6 +298,7 @@ class AdminWindow(QMainWindow):
                                 FROM Drivers
                                 """
         self.load_stats_lists(self.driverStatsListWidget, driverStatsListQuery)
+
 
         leaderStatsListQuery =  """
                                 SELECT id, f_name || ' ' || l_name AS name
@@ -659,9 +664,15 @@ class AdminWindow(QMainWindow):
             # Total income
             self.cursor.execute("SELECT SUM(cost) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
             total_income = self.cursor.fetchone()[0] or 0.0
+            # Υπολογισμός αριθμού συμμετεχόντων
+            self.cursor.execute("SELECT SUM(people_numb) FROM Reservations WHERE tour_id = ? AND status = 'Active'", (tour_id,))
+            total_people = self.cursor.fetchone()[0] or 0
+
+            # Υπολογισμός του μεριδίου των ξενοδοχείων (70% από το υπόλοιπο μετά την αφαίρεση 50€/άτομο)
+            hotel_share = 0.7 * max(total_income - (50 * total_people), 0)
 
             if total_income > 0:
-                profit_amount = total_income - total_service_cost
+                profit_amount = total_income - total_service_cost - hotel_share
                 profit_percent = (profit_amount / total_income) * 100
             else:
                 profit_amount = 0.0
@@ -674,7 +685,8 @@ class AdminWindow(QMainWindow):
             round(total_service_cost, 2),
             round(total_income, 2),
             round(profit_amount, 2),
-            round(profit_percent, 2)
+            round(profit_percent, 2),
+            round(hotel_share, 2)
             # Return results if requested
             if return_values_only:
                 return {
@@ -692,6 +704,7 @@ class AdminWindow(QMainWindow):
             self.driverCostLabel.setText(f"Driver Cost: €{driver_cost:.2f}")
             self.vehicleCostLabel.setText(vehicle_label)
             self.guideCostLabel.setText(f"Guide Cost: €{guide_cost:.2f}")
+            self.hotelshare_label.setText(f"Hotel Share: €{hotel_share:.2f}")
             self.totalCostLabel.setText(f"Total Cost: €{total_service_cost:.2f}")
             self.profitLabel.setText(f"Profit: €{profit_amount:.2f} ({profit_percent:.1f}%)")
 
@@ -1037,6 +1050,8 @@ class AdminWindow(QMainWindow):
 
         self.populate_table.populate_table(l_layout, l_query, 3, 1, text_id)
 
+
+    
 
 #--LogOut----------
     def to_login_window(self):
