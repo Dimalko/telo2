@@ -32,22 +32,22 @@ class DriverRegisterWindow(QMainWindow):
             id = self.IdInput.text()
             firstName = self.FirstNameInput.text()
             lastName = self.LastNameInput.text()
-            payment = self.PaymentInput.text()
+            payment = float(self.PaymentInput.text())
             type = self.TypeComboBox.currentText()
             status = "Available"
 
             self.cursor.execute("INSERT INTO Drivers (tax_code, f_name, l_name,type,salary,status) VALUES (?, ?, ?, ?, ?,?)",
                                 (id, firstName, lastName,type, payment, status))
-            self.connection.commit()
+            if id != "":
+                self.connection.commit()
+            else:
+                raise ValueError
+            
+            self.hide()
             self.finished.emit()
             self.input_clear()
-            QMessageBox.information(self, "Success", "Driver added successfully")
-        except Exception as e:
-            print(e)
-            QMessageBox.warning(self, "Error", "Could not add Driver")
-            self.input_clear()
-            self.connection.rollback()
-        finally:
-            self.connection.close()
-            self.finished.emit()
-            self.close()
+        
+        except ValueError:
+            QMessageBox.warning(self, "Warning", "Εσφαλμενα στοιχεια")
+        except sqlite3.IntegrityError:
+            QMessageBox.warning(self, "Warning", "Εσφαλμενα στοιχεια")  

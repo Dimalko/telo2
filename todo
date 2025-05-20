@@ -1,44 +1,22 @@
 --------------------------------------------------
-all register windows must be with scrollbar and same size
+all register windows must be with scrollbar and same size/
 
 fix description 2nd input error
 
 fix most registers 2nd input error
 
-fix tour payment
+fix tour payment/
 
-create triggers about db
+create triggers about db/
 
-group payments na deixnoun kai tour check
+group payments na deixnoun kai tour check/
 
-na dinoume kai kana fragkom sta jenodoxeia
+na dinoume kai kana fragkom sta jenodoxeia/
 
-after complete tour o team leader den vgainei apo busy katastash check
+after complete tour o team leader den vgainei apo busy katastash check/
 
 
 ------------------------------------------------------
---add edit functions .malko
-
---na valw ton agent na kanei tour description .malko
-
---na valoume ston team leader status .panos Check
-
---na allazoun ta status tou proswpikou kai twn oximatwn otan ginete accepted ena tour .panos Check
-
---meta to tour na ginontai update ta xiliometra twn levforiwn .panos
-
---na valw eisitiria gia plane kai ship .panos
-
---sto tour description na valoume kai perigrafi .malko
-
---logout .malko
-
---na valoume tour drastiriotites .malko~
-
---automatopoihmena ids opou xreiazetai .malko
-
---na mpoun oi drastiriothtes sto tour descr .malko
-
 
 search sta stats .malko
 
@@ -76,3 +54,4 @@ fav proorismoi\
 
 ----------------------------------------------------------
 eksfalmatosh
+
