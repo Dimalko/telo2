@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QHBoxLayout,
-    QHeaderView, QLabel, QListWidget, QListWidgetItem,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QStackedWidget, QTabWidget, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFormLayout, QGridLayout,
+    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
+    QListWidget, QListWidgetItem, QMainWindow, QPushButton,
+    QSizePolicy, QSpacerItem, QStackedWidget, QTabWidget,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -419,25 +419,25 @@ class Ui_MainWindow(object):
         self.requestPage.setObjectName(u"requestPage")
         self.gridLayout_8 = QGridLayout(self.requestPage)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
-        self.totalCostLabel = QLabel(self.requestPage)
-        self.totalCostLabel.setObjectName(u"totalCostLabel")
-
-        self.gridLayout_8.addWidget(self.totalCostLabel, 9, 1, 1, 1)
-
         self.profitLabel = QLabel(self.requestPage)
         self.profitLabel.setObjectName(u"profitLabel")
 
-        self.gridLayout_8.addWidget(self.profitLabel, 10, 1, 1, 1)
+        self.gridLayout_8.addWidget(self.profitLabel, 11, 1, 1, 1)
 
-        self.guideCostLabel = QLabel(self.requestPage)
-        self.guideCostLabel.setObjectName(u"guideCostLabel")
+        self.totalCostLabel = QLabel(self.requestPage)
+        self.totalCostLabel.setObjectName(u"totalCostLabel")
 
-        self.gridLayout_8.addWidget(self.guideCostLabel, 8, 1, 1, 1)
+        self.gridLayout_8.addWidget(self.totalCostLabel, 10, 1, 1, 1)
 
         self.vehicleCostLabel = QLabel(self.requestPage)
         self.vehicleCostLabel.setObjectName(u"vehicleCostLabel")
 
         self.gridLayout_8.addWidget(self.vehicleCostLabel, 7, 1, 1, 1)
+
+        self.guideCostLabel = QLabel(self.requestPage)
+        self.guideCostLabel.setObjectName(u"guideCostLabel")
+
+        self.gridLayout_8.addWidget(self.guideCostLabel, 8, 1, 1, 1)
 
         self.tourSummaryTable = QTableWidget(self.requestPage)
         if (self.tourSummaryTable.columnCount() < 2):
@@ -454,6 +454,18 @@ class Ui_MainWindow(object):
         self.driverCostLabel.setObjectName(u"driverCostLabel")
 
         self.gridLayout_8.addWidget(self.driverCostLabel, 6, 1, 1, 1)
+
+        self.label_7 = QLabel(self.requestPage)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setStyleSheet(u"background-color:rgb(170, 217, 231);\n"
+"padding: 5px;\n"
+"border-radius: 7px;")
+
+        self.gridLayout_8.addWidget(self.label_7, 0, 0, 1, 2)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_8.addItem(self.horizontalSpacer, 3, 1, 1, 1)
 
         self.LabelLayout = QHBoxLayout()
         self.LabelLayout.setObjectName(u"LabelLayout")
@@ -571,18 +583,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_8.addLayout(self.horizontalLayout_3, 5, 1, 1, 1)
 
-        self.label_7 = QLabel(self.requestPage)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setStyleSheet(u"background-color:rgb(170, 217, 231);\n"
-"padding: 5px;\n"
-"border-radius: 7px;")
-
-        self.gridLayout_8.addWidget(self.label_7, 0, 0, 1, 2)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_8.addItem(self.horizontalSpacer, 3, 1, 1, 1)
-
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, -1, -1, -1)
@@ -647,7 +647,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
 
-        self.gridLayout_8.addLayout(self.verticalLayout_2, 1, 0, 10, 1)
+        self.gridLayout_8.addLayout(self.verticalLayout_2, 1, 0, 11, 1)
+
+        self.hotelshare_label = QLabel(self.requestPage)
+        self.hotelshare_label.setObjectName(u"hotelshare_label")
+
+        self.gridLayout_8.addWidget(self.hotelshare_label, 9, 1, 1, 1)
 
         self.gridLayout_8.setColumnStretch(0, 2)
         self.gridLayout_8.setColumnStretch(1, 8)
@@ -1165,15 +1170,470 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.hotelsPage)
         self.statsPage = QWidget()
         self.statsPage.setObjectName(u"statsPage")
-        self.label_3 = QLabel(self.statsPage)
+        self.verticalLayout_3 = QVBoxLayout(self.statsPage)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.tabWidget_2 = QTabWidget(self.statsPage)
+        self.tabWidget_2.setObjectName(u"tabWidget_2")
+        self.tabWidget_2.setStyleSheet(u"QTabBar{\n"
+"border:none;\n"
+"}\n"
+"\n"
+"QTabBar::tab {\n"
+"        background: rgb(220, 228, 231);\n"
+"        \n"
+"       \n"
+"}\n"
+"\n"
+"QTabBar::tab:selected {\n"
+"        background: #087be1;\n"
+"        color: white; \n"
+"}\n"
+"\n"
+"QTabBar::tab:hover {\n"
+"        background: #2f8ee4;\n"
+"		color: white; \n"
+"}")
+        self.tourStatsTab = QWidget()
+        self.tourStatsTab.setObjectName(u"tourStatsTab")
+        self.horizontalLayout = QHBoxLayout(self.tourStatsTab)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.widget_3 = QWidget(self.tourStatsTab)
+        self.widget_3.setObjectName(u"widget_3")
+        self.verticalLayout_4 = QVBoxLayout(self.widget_3)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.label_12 = QLabel(self.widget_3)
+        self.label_12.setObjectName(u"label_12")
+
+        self.verticalLayout_4.addWidget(self.label_12)
+
+        self.toursPie = QHBoxLayout()
+        self.toursPie.setObjectName(u"toursPie")
+
+        self.verticalLayout_4.addLayout(self.toursPie)
+
+        self.label_13 = QLabel(self.widget_3)
+        self.label_13.setObjectName(u"label_13")
+
+        self.verticalLayout_4.addWidget(self.label_13)
+
+        self.toursBar = QHBoxLayout()
+        self.toursBar.setObjectName(u"toursBar")
+
+        self.verticalLayout_4.addLayout(self.toursBar)
+
+        self.formLayout = QFormLayout()
+        self.formLayout.setObjectName(u"formLayout")
+        self.label_3 = QLabel(self.widget_3)
         self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(280, 270, 201, 81))
-        self.label_6 = QLabel(self.statsPage)
+
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_3)
+
+        self.label_6 = QLabel(self.widget_3)
         self.label_6.setObjectName(u"label_6")
-        self.label_6.setGeometry(QRect(220, 30, 361, 61))
-        self.label_6.setStyleSheet(u"background-color:rgb(170, 217, 231);\n"
-"padding: 5px;\n"
-"border-radius: 7px;")
+
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_6)
+
+        self.label_8 = QLabel(self.widget_3)
+        self.label_8.setObjectName(u"label_8")
+
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_8)
+
+        self.avgPeoplePTLbl = QLabel(self.widget_3)
+        self.avgPeoplePTLbl.setObjectName(u"avgPeoplePTLbl")
+
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.avgPeoplePTLbl)
+
+        self.mostProfTourLbl = QLabel(self.widget_3)
+        self.mostProfTourLbl.setObjectName(u"mostProfTourLbl")
+
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.mostProfTourLbl)
+
+        self.tourWthMosPplLbl = QLabel(self.widget_3)
+        self.tourWthMosPplLbl.setObjectName(u"tourWthMosPplLbl")
+
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.tourWthMosPplLbl)
+
+
+        self.verticalLayout_4.addLayout(self.formLayout)
+
+        self.verticalLayout_4.setStretch(1, 4)
+        self.verticalLayout_4.setStretch(3, 4)
+        self.verticalLayout_4.setStretch(4, 2)
+
+        self.horizontalLayout.addWidget(self.widget_3)
+
+        self.horizontalLayout.setStretch(0, 5)
+        self.tabWidget_2.addTab(self.tourStatsTab, "")
+        self.vehiclesStatsTab = QWidget()
+        self.vehiclesStatsTab.setObjectName(u"vehiclesStatsTab")
+        self.horizontalLayout_5 = QHBoxLayout(self.vehiclesStatsTab)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.widget_8 = QWidget(self.vehiclesStatsTab)
+        self.widget_8.setObjectName(u"widget_8")
+        self.verticalLayout_5 = QVBoxLayout(self.widget_8)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.label_14 = QLabel(self.widget_8)
+        self.label_14.setObjectName(u"label_14")
+
+        self.verticalLayout_5.addWidget(self.label_14)
+
+        self.busBar = QHBoxLayout()
+        self.busBar.setObjectName(u"busBar")
+
+        self.verticalLayout_5.addLayout(self.busBar)
+
+        self.formLayout_2 = QFormLayout()
+        self.formLayout_2.setObjectName(u"formLayout_2")
+        self.label_9 = QLabel(self.widget_8)
+        self.label_9.setObjectName(u"label_9")
+
+        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label_9)
+
+        self.avgBusCostLbl = QLabel(self.widget_8)
+        self.avgBusCostLbl.setObjectName(u"avgBusCostLbl")
+
+        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.avgBusCostLbl)
+
+
+        self.verticalLayout_5.addLayout(self.formLayout_2)
+
+        self.verticalLayout_5.setStretch(1, 9)
+        self.verticalLayout_5.setStretch(2, 1)
+
+        self.horizontalLayout_4.addWidget(self.widget_8)
+
+        self.horizontalLayout_4.setStretch(0, 5)
+
+        self.horizontalLayout_5.addLayout(self.horizontalLayout_4)
+
+        self.horizontalLayout_5.setStretch(0, 5)
+        self.tabWidget_2.addTab(self.vehiclesStatsTab, "")
+        self.driversStatsTab = QWidget()
+        self.driversStatsTab.setObjectName(u"driversStatsTab")
+        self.horizontalLayout_7 = QHBoxLayout(self.driversStatsTab)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.widget_10 = QWidget(self.driversStatsTab)
+        self.widget_10.setObjectName(u"widget_10")
+        self.verticalLayout_6 = QVBoxLayout(self.widget_10)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.label_15 = QLabel(self.widget_10)
+        self.label_15.setObjectName(u"label_15")
+
+        self.verticalLayout_6.addWidget(self.label_15)
+
+        self.driversBar = QHBoxLayout()
+        self.driversBar.setObjectName(u"driversBar")
+
+        self.verticalLayout_6.addLayout(self.driversBar)
+
+        self.formLayout_3 = QFormLayout()
+        self.formLayout_3.setObjectName(u"formLayout_3")
+        self.label_16 = QLabel(self.widget_10)
+        self.label_16.setObjectName(u"label_16")
+
+        self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.label_16)
+
+        self.label_17 = QLabel(self.widget_10)
+        self.label_17.setObjectName(u"label_17")
+
+        self.formLayout_3.setWidget(1, QFormLayout.LabelRole, self.label_17)
+
+        self.driverWithMostKmLbl = QLabel(self.widget_10)
+        self.driverWithMostKmLbl.setObjectName(u"driverWithMostKmLbl")
+        self.driverWithMostKmLbl.setStyleSheet(u"QLabel {\n"
+"    color: #12418d;\n"
+"    font-size: 12px;\n"
+"    font-weight: bold;\n"
+"    padding: 4px;\n"
+"    border-radius: 4px;\n"
+"}")
+
+        self.formLayout_3.setWidget(0, QFormLayout.FieldRole, self.driverWithMostKmLbl)
+
+        self.leastExpensiveDriverLbl = QLabel(self.widget_10)
+        self.leastExpensiveDriverLbl.setObjectName(u"leastExpensiveDriverLbl")
+        self.leastExpensiveDriverLbl.setStyleSheet(u"QLabel {\n"
+"    color: #12418d;\n"
+"    font-size: 12px;\n"
+"    font-weight: bold;\n"
+"    padding: 4px;\n"
+"    border-radius: 4px;\n"
+"}")
+
+        self.formLayout_3.setWidget(1, QFormLayout.FieldRole, self.leastExpensiveDriverLbl)
+
+
+        self.verticalLayout_6.addLayout(self.formLayout_3)
+
+        self.verticalLayout_6.setStretch(1, 9)
+        self.verticalLayout_6.setStretch(2, 1)
+
+        self.horizontalLayout_6.addWidget(self.widget_10)
+
+        self.widget_12 = QWidget(self.driversStatsTab)
+        self.widget_12.setObjectName(u"widget_12")
+        self.horizontalLayout_8 = QHBoxLayout(self.widget_12)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_8 = QVBoxLayout()
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setContentsMargins(0, -1, -1, -1)
+        self.label_19 = QLabel(self.widget_12)
+        self.label_19.setObjectName(u"label_19")
+
+        self.verticalLayout_8.addWidget(self.label_19)
+
+        self.driverStatsListWidget = QListWidget(self.widget_12)
+        self.driverStatsListWidget.setObjectName(u"driverStatsListWidget")
+        self.driverStatsListWidget.setStyleSheet(u"QListWidget {\n"
+"        font-size: 16px;\n"
+"        color: rgb(18, 65, 141);\n"
+"        background-color: white;\n"
+"        border: 1px solid rgb(18, 65, 141);\n"
+"        border-radius: 6px;\n"
+"    }\n"
+"    QListWidget::item {\n"
+"        padding: 6px;\n"
+"    }\n"
+"    QListWidget::item:selected {\n"
+"        background-color: rgb(18, 65, 141);\n"
+"        color: white;\n"
+"        border-radius: 4px;\n"
+"    }")
+
+        self.verticalLayout_8.addWidget(self.driverStatsListWidget)
+
+        self.driverslineEdit = QLineEdit(self.widget_12)
+        self.driverslineEdit.setObjectName(u"driverslineEdit")
+        self.driverslineEdit.setStyleSheet(u"QLineEdit {\n"
+"        font-size: 16px;\n"
+"        color: rgb(18, 65, 141);\n"
+"        background-color: white;\n"
+"        border: 1px solid rgb(18, 65, 141);\n"
+"        border-radius: 6px;\n"
+"    }")
+
+        self.verticalLayout_8.addWidget(self.driverslineEdit)
+
+
+        self.horizontalLayout_8.addLayout(self.verticalLayout_8)
+
+        self.widget_13 = QWidget(self.widget_12)
+        self.widget_13.setObjectName(u"widget_13")
+        self.verticalLayout_7 = QVBoxLayout(self.widget_13)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.label_18 = QLabel(self.widget_13)
+        self.label_18.setObjectName(u"label_18")
+
+        self.verticalLayout_7.addWidget(self.label_18)
+
+        self.driversFavPie = QVBoxLayout()
+        self.driversFavPie.setObjectName(u"driversFavPie")
+
+        self.verticalLayout_7.addLayout(self.driversFavPie)
+
+        self.label_10 = QLabel(self.widget_13)
+        self.label_10.setObjectName(u"label_10")
+
+        self.verticalLayout_7.addWidget(self.label_10)
+
+        self.driverTourStatList = QTableWidget(self.widget_13)
+        if (self.driverTourStatList.columnCount() < 3):
+            self.driverTourStatList.setColumnCount(3)
+        __qtablewidgetitem56 = QTableWidgetItem()
+        self.driverTourStatList.setHorizontalHeaderItem(0, __qtablewidgetitem56)
+        __qtablewidgetitem57 = QTableWidgetItem()
+        self.driverTourStatList.setHorizontalHeaderItem(1, __qtablewidgetitem57)
+        __qtablewidgetitem58 = QTableWidgetItem()
+        self.driverTourStatList.setHorizontalHeaderItem(2, __qtablewidgetitem58)
+        self.driverTourStatList.setObjectName(u"driverTourStatList")
+
+        self.verticalLayout_7.addWidget(self.driverTourStatList)
+
+        self.verticalLayout_7.setStretch(1, 5)
+        self.verticalLayout_7.setStretch(3, 5)
+
+        self.horizontalLayout_8.addWidget(self.widget_13)
+
+        self.horizontalLayout_8.setStretch(0, 3)
+        self.horizontalLayout_8.setStretch(1, 7)
+
+        self.horizontalLayout_6.addWidget(self.widget_12)
+
+        self.horizontalLayout_6.setStretch(0, 5)
+        self.horizontalLayout_6.setStretch(1, 5)
+
+        self.horizontalLayout_7.addLayout(self.horizontalLayout_6)
+
+        self.tabWidget_2.addTab(self.driversStatsTab, "")
+        self.leadersStatsTab = QWidget()
+        self.leadersStatsTab.setObjectName(u"leadersStatsTab")
+        self.horizontalLayout_11 = QHBoxLayout(self.leadersStatsTab)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_9 = QHBoxLayout()
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.widget_15 = QWidget(self.leadersStatsTab)
+        self.widget_15.setObjectName(u"widget_15")
+        self.verticalLayout_9 = QVBoxLayout(self.widget_15)
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.label_20 = QLabel(self.widget_15)
+        self.label_20.setObjectName(u"label_20")
+
+        self.verticalLayout_9.addWidget(self.label_20)
+
+        self.leadersBar = QHBoxLayout()
+        self.leadersBar.setObjectName(u"leadersBar")
+
+        self.verticalLayout_9.addLayout(self.leadersBar)
+
+        self.formLayout_4 = QFormLayout()
+        self.formLayout_4.setObjectName(u"formLayout_4")
+        self.label_21 = QLabel(self.widget_15)
+        self.label_21.setObjectName(u"label_21")
+
+        self.formLayout_4.setWidget(0, QFormLayout.LabelRole, self.label_21)
+
+        self.label_22 = QLabel(self.widget_15)
+        self.label_22.setObjectName(u"label_22")
+
+        self.formLayout_4.setWidget(1, QFormLayout.LabelRole, self.label_22)
+
+        self.leaderWithMostTourLbl = QLabel(self.widget_15)
+        self.leaderWithMostTourLbl.setObjectName(u"leaderWithMostTourLbl")
+        self.leaderWithMostTourLbl.setStyleSheet(u"QLabel {\n"
+"    color: #12418d;\n"
+"    font-size: 12px;\n"
+"    font-weight: bold;\n"
+"    padding: 4px;\n"
+"    border-radius: 4px;\n"
+"}")
+
+        self.formLayout_4.setWidget(0, QFormLayout.FieldRole, self.leaderWithMostTourLbl)
+
+        self.leastExpensiveLeaderLbl = QLabel(self.widget_15)
+        self.leastExpensiveLeaderLbl.setObjectName(u"leastExpensiveLeaderLbl")
+        self.leastExpensiveLeaderLbl.setStyleSheet(u"QLabel {\n"
+"    color: #12418d;\n"
+"    font-size: 12px;\n"
+"    font-weight: bold;\n"
+"    padding: 4px;\n"
+"    border-radius: 4px;\n"
+"}")
+
+        self.formLayout_4.setWidget(1, QFormLayout.FieldRole, self.leastExpensiveLeaderLbl)
+
+
+        self.verticalLayout_9.addLayout(self.formLayout_4)
+
+        self.verticalLayout_9.setStretch(1, 9)
+        self.verticalLayout_9.setStretch(2, 1)
+
+        self.horizontalLayout_9.addWidget(self.widget_15)
+
+        self.widget_17 = QWidget(self.leadersStatsTab)
+        self.widget_17.setObjectName(u"widget_17")
+        self.horizontalLayout_10 = QHBoxLayout(self.widget_17)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_10 = QVBoxLayout()
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.verticalLayout_10.setContentsMargins(0, -1, -1, -1)
+        self.label_23 = QLabel(self.widget_17)
+        self.label_23.setObjectName(u"label_23")
+
+        self.verticalLayout_10.addWidget(self.label_23)
+
+        self.leaderStatsListWidget = QListWidget(self.widget_17)
+        self.leaderStatsListWidget.setObjectName(u"leaderStatsListWidget")
+        self.leaderStatsListWidget.setStyleSheet(u"QListWidget {\n"
+"        font-size: 16px;\n"
+"        color: rgb(18, 65, 141);\n"
+"        background-color: white;\n"
+"        border: 1px solid rgb(18, 65, 141);\n"
+"        border-radius: 6px;\n"
+"    }\n"
+"    QListWidget::item {\n"
+"        padding: 6px;\n"
+"    }\n"
+"    QListWidget::item:selected {\n"
+"        background-color: rgb(18, 65, 141);\n"
+"        color: white;\n"
+"        border-radius: 4px;\n"
+"    }")
+
+        self.verticalLayout_10.addWidget(self.leaderStatsListWidget)
+
+        self.teamleaderslineEdit = QLineEdit(self.widget_17)
+        self.teamleaderslineEdit.setObjectName(u"teamleaderslineEdit")
+        self.teamleaderslineEdit.setStyleSheet(u"QLineEdit {\n"
+"        font-size: 16px;\n"
+"        color: rgb(18, 65, 141);\n"
+"        background-color: white;\n"
+"        border: 1px solid rgb(18, 65, 141);\n"
+"        border-radius: 6px;\n"
+"    }")
+
+        self.verticalLayout_10.addWidget(self.teamleaderslineEdit)
+
+
+        self.horizontalLayout_10.addLayout(self.verticalLayout_10)
+
+        self.widget_18 = QWidget(self.widget_17)
+        self.widget_18.setObjectName(u"widget_18")
+        self.verticalLayout_11 = QVBoxLayout(self.widget_18)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
+        self.label_24 = QLabel(self.widget_18)
+        self.label_24.setObjectName(u"label_24")
+
+        self.verticalLayout_11.addWidget(self.label_24)
+
+        self.leadersFavPie = QVBoxLayout()
+        self.leadersFavPie.setObjectName(u"leadersFavPie")
+
+        self.verticalLayout_11.addLayout(self.leadersFavPie)
+
+        self.label_11 = QLabel(self.widget_18)
+        self.label_11.setObjectName(u"label_11")
+
+        self.verticalLayout_11.addWidget(self.label_11)
+
+        self.leaderTourStatList = QTableWidget(self.widget_18)
+        if (self.leaderTourStatList.columnCount() < 3):
+            self.leaderTourStatList.setColumnCount(3)
+        __qtablewidgetitem59 = QTableWidgetItem()
+        self.leaderTourStatList.setHorizontalHeaderItem(0, __qtablewidgetitem59)
+        __qtablewidgetitem60 = QTableWidgetItem()
+        self.leaderTourStatList.setHorizontalHeaderItem(1, __qtablewidgetitem60)
+        __qtablewidgetitem61 = QTableWidgetItem()
+        self.leaderTourStatList.setHorizontalHeaderItem(2, __qtablewidgetitem61)
+        self.leaderTourStatList.setObjectName(u"leaderTourStatList")
+
+        self.verticalLayout_11.addWidget(self.leaderTourStatList)
+
+        self.verticalLayout_11.setStretch(1, 5)
+        self.verticalLayout_11.setStretch(3, 5)
+
+        self.horizontalLayout_10.addWidget(self.widget_18)
+
+        self.horizontalLayout_10.setStretch(0, 3)
+        self.horizontalLayout_10.setStretch(1, 7)
+
+        self.horizontalLayout_9.addWidget(self.widget_17)
+
+        self.horizontalLayout_9.setStretch(0, 5)
+        self.horizontalLayout_9.setStretch(1, 5)
+
+        self.horizontalLayout_11.addLayout(self.horizontalLayout_9)
+
+        self.tabWidget_2.addTab(self.leadersStatsTab, "")
+
+        self.verticalLayout_3.addWidget(self.tabWidget_2)
+
         self.stackedWidget.addWidget(self.statsPage)
 
         self.gridLayout_9.addWidget(self.stackedWidget, 0, 1, 1, 1)
@@ -1182,8 +1642,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(6)
         self.tabWidget.setCurrentIndex(0)
+        self.tabWidget_2.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1227,21 +1688,22 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"Hotels", None));
         self.createTourDescriptionBtn.setText(QCoreApplication.translate("MainWindow", u"Create Tour Description \ud83d\udcdd", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#12418d;\">Tours</span></p></body></html>", None))
-        self.totalCostLabel.setText(QCoreApplication.translate("MainWindow", u"Total Cost:", None))
         self.profitLabel.setText(QCoreApplication.translate("MainWindow", u"Profit:", None))
-        self.guideCostLabel.setText(QCoreApplication.translate("MainWindow", u" Guide Cost:", None))
+        self.totalCostLabel.setText(QCoreApplication.translate("MainWindow", u"Total Cost:", None))
         self.vehicleCostLabel.setText(QCoreApplication.translate("MainWindow", u"Vehicle Cost:", None))
+        self.guideCostLabel.setText(QCoreApplication.translate("MainWindow", u" Guide Cost:", None))
         ___qtablewidgetitem11 = self.tourSummaryTable.horizontalHeaderItem(0)
         ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"Total People", None));
         ___qtablewidgetitem12 = self.tourSummaryTable.horizontalHeaderItem(1)
         ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"Total Cost", None));
         self.driverCostLabel.setText(QCoreApplication.translate("MainWindow", u"Driver Cost:", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#12418d;\">Requests</span></p></body></html>", None))
         self.Driver_label.setText(QCoreApplication.translate("MainWindow", u"Select Driver", None))
         self.Vehicle_label.setText(QCoreApplication.translate("MainWindow", u"Select vehicle", None))
         self.Tour_Guide_label.setText(QCoreApplication.translate("MainWindow", u"Select Tour Guide", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#12418d;\">Requests</span></p></body></html>", None))
         self.acceptTourButton.setText(QCoreApplication.translate("MainWindow", u"Accept", None))
         self.declineTourButton.setText(QCoreApplication.translate("MainWindow", u"Decline", None))
+        self.hotelshare_label.setText(QCoreApplication.translate("MainWindow", u"Hotel Share:", None))
         self.completeTourButton.setText(QCoreApplication.translate("MainWindow", u"Complete Tour", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt;\">Ongoing Trips</span></p></body></html>", None))
         ___qtablewidgetitem13 = self.ongoingTourDetailsTable.horizontalHeaderItem(0)
@@ -1350,7 +1812,48 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem55.setText(QCoreApplication.translate("MainWindow", u"Price Per Person", None));
         self.addHotelBtn.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; color:#12418d;\">Hotels</span></p></body></html>", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:16pt;\">STATS TO DO!!</span></p></body></html>", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; color:#12418d;\">Statistics</span></p></body></html>", None))
+        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Tours By Transportation Type:", None))
+        self.label_13.setText(QCoreApplication.translate("MainWindow", u"Profit / Destination:", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Average People / Tour:", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Most Profitable Tour:", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Tour With Most People:", None))
+        self.avgPeoplePTLbl.setText("")
+        self.mostProfTourLbl.setText("")
+        self.tourWthMosPplLbl.setText("")
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tourStatsTab), QCoreApplication.translate("MainWindow", u"Tours", None))
+        self.label_14.setText(QCoreApplication.translate("MainWindow", u"Tours / Bus", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Average Cost:", None))
+        self.avgBusCostLbl.setText("")
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.vehiclesStatsTab), QCoreApplication.translate("MainWindow", u"Vehicles", None))
+        self.label_15.setText(QCoreApplication.translate("MainWindow", u"Tours / Driver", None))
+        self.label_16.setText(QCoreApplication.translate("MainWindow", u"Driver With Most km:", None))
+        self.label_17.setText(QCoreApplication.translate("MainWindow", u"Cheapest Driver (By Day):", None))
+        self.driverWithMostKmLbl.setText("")
+        self.leastExpensiveDriverLbl.setText("")
+        self.label_19.setText(QCoreApplication.translate("MainWindow", u"Driver:", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"Favourite 3 Destinations:", None))
+        self.label_10.setText(QCoreApplication.translate("MainWindow", u"Tours Participated:", None))
+        ___qtablewidgetitem56 = self.driverTourStatList.horizontalHeaderItem(0)
+        ___qtablewidgetitem56.setText(QCoreApplication.translate("MainWindow", u"Tour ID", None));
+        ___qtablewidgetitem57 = self.driverTourStatList.horizontalHeaderItem(1)
+        ___qtablewidgetitem57.setText(QCoreApplication.translate("MainWindow", u"Destination", None));
+        ___qtablewidgetitem58 = self.driverTourStatList.horizontalHeaderItem(2)
+        ___qtablewidgetitem58.setText(QCoreApplication.translate("MainWindow", u"Cost", None));
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.driversStatsTab), QCoreApplication.translate("MainWindow", u"Drivers", None))
+        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Tours / Leader", None))
+        self.label_21.setText(QCoreApplication.translate("MainWindow", u"T. Leader With Most Tours:", None))
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Cheapest T. Leader (By Day):", None))
+        self.leaderWithMostTourLbl.setText("")
+        self.leastExpensiveLeaderLbl.setText("")
+        self.label_23.setText(QCoreApplication.translate("MainWindow", u"Team Leader:", None))
+        self.label_24.setText(QCoreApplication.translate("MainWindow", u"Favourite 3 Destinations:", None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Tours Participated:", None))
+        ___qtablewidgetitem59 = self.leaderTourStatList.horizontalHeaderItem(0)
+        ___qtablewidgetitem59.setText(QCoreApplication.translate("MainWindow", u"Tour ID", None));
+        ___qtablewidgetitem60 = self.leaderTourStatList.horizontalHeaderItem(1)
+        ___qtablewidgetitem60.setText(QCoreApplication.translate("MainWindow", u"Destination", None));
+        ___qtablewidgetitem61 = self.leaderTourStatList.horizontalHeaderItem(2)
+        ___qtablewidgetitem61.setText(QCoreApplication.translate("MainWindow", u"Cost", None));
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.leadersStatsTab), QCoreApplication.translate("MainWindow", u"Team Leaders", None))
     # retranslateUi
 

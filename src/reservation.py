@@ -268,7 +268,7 @@ class ReservationWindow(QMainWindow):
 
             # Τελικό κόστος: τιμή * άτομα * ημέρες + extra 50€/άτομο
             f_total_cost = (price_per_person * people * number_of_days) + (50 * people) + transportation_cost
-            total_cost = (price_per_person * people * number_of_days)*0.3 + (50 * people) + transportation_cost
+            total_cost = (price_per_person * people * number_of_days) + (50 * people) + transportation_cost
 
             # Δημιουργία κράτησης
             self.cursor.execute("""
@@ -404,6 +404,15 @@ class ReservationWindow(QMainWindow):
                 QMessageBox.warning(self, "Invalid Amount", "The amount has to be larger than 0.")
                 return
 
+        # Έλεγχος να μην ξεπεραστεί το συνολικό ποσό
+            self.cursor.execute("SELECT total_cost, COALESCE(amount_paid, 0) FROM ReservationGroup WHERE id = ?", (group_id,))
+            result = self.cursor.fetchone()
+
+            if result:
+                total_cost, amount_paid = result
+                if amount_paid + amount > total_cost:
+                    QMessageBox.warning(self, "Error", "This payment exceeds the remaining balance.")
+                    return
             # Καταχώρηση πληρωμής
             self.cursor.execute("""
                 INSERT INTO GroupPayments (group_id, payment_date, type, amount)
