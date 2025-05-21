@@ -37,26 +37,21 @@ class BusesRegisterWindow(QMainWindow):
             plateNumber = self.PlateNumberInput.text()
             model = self.ModelInput.text()
             year = self.YearInput.text()
-            mileage = self.MileageInput.text()
+            mileage = float(self.MileageInput.text())
             company = self.CompanyComboBox.currentText()
-            rental_cost = self.Rental_CostInput.text()
-            consumption = self.ConsumptionInput.text()
-            seats = self.SeatsInput.text()
+            rental_cost = float(self.Rental_CostInput.text())
+            consumption = float(self.ConsumptionInput.text())
+            seats = float(self.SeatsInput.text())
             date = self.Contract_Date_dateEdit.date().toString("yyyy-MM-dd")  # Assuming your QDateEdit is named DateEdit
             status = "Available"
 
             self.cursor.execute("INSERT INTO Buses (plate_number, model, year, mileage,company, rental_cost, consumption, seats, status,contract_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)",
                                 (plateNumber, model, year, mileage,company, rental_cost, consumption, seats, status,date))
             self.connection.commit()
+            self.hide()
             self.finished.emit()
             self.input_clear()
-            QMessageBox.information(self, "Success", "Bus added successfully")
-        except Exception as e:
-            print(e)
-            QMessageBox.warning(self, "Error", "Could not add Bus")
-            self.input_clear()
-            self.connection.rollback()
-        finally:
-            self.connection.close()
-            self.finished.emit()
-            self.close()         
+        except ValueError:
+            QMessageBox.warning(self, "Warning", "Εσφαλμενα στοιχεια")
+        except sqlite3.IntegrityError:
+            QMessageBox.warning(self, "Warning", "Εσφαλμενα στοιχεια")   

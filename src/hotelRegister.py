@@ -49,12 +49,19 @@ class HotelRegisterWindow(QMainWindow):
                 name = self.hotelNameInput.text()
                 city = self.hotelCityInput.text()
                 address = self.hotelAddressInput.text()
-                price = self.hotelPriceInput.text()
+                price = float(self.hotelPriceInput.text())
                 
 
                 self.cursor.execute("INSERT INTO Hotels (id, name, city, address, price_pp) VALUES (?, ?, ?, ?, ?)",
                                     (id, name, city, address, price))
-                self.connection.commit()
+                if name != "":
+                 self.connection.commit()
+                else:
+                    raise ValueError
+                if address != "":
+                 self.connection.commit()
+                else:
+                    raise ValueError
                 
                 self.hide()
                 self.finished.emit()

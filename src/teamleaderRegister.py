@@ -35,22 +35,22 @@ class TeamLeaderRegisterWindow(QMainWindow):
             id = self.IdInput.text()
             firstName = self.FirstNameInput.text()
             lastName = self.LastNameInput.text()
-            payment = self.PaymentInput.text()
+            payment = float(self.PaymentInput.text())
             skills = self.SkillsInput.text()
             
 
             self.cursor.execute("INSERT INTO TeamLeaders (id, f_name, l_name, payment, skills) VALUES (?, ?, ?, ?, ?)",
                                 (id, firstName, lastName, payment, skills))
+            if id != ""or firstName != "" or lastName != "" or payment != "":
+                self.connection.commit()
+            else:
+                raise ValueError
+            self.input_clear()
             self.connection.commit()
+            self.hide()
             self.finished.emit()
             self.input_clear()
-            QMessageBox.information(self, "Success", "Team Leader added successfully")
-        except Exception as e:
-            print(e)
-            QMessageBox.warning(self, "Error", "Could not add Team Leader")
-            self.input_clear()
-            self.connection.rollback()
-        finally:
-            self.connection.close()
-            self.finished.emit()
-            self.close()
+        except ValueError:
+            QMessageBox.warning(self, "Warning", "Εσφαλμενα στοιχεια")
+        except sqlite3.IntegrityError:
+            QMessageBox.warning(self, "Warning", "Εσφαλμενα στοιχεια")  

@@ -52,13 +52,15 @@ class TravelAgentRegisterWindow(QMainWindow):
             password = self.passwordInput.text()
             firstname = self.FirstNameInput.text()
             lastName = self.LastNameInput.text()
-            hours = self.Work_HoursInput.text()
-            salary = self.SalaryInput.text()
+            hours = float(self.Work_HoursInput.text())
+            salary = float(self.SalaryInput.text())
             role="Travel_Agent"
             
 
             self.cursor.execute("INSERT INTO Staff (id, username, password, f_name, l_name, role, work_hours, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                            (id,username, password, firstname, lastName, role, hours, salary))
+            if username == "" or password == "" or firstname == "" or lastName == "" or hours == "" or salary == "":
+                raise ValueError("Empty fields")
             self.connection.commit()
             
             self.hide()

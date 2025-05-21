@@ -1,38 +1,22 @@
 --------------------------------------------------
-<<<<<<< HEAD
-all register windows must be with scrollbar and same size/
-=======
 all register windows must be with scrollbar and same size check
->>>>>>> e3d886ce56e5a478ab3a5b030001d592f93ab144
 
 fix description 2nd input error
 
 fix most registers 2nd input error
 
-<<<<<<< HEAD
-fix tour payment/
-
-create triggers about db/
-=======
 fix tour payments check
 
 create triggers about db check
->>>>>>> e3d886ce56e5a478ab3a5b030001d592f93ab144
 
 group payments na deixnoun kai tour check/
 
-<<<<<<< HEAD
-na dinoume kai kana fragkom sta jenodoxeia/
-=======
 na dinoume kai kana fragkom sta jenodoxeia  check
->>>>>>> e3d886ce56e5a478ab3a5b030001d592f93ab144
 
 after complete tour o team leader den vgainei apo busy katastash check/
 
-
+UNIQUE constraint failed: Buses.plate_number
 ------------------------------------------------------
-<<<<<<< HEAD
-=======
 --add edit functions .malko
 
 --na valw ton agent na kanei tour description .malko
@@ -54,7 +38,6 @@ after complete tour o team leader den vgainei apo busy katastash check/
 --automatopoihmena ids opou xreiazetai .malko
 
 --na mpoun oi drastiriothtes sto tour descr .malko
->>>>>>> e3d886ce56e5a478ab3a5b030001d592f93ab144
 
 search sta stats .malko
 
