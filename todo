@@ -76,3 +76,12 @@ fav proorismoi\
 ----------------------------------------------------------
 eksfalmatosh
 
+Traceback (most recent call last):
+  File "path", line 38, in saveDescription
+    self.cursor.execute("SELECT start_date, end_date, destination, description, activi end_date, destination, description, activities FROM Tours WHERE id = ?, (tourDescId,))
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^ties FROM Tours WHERE id = ?", (tourDescId,))
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^))
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^
+sqlite3.ProgrammingError: Cannot operate onsqlite3.ProgrammingError: Cannot operate on a closed database.
+

@@ -22,18 +22,21 @@ class CreateTourDescriptionWindow(QMainWindow):
         self.saveDBtn.clicked.connect(self.saveDescription)
         self.addImgDBtn.clicked.connect(self.getImage)
 
-        self.imagePath = ""
+        self.image_path = ""
 
 
     def input_clear(self):
         self.tourIdDInput.setText("")
         self.startingPriceDInput.setText("")
+        self.image_path = ""
 
 
     def saveDescription(self):
         try:
             tourDescId = self.tourIdDInput.text()
             price = self.startingPriceDInput.text()
+            if price == "" or price == None:
+                raise Exception
             
             self.cursor.execute("SELECT start_date, end_date, destination, description, activities FROM Tours WHERE id = ?", (tourDescId,))
             result = self.cursor.fetchone()
@@ -128,7 +131,6 @@ class CreateTourDescriptionWindow(QMainWindow):
             self.input_clear()
             self.connection.rollback()
         finally:
-            self.connection.close()
             self.finished.emit()
             self.close()    
     
