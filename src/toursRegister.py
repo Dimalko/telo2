@@ -68,7 +68,7 @@ class ToursRegisterWindow(QMainWindow):
             start_date = self.start_dateEdit.date().toString("yyyy-MM-dd")  
             end_date = self.end_dateEdit.date().toString("yyyy-MM-dd")
             description = self.descriptionInput.text()
-            km = self.kmInput.text()
+            km = float(self.kmInput.text())
             transportation = self.transportationInput.currentText()
             status = "Free"    
             activities = self.activitiesInput.text()
@@ -76,7 +76,8 @@ class ToursRegisterWindow(QMainWindow):
 
             self.cursor.execute("INSERT INTO Tours (id, destination, start_date, end_date, description, km, transportation, status, activities) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                                 (id, destination, start_date, end_date, description, km, transportation, status, activities))
-            
+            if destination == "" or start_date == "" or end_date == "" or description == "" or km == "" or transportation == "" or status == "" or activities == "":
+                raise ValueError("Empty fields")
             for cb in self.checkboxes:
                 if cb.isChecked():
                     self.cursor.execute("INSERT INTO ToursHotels (tour_id, hotel_id) VALUES (?, ?)",
