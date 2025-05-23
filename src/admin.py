@@ -820,10 +820,13 @@ class AdminWindow(QMainWindow):
 
                 tour_id = self.selected_tour_id
 
+                # Αλλαγή το status του Tour σε Declined
+                self.cursor.execute("UPDATE Tours SET status = 'Declined' WHERE id = ?", (tour_id,))
+                self.loadOngoingTours()
                 # Αλλαγή των κρατήσεων σε Cancelled
                 self.cursor.execute("UPDATE Reservations SET status = 'Cancelled' WHERE tour_id = ?", (tour_id,))
                 self.connection.commit()
-                QMessageBox.information(self, "Declined", f"All reservations for tour {tour_id} were cancelled.")
+                QMessageBox.information(self, "Declined", f"All reservations for tour {tour_id} were cancelled and the tour was declined.")
                 self.load_tour_summary(tour_id)
                 self.calculate_all_costs()
 

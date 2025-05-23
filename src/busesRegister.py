@@ -47,6 +47,8 @@ class BusesRegisterWindow(QMainWindow):
 
             self.cursor.execute("INSERT INTO Buses (plate_number, model, year, mileage,company, rental_cost, consumption, seats, status,contract_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)",
                                 (plateNumber, model, year, mileage,company, rental_cost, consumption, seats, status,date))
+            if plateNumber == "":
+                raise ValueError("Plate number cannot be empty")
             self.connection.commit()
             self.hide()
             self.finished.emit()
