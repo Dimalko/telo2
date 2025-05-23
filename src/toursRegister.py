@@ -91,9 +91,3 @@ class ToursRegisterWindow(QMainWindow):
             QMessageBox.warning(self, "Warning", "Εσφαλμενα στοιχεια")
         except sqlite3.IntegrityError:
             QMessageBox.warning(self, "Warning", "Εσφαλμενα στοιχεια")    
-
-
-
-
-#start_date = self.start_dateEdit.date().toString("yyyy-MM-dd")  
-       # end_date = self.end_dateEdit.date().toString("yyyy-MM-dd")

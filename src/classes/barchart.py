@@ -34,8 +34,8 @@ class BarChart():
         categories = []
 
         for item in data:
-            categories.append(item[0])     # bus_plate
-            bar_set.append(item[1])        # total_tours
+            categories.append(item[0])     
+            bar_set.append(item[1])        
 
         # Bar Series
         series = QBarSeries()
