@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'hotelRegister.ui'
+## Form generated from reading UI file 'TeamLeadersRegister.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.6.1
 ##
@@ -47,6 +47,16 @@ class Ui_MainWindow(object):
 "font-size:14px;\n"
 "}\n"
 "\n"
+"QComboBox{\n"
+"	background-color: rgb(255, 255, 255);\n"
+"	border: 2px solid; \n"
+"	border-radius: 6px; \n"
+"	border-color:rgb(18, 65, 141);\n"
+"	padding: 8px;\n"
+"	color: rgb(18, 65, 141);\n"
+"	font-size:14px;\n"
+"}\n"
+"\n"
 "QPushButton{\n"
 "color:#fff;\n"
 "border: 0px;\n"
@@ -63,7 +73,8 @@ class Ui_MainWindow(object):
 "QScrollBar:vertical {\n"
 "    border: none;\n"
 "    background: rgb(230, 222, 255);  /* Background color of the scrollbar track */\n"
-"    width: 12px;  /* Thickness of the scrollbar */\n"
+"    width: 12px;  /* Thickness of the s"
+                        "crollbar */\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical {\n"
@@ -72,8 +83,7 @@ class Ui_MainWindow(object):
 "    border-radius: 6px; /* Rounded edges */\n"
 "}\n"
 "\n"
-"QScrollBa"
-                        "r::handle:vertical:hover {\n"
+"QScrollBar::handle:vertical:hover {\n"
 "    background: #74b9ff; /* Lighter color when hovered */\n"
 "}\n"
 "\n"
@@ -117,48 +127,61 @@ class Ui_MainWindow(object):
         self.widget.setStyleSheet(u"")
         self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.passwordLabel = QLabel(self.widget)
-        self.passwordLabel.setObjectName(u"passwordLabel")
+        self.IdLabel = QLabel(self.widget)
+        self.IdLabel.setObjectName(u"IdLabel")
 
-        self.verticalLayout.addWidget(self.passwordLabel)
+        self.verticalLayout.addWidget(self.IdLabel)
 
-        self.hotelNameInput = QLineEdit(self.widget)
-        self.hotelNameInput.setObjectName(u"hotelNameInput")
-        self.hotelNameInput.setStyleSheet(u"")
+        self.IdInput = QLineEdit(self.widget)
+        self.IdInput.setObjectName(u"IdInput")
+        self.IdInput.setStyleSheet(u"")
 
-        self.verticalLayout.addWidget(self.hotelNameInput)
-
-        self.label_2 = QLabel(self.widget)
-        self.label_2.setObjectName(u"label_2")
-
-        self.verticalLayout.addWidget(self.label_2)
-
-        self.hotelCityInput = QLineEdit(self.widget)
-        self.hotelCityInput.setObjectName(u"hotelCityInput")
-
-        self.verticalLayout.addWidget(self.hotelCityInput)
+        self.verticalLayout.addWidget(self.IdInput)
 
         self.FirstNameLabel = QLabel(self.widget)
         self.FirstNameLabel.setObjectName(u"FirstNameLabel")
 
         self.verticalLayout.addWidget(self.FirstNameLabel)
 
-        self.hotelAddressInput = QLineEdit(self.widget)
-        self.hotelAddressInput.setObjectName(u"hotelAddressInput")
-        self.hotelAddressInput.setStyleSheet(u"")
+        self.FirstNameInput = QLineEdit(self.widget)
+        self.FirstNameInput.setObjectName(u"FirstNameInput")
+        self.FirstNameInput.setStyleSheet(u"")
 
-        self.verticalLayout.addWidget(self.hotelAddressInput)
+        self.verticalLayout.addWidget(self.FirstNameInput)
 
         self.LastNameLabel = QLabel(self.widget)
         self.LastNameLabel.setObjectName(u"LastNameLabel")
 
         self.verticalLayout.addWidget(self.LastNameLabel)
 
-        self.hotelPriceInput = QLineEdit(self.widget)
-        self.hotelPriceInput.setObjectName(u"hotelPriceInput")
-        self.hotelPriceInput.setStyleSheet(u"")
+        self.LastNameInput = QLineEdit(self.widget)
+        self.LastNameInput.setObjectName(u"LastNameInput")
+        self.LastNameInput.setStyleSheet(u"")
 
-        self.verticalLayout.addWidget(self.hotelPriceInput)
+        self.verticalLayout.addWidget(self.LastNameInput)
+
+        self.PaymentLabel = QLabel(self.widget)
+        self.PaymentLabel.setObjectName(u"PaymentLabel")
+
+        self.verticalLayout.addWidget(self.PaymentLabel)
+
+        self.PaymentInput = QLineEdit(self.widget)
+        self.PaymentInput.setObjectName(u"PaymentInput")
+        self.PaymentInput.setStyleSheet(u"")
+
+        self.verticalLayout.addWidget(self.PaymentInput)
+
+        self.SkillsLabel = QLabel(self.widget)
+        self.SkillsLabel.setObjectName(u"SkillsLabel")
+        self.SkillsLabel.setStyleSheet(u"")
+
+        self.verticalLayout.addWidget(self.SkillsLabel)
+
+        self.SkillsInput = QLineEdit(self.widget)
+        self.SkillsInput.setObjectName(u"SkillsInput")
+        self.SkillsInput.setStyleSheet(u"")
+
+        self.verticalLayout.addWidget(self.SkillsInput)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Minimum)
 
@@ -170,20 +193,20 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer_3)
 
-        self.add_Hotel_button = QPushButton(self.widget)
-        self.add_Hotel_button.setObjectName(u"add_Hotel_button")
-        self.add_Hotel_button.setEnabled(True)
+        self.add_Team_Leader_button = QPushButton(self.widget)
+        self.add_Team_Leader_button.setObjectName(u"add_Team_Leader_button")
+        self.add_Team_Leader_button.setEnabled(True)
         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.add_Hotel_button.sizePolicy().hasHeightForWidth())
-        self.add_Hotel_button.setSizePolicy(sizePolicy)
-        self.add_Hotel_button.setMinimumSize(QSize(200, 25))
-        self.add_Hotel_button.setMaximumSize(QSize(200, 16777215))
-        self.add_Hotel_button.setCursor(QCursor(Qt.PointingHandCursor))
-        self.add_Hotel_button.setStyleSheet(u"")
+        sizePolicy.setHeightForWidth(self.add_Team_Leader_button.sizePolicy().hasHeightForWidth())
+        self.add_Team_Leader_button.setSizePolicy(sizePolicy)
+        self.add_Team_Leader_button.setMinimumSize(QSize(200, 25))
+        self.add_Team_Leader_button.setMaximumSize(QSize(200, 16777215))
+        self.add_Team_Leader_button.setCursor(QCursor(Qt.PointingHandCursor))
+        self.add_Team_Leader_button.setStyleSheet(u"")
 
-        self.horizontalLayout.addWidget(self.add_Hotel_button)
+        self.horizontalLayout.addWidget(self.add_Team_Leader_button)
 
         self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -209,12 +232,13 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Hotel Register", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:24pt; font-weight:600;\">Hotel register</span></p></body></html>", None))
-        self.passwordLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Name</span></p></body></html>", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">City</span></p></body></html>", None))
-        self.FirstNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Address</span></p></body></html>", None))
-        self.LastNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Price Per Person</span></p></body></html>", None))
-        self.add_Hotel_button.setText(QCoreApplication.translate("MainWindow", u"Register", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Team Leaders Register", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:24pt; font-weight:600;\">Team Leader Register</span></p></body></html>", None))
+        self.IdLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Identification Number</span></p></body></html>", None))
+        self.FirstNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">First Name</span></p></body></html>", None))
+        self.LastNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Last name</span></p></body></html>", None))
+        self.PaymentLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Payment</span></p></body></html>", None))
+        self.SkillsLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Skills</span></p></body></html>", None))
+        self.add_Team_Leader_button.setText(QCoreApplication.translate("MainWindow", u"Register", None))
     # retranslateUi
 

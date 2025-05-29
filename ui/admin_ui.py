@@ -1644,14 +1644,14 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.setCurrentIndex(6)
         self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(2)
+        self.tabWidget_2.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Admin Window", None))
         self.logoLabel.setText("")
         self.homeBtn.setText(QCoreApplication.translate("MainWindow", u"Tours", None))
         self.requestBtn.setText(QCoreApplication.translate("MainWindow", u"Requests", None))

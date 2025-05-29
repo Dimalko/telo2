@@ -31,6 +31,9 @@ class Ui_MainWindow(object):
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setMinimumSize(QSize(800, 600))
         MainWindow.setMaximumSize(QSize(800, 600))
+        icon = QIcon()
+        icon.addFile(u"../../../../Downloads/app_icon_blue_32x32.ico", QSize(), QIcon.Normal, QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"QWidget{\n"
 "font: 57 8pt \"Yu Gothic Medium\";\n"
 "}")
@@ -226,7 +229,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Login Window", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">Welcome</p></body></html>", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Username", None))
         self.label_5.setText("")

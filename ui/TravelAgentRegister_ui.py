@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'hotelRegister.ui'
+## Form generated from reading UI file 'TravelAgentRegister.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.6.1
 ##
@@ -117,48 +117,72 @@ class Ui_MainWindow(object):
         self.widget.setStyleSheet(u"")
         self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.usernameLabel = QLabel(self.widget)
+        self.usernameLabel.setObjectName(u"usernameLabel")
+
+        self.verticalLayout.addWidget(self.usernameLabel)
+
+        self.usernameInput = QLineEdit(self.widget)
+        self.usernameInput.setObjectName(u"usernameInput")
+        self.usernameInput.setStyleSheet(u"")
+
+        self.verticalLayout.addWidget(self.usernameInput)
+
         self.passwordLabel = QLabel(self.widget)
         self.passwordLabel.setObjectName(u"passwordLabel")
 
         self.verticalLayout.addWidget(self.passwordLabel)
 
-        self.hotelNameInput = QLineEdit(self.widget)
-        self.hotelNameInput.setObjectName(u"hotelNameInput")
-        self.hotelNameInput.setStyleSheet(u"")
+        self.passwordInput = QLineEdit(self.widget)
+        self.passwordInput.setObjectName(u"passwordInput")
+        self.passwordInput.setStyleSheet(u"")
 
-        self.verticalLayout.addWidget(self.hotelNameInput)
-
-        self.label_2 = QLabel(self.widget)
-        self.label_2.setObjectName(u"label_2")
-
-        self.verticalLayout.addWidget(self.label_2)
-
-        self.hotelCityInput = QLineEdit(self.widget)
-        self.hotelCityInput.setObjectName(u"hotelCityInput")
-
-        self.verticalLayout.addWidget(self.hotelCityInput)
+        self.verticalLayout.addWidget(self.passwordInput)
 
         self.FirstNameLabel = QLabel(self.widget)
         self.FirstNameLabel.setObjectName(u"FirstNameLabel")
 
         self.verticalLayout.addWidget(self.FirstNameLabel)
 
-        self.hotelAddressInput = QLineEdit(self.widget)
-        self.hotelAddressInput.setObjectName(u"hotelAddressInput")
-        self.hotelAddressInput.setStyleSheet(u"")
+        self.FirstNameInput = QLineEdit(self.widget)
+        self.FirstNameInput.setObjectName(u"FirstNameInput")
+        self.FirstNameInput.setStyleSheet(u"")
 
-        self.verticalLayout.addWidget(self.hotelAddressInput)
+        self.verticalLayout.addWidget(self.FirstNameInput)
 
         self.LastNameLabel = QLabel(self.widget)
         self.LastNameLabel.setObjectName(u"LastNameLabel")
 
         self.verticalLayout.addWidget(self.LastNameLabel)
 
-        self.hotelPriceInput = QLineEdit(self.widget)
-        self.hotelPriceInput.setObjectName(u"hotelPriceInput")
-        self.hotelPriceInput.setStyleSheet(u"")
+        self.LastNameInput = QLineEdit(self.widget)
+        self.LastNameInput.setObjectName(u"LastNameInput")
+        self.LastNameInput.setStyleSheet(u"")
 
-        self.verticalLayout.addWidget(self.hotelPriceInput)
+        self.verticalLayout.addWidget(self.LastNameInput)
+
+        self.Work_HoursLabel = QLabel(self.widget)
+        self.Work_HoursLabel.setObjectName(u"Work_HoursLabel")
+        self.Work_HoursLabel.setStyleSheet(u"")
+
+        self.verticalLayout.addWidget(self.Work_HoursLabel)
+
+        self.Work_HoursInput = QLineEdit(self.widget)
+        self.Work_HoursInput.setObjectName(u"Work_HoursInput")
+        self.Work_HoursInput.setStyleSheet(u"")
+
+        self.verticalLayout.addWidget(self.Work_HoursInput)
+
+        self.SalaryLabel = QLabel(self.widget)
+        self.SalaryLabel.setObjectName(u"SalaryLabel")
+
+        self.verticalLayout.addWidget(self.SalaryLabel)
+
+        self.SalaryInput = QLineEdit(self.widget)
+        self.SalaryInput.setObjectName(u"SalaryInput")
+        self.SalaryInput.setStyleSheet(u"")
+
+        self.verticalLayout.addWidget(self.SalaryInput)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Minimum)
 
@@ -170,20 +194,20 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer_3)
 
-        self.add_Hotel_button = QPushButton(self.widget)
-        self.add_Hotel_button.setObjectName(u"add_Hotel_button")
-        self.add_Hotel_button.setEnabled(True)
+        self.add_Travel_Agent_button = QPushButton(self.widget)
+        self.add_Travel_Agent_button.setObjectName(u"add_Travel_Agent_button")
+        self.add_Travel_Agent_button.setEnabled(True)
         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.add_Hotel_button.sizePolicy().hasHeightForWidth())
-        self.add_Hotel_button.setSizePolicy(sizePolicy)
-        self.add_Hotel_button.setMinimumSize(QSize(200, 25))
-        self.add_Hotel_button.setMaximumSize(QSize(200, 16777215))
-        self.add_Hotel_button.setCursor(QCursor(Qt.PointingHandCursor))
-        self.add_Hotel_button.setStyleSheet(u"")
+        sizePolicy.setHeightForWidth(self.add_Travel_Agent_button.sizePolicy().hasHeightForWidth())
+        self.add_Travel_Agent_button.setSizePolicy(sizePolicy)
+        self.add_Travel_Agent_button.setMinimumSize(QSize(200, 25))
+        self.add_Travel_Agent_button.setMaximumSize(QSize(200, 16777215))
+        self.add_Travel_Agent_button.setCursor(QCursor(Qt.PointingHandCursor))
+        self.add_Travel_Agent_button.setStyleSheet(u"")
 
-        self.horizontalLayout.addWidget(self.add_Hotel_button)
+        self.horizontalLayout.addWidget(self.add_Travel_Agent_button)
 
         self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -195,8 +219,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.widget)
 
-        self.verticalLayout_3.setStretch(0, 3)
-        self.verticalLayout_3.setStretch(1, 7)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.verticalLayout_2.addWidget(self.scrollArea)
@@ -209,12 +231,14 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Hotel Register", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:24pt; font-weight:600;\">Hotel register</span></p></body></html>", None))
-        self.passwordLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Name</span></p></body></html>", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">City</span></p></body></html>", None))
-        self.FirstNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Address</span></p></body></html>", None))
-        self.LastNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Price Per Person</span></p></body></html>", None))
-        self.add_Hotel_button.setText(QCoreApplication.translate("MainWindow", u"Register", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Travel Agents Register", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:24pt; font-weight:600;\">Travel Agent Register</span></p></body></html>", None))
+        self.usernameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Username</span></p></body></html>", None))
+        self.passwordLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Password</span></p></body></html>", None))
+        self.FirstNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">First Name</span></p></body></html>", None))
+        self.LastNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Last name</span></p></body></html>", None))
+        self.Work_HoursLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Work Hours</span></p></body></html>", None))
+        self.SalaryLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Salary</span></p></body></html>", None))
+        self.add_Travel_Agent_button.setText(QCoreApplication.translate("MainWindow", u"Register", None))
     # retranslateUi
 

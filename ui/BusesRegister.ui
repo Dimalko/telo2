@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Buses</string>
+   <string>Buses Register</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget{

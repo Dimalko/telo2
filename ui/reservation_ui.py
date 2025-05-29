@@ -148,10 +148,10 @@ class Ui_MainWindow(object):
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setStyleSheet(u"")
-        self.horizontalLayout = QHBoxLayout(self.centralwidget)
-        self.horizontalLayout.setSpacing(0)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_5 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_5.setSpacing(0)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setStyleSheet(u"QWidget{\n"
@@ -208,6 +208,26 @@ class Ui_MainWindow(object):
 "    background-color: rgb(18, 65, 141);\n"
 "    color: white;\n"
 "    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QTabBar{\n"
+"border:none;\n"
+"}\n"
+"\n"
+"QTabBar::tab {\n"
+"        background: rgb(220, 228, 231);\n"
+"        \n"
+"       \n"
+"}\n"
+"\n"
+"QTabBar::tab:selected {\n"
+"        background: #087be1;\n"
+"        color: white; \n"
+"}\n"
+"\n"
+"QTabBar::tab:hover {\n"
+"        background: #2f8ee4;\n"
+"		color: white; \n"
 "}\n"
 "")
         self.reservationTab = QWidget()
@@ -268,27 +288,25 @@ class Ui_MainWindow(object):
 "    border-radius: 4px;\n"
 "}\n"
 "")
-        self.horizontalLayoutWidget = QWidget(self.reservationTab)
-        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
-        self.horizontalLayoutWidget.setGeometry(QRect(122, 49, 531, 451))
-        self.horizontalLayout_2 = QHBoxLayout(self.horizontalLayoutWidget)
+        self.verticalLayout_6 = QVBoxLayout(self.reservationTab)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.Tourslabel = QLabel(self.horizontalLayoutWidget)
+        self.Tourslabel = QLabel(self.reservationTab)
         self.Tourslabel.setObjectName(u"Tourslabel")
 
         self.verticalLayout_2.addWidget(self.Tourslabel)
 
-        self.Tour_listWidget = QListWidget(self.horizontalLayoutWidget)
+        self.Tour_listWidget = QListWidget(self.reservationTab)
         self.Tour_listWidget.setObjectName(u"Tour_listWidget")
 
         self.verticalLayout_2.addWidget(self.Tour_listWidget)
 
-        self.TourslineEdit = QLineEdit(self.horizontalLayoutWidget)
+        self.TourslineEdit = QLineEdit(self.reservationTab)
         self.TourslineEdit.setObjectName(u"TourslineEdit")
 
         self.verticalLayout_2.addWidget(self.TourslineEdit)
@@ -298,18 +316,18 @@ class Ui_MainWindow(object):
 
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.Clientlabel = QLabel(self.horizontalLayoutWidget)
+        self.Clientlabel = QLabel(self.reservationTab)
         self.Clientlabel.setObjectName(u"Clientlabel")
 
         self.verticalLayout.addWidget(self.Clientlabel)
 
-        self.Client_listWidget = QListWidget(self.horizontalLayoutWidget)
+        self.Client_listWidget = QListWidget(self.reservationTab)
         self.Client_listWidget.setObjectName(u"Client_listWidget")
         self.Client_listWidget.setStyleSheet(u"")
 
         self.verticalLayout.addWidget(self.Client_listWidget)
 
-        self.ClientlineEdit = QLineEdit(self.horizontalLayoutWidget)
+        self.ClientlineEdit = QLineEdit(self.reservationTab)
         self.ClientlineEdit.setObjectName(u"ClientlineEdit")
 
         self.verticalLayout.addWidget(self.ClientlineEdit)
@@ -322,12 +340,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4 = QVBoxLayout()
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.label_3 = QLabel(self.horizontalLayoutWidget)
+        self.label_3 = QLabel(self.reservationTab)
         self.label_3.setObjectName(u"label_3")
 
         self.verticalLayout_4.addWidget(self.label_3)
 
-        self.peopleSpinBox = QSpinBox(self.horizontalLayoutWidget)
+        self.peopleSpinBox = QSpinBox(self.reservationTab)
         self.peopleSpinBox.setObjectName(u"peopleSpinBox")
         self.peopleSpinBox.setStyleSheet(u"QSpinBox {\n"
 "    background-color: white;\n"
@@ -350,12 +368,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addWidget(self.peopleSpinBox)
 
-        self.label_4 = QLabel(self.horizontalLayoutWidget)
+        self.label_4 = QLabel(self.reservationTab)
         self.label_4.setObjectName(u"label_4")
 
         self.verticalLayout_4.addWidget(self.label_4)
 
-        self.Hotels_comboBox = QComboBox(self.horizontalLayoutWidget)
+        self.Hotels_comboBox = QComboBox(self.reservationTab)
         self.Hotels_comboBox.setObjectName(u"Hotels_comboBox")
         self.Hotels_comboBox.setStyleSheet(u"QComboBox {\n"
 "    background-color: white;\n"
@@ -378,12 +396,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addWidget(self.Hotels_comboBox)
 
-        self.label_5 = QLabel(self.horizontalLayoutWidget)
+        self.label_5 = QLabel(self.reservationTab)
         self.label_5.setObjectName(u"label_5")
 
         self.verticalLayout_4.addWidget(self.label_5)
 
-        self.paymentComboBox = QComboBox(self.horizontalLayoutWidget)
+        self.paymentComboBox = QComboBox(self.reservationTab)
         self.paymentComboBox.addItem("")
         self.paymentComboBox.addItem("")
         self.paymentComboBox.setObjectName(u"paymentComboBox")
@@ -413,15 +431,25 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.setStretch(0, 5)
         self.horizontalLayout_2.setStretch(1, 5)
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_2)
+
         self.add_reservation_pushButton = QPushButton(self.reservationTab)
         self.add_reservation_pushButton.setObjectName(u"add_reservation_pushButton")
-        self.add_reservation_pushButton.setGeometry(QRect(320, 530, 151, 32))
+
+        self.verticalLayout_6.addWidget(self.add_reservation_pushButton)
+
         self.tabWidget.addTab(self.reservationTab, "")
         self.clientsTab = QWidget()
         self.clientsTab.setObjectName(u"clientsTab")
+        self.horizontalLayout = QHBoxLayout(self.clientsTab)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
         self.widget = QWidget(self.clientsTab)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(215, 0, 401, 528))
         self.widget.setStyleSheet(u"")
         self.gridLayout = QGridLayout(self.widget)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -516,6 +544,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.EmailLabel, 7, 0, 1, 1)
 
+
+        self.horizontalLayout.addWidget(self.widget)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer_2)
+
         self.tabWidget.addTab(self.clientsTab, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
@@ -587,6 +622,7 @@ class Ui_MainWindow(object):
 "    font-weight: bold;\n"
 "    padding: 4px;\n"
 "    border-radius: 4px;\n"
+"	background-color:rgb(170, 217, 231);\n"
 "}\n"
 "")
 
@@ -767,6 +803,18 @@ class Ui_MainWindow(object):
         self.horizontalPaymentButtons.setObjectName(u"horizontalPaymentButtons")
         self.addPaymentButton = QPushButton(self.tab_3)
         self.addPaymentButton.setObjectName(u"addPaymentButton")
+        self.addPaymentButton.setStyleSheet(u"QPushButton{\n"
+"color:#fff;\n"
+"border: 0px;\n"
+"font-size: 14px;\n"
+"padding: 5px;\n"
+"background-color: rgb(8, 123, 225);\n"
+"border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgb(47, 142, 228);\n"
+"}")
 
         self.horizontalPaymentButtons.addWidget(self.addPaymentButton)
 
@@ -777,6 +825,18 @@ class Ui_MainWindow(object):
 
         self.editPaymentButton = QPushButton(self.tab_3)
         self.editPaymentButton.setObjectName(u"editPaymentButton")
+        self.editPaymentButton.setStyleSheet(u"QPushButton{\n"
+"color:#fff;\n"
+"border: 0px;\n"
+"font-size: 14px;\n"
+"padding: 5px;\n"
+"background-color:rgb(234, 129, 0);\n"
+"border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:rgb(240, 168, 0);\n"
+"}")
 
         self.horizontalPaymentButtons.addWidget(self.editPaymentButton)
 
@@ -785,26 +845,29 @@ class Ui_MainWindow(object):
 
         self.paymentStatusLabel = QLabel(self.tab_3)
         self.paymentStatusLabel.setObjectName(u"paymentStatusLabel")
-        self.paymentStatusLabel.setStyleSheet(u"font-weight: bold; padding-top: 10px;")
+        self.paymentStatusLabel.setStyleSheet(u"font-weight: bold; \n"
+"padding-top: 10px;\n"
+"background-color:rgb(170, 217, 231);;\n"
+"border-radius: 7px;")
 
         self.verticalLayout1.addWidget(self.paymentStatusLabel)
 
         self.tabWidget.addTab(self.tab_3, "")
 
-        self.horizontalLayout.addWidget(self.tabWidget)
+        self.verticalLayout_5.addWidget(self.tabWidget)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Reservation Window", None))
         self.Tourslabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">Tours</p></body></html>", None))
         self.Clientlabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">client</p></body></html>", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"number of people", None))

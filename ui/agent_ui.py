@@ -26,6 +26,9 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(907, 665)
+        icon = QIcon()
+        icon.addFile(u"../../../../Downloads/app_icon_blue_32x32.ico", QSize(), QIcon.Normal, QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"QWidget{\n"
 "font: 57 8pt \"Yu Gothic Medium\";\n"
 "}\n"
@@ -629,7 +632,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Agent Window", None))
         self.logoLabel.setText("")
         self.homeBtn.setText(QCoreApplication.translate("MainWindow", u"Tours", None))
         self.reservationsBtn.setText(QCoreApplication.translate("MainWindow", u"Reservations", None))

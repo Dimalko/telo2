@@ -221,6 +221,16 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.transportationInput)
 
+        self.label_3 = QLabel(self.widget)
+        self.label_3.setObjectName(u"label_3")
+
+        self.verticalLayout.addWidget(self.label_3)
+
+        self.activitiesInput = QLineEdit(self.widget)
+        self.activitiesInput.setObjectName(u"activitiesInput")
+
+        self.verticalLayout.addWidget(self.activitiesInput)
+
         self.label_2 = QLabel(self.widget)
         self.label_2.setObjectName(u"label_2")
 
@@ -278,7 +288,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Tours", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Tours Register", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:24pt; font-weight:600;\">Tour Register</span></p></body></html>", None))
         self.destinationLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Destination</span></p></body></html>", None))
         self.start_dateLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Start Date</span></p></body></html>", None))
@@ -292,6 +302,7 @@ class Ui_MainWindow(object):
         self.transportationInput.setItemText(1, QCoreApplication.translate("MainWindow", u"Ship", None))
         self.transportationInput.setItemText(2, QCoreApplication.translate("MainWindow", u"Airplain", None))
 
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Activities</span></p></body></html>", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Hotels</span></p></body></html>", None))
         self.add_Tour_button.setText(QCoreApplication.translate("MainWindow", u"Register", None))
     # retranslateUi

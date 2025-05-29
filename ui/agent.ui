@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Agent Window</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../Downloads/app_icon_blue_32x32.ico</normaloff>../../../../Downloads/app_icon_blue_32x32.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget{
