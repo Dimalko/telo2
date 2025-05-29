@@ -239,29 +239,6 @@ border-bottom: 2px solid #74b9ff;
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="statsBtn">
-         <property name="styleSheet">
-          <string notr="true">QPushButton{
-color:#fff;
-border: 0px;
-font-size: 14px;
-padding: 5px;
-border-radius: 0px;
-background-color: rgb(8, 123, 225);
-}
-
-QPushButton:hover{
-background-color: rgb(18, 65, 141);
-border-radius: 10px;
-border-bottom: 2px solid #74b9ff;
-}</string>
-         </property>
-         <property name="text">
-          <string>Stats</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -331,7 +308,7 @@ background-color:rgb(240, 168, 0);
        <string notr="true">background-color: rgb(243, 249, 254);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0">
@@ -856,21 +833,6 @@ QTabBar::tab:hover {
          </widget>
         </item>
        </layout>
-      </widget>
-      <widget class="QWidget" name="statsPage">
-       <widget class="QLabel" name="label_3">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>270</y>
-          <width>201</width>
-          <height>81</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;STATS TO DO!!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
       </widget>
      </widget>
     </item>

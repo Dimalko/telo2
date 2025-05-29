@@ -45,7 +45,6 @@ class AgentWindow(QMainWindow):
         self.reservationsBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
         self.staffBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
         self.vehiclesBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
-        self.statsBtn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(4))
         self.TourslineEdit.textChanged.connect(self.filterFreeTours)
         self.TourlistWidget.itemClicked.connect(self.handleTourSelection)
         #Add Buttons

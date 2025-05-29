@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Admin Window</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../Downloads/app_icon_blue_32x32.ico</normaloff>../../../../Downloads/app_icon_blue_32x32.ico</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QWidget{
 font: 57 8pt &quot;Yu Gothic Medium&quot;;

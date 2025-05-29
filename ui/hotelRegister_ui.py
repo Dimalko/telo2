@@ -26,6 +26,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(531, 775)
         MainWindow.setMinimumSize(QSize(531, 300))
         MainWindow.setMaximumSize(QSize(531, 775))
+        icon = QIcon()
+        icon.addFile(u"../../../../Downloads/app_icon_blue_32x32.ico", QSize(), QIcon.Normal, QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"QWidget{\n"
 "background-color: rgb(243, 249, 254);\n"
 "}\n"

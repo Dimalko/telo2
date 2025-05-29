@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QSize(417, 230))
         MainWindow.setMaximumSize(QSize(417, 230))
         icon = QIcon()
-        icon.addFile(u"hospital_clinic_pharmacy_icon_229983.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../../../../Downloads/app_icon_blue_32x32.ico", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"QWidget{\n"
 "background-color: rgb(243, 249, 254);\n"

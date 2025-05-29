@@ -198,25 +198,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.vehiclesBtn)
 
-        self.statsBtn = QPushButton(self.widget)
-        self.statsBtn.setObjectName(u"statsBtn")
-        self.statsBtn.setStyleSheet(u"QPushButton{\n"
-"color:#fff;\n"
-"border: 0px;\n"
-"font-size: 14px;\n"
-"padding: 5px;\n"
-"border-radius: 0px;\n"
-"background-color: rgb(8, 123, 225);\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"background-color: rgb(18, 65, 141);\n"
-"border-radius: 10px;\n"
-"border-bottom: 2px solid #74b9ff;\n"
-"}")
-
-        self.verticalLayout.addWidget(self.statsBtn)
-
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
@@ -609,12 +590,6 @@ class Ui_MainWindow(object):
         self.gridLayout_6.addWidget(self.busesTableWidget, 0, 0, 1, 2)
 
         self.stackedWidget.addWidget(self.vehiclePage)
-        self.statsPage = QWidget()
-        self.statsPage.setObjectName(u"statsPage")
-        self.label_3 = QLabel(self.statsPage)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(280, 270, 201, 81))
-        self.stackedWidget.addWidget(self.statsPage)
 
         self.horizontalLayout.addWidget(self.stackedWidget)
 
@@ -624,7 +599,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(3)
         self.tabWidget.setCurrentIndex(0)
 
 
@@ -638,7 +613,6 @@ class Ui_MainWindow(object):
         self.reservationsBtn.setText(QCoreApplication.translate("MainWindow", u"Reservations", None))
         self.staffBtn.setText(QCoreApplication.translate("MainWindow", u"Staff", None))
         self.vehiclesBtn.setText(QCoreApplication.translate("MainWindow", u"Vehicles", None))
-        self.statsBtn.setText(QCoreApplication.translate("MainWindow", u"Stats", None))
         self.logOutBtn.setText(QCoreApplication.translate("MainWindow", u"Log Out", None))
         ___qtablewidgetitem = self.tourTableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Id", None));
@@ -738,6 +712,5 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem41.setText(QCoreApplication.translate("MainWindow", u"Status", None));
         ___qtablewidgetitem42 = self.busesTableWidget.horizontalHeaderItem(8)
         ___qtablewidgetitem42.setText(QCoreApplication.translate("MainWindow", u"Contract Date", None));
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:16pt;\">STATS TO DO!!</span></p></body></html>", None))
     # retranslateUi
 

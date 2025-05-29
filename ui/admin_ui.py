@@ -26,6 +26,9 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1055, 665)
+        icon = QIcon()
+        icon.addFile(u"../../../../Downloads/app_icon_blue_32x32.ico", QSize(), QIcon.Normal, QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"QWidget{\n"
 "font: 57 8pt \"Yu Gothic Medium\";\n"
 "}\n"
