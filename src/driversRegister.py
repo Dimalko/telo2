@@ -4,10 +4,18 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5.uic import loadUi
 
-
+"""
+    Window for registering new drivers in the system.
+    Allows users to add driver information including personal details, payment,
+    driver type, and automatically sets their status to 'Available'.
+    """
 class DriverRegisterWindow(QMainWindow):
     finished = pyqtSignal()
-
+    """
+        Initializes the driver registration window.
+        Loads the UI, connects to the database, and sets up the event handler
+        for the driver registration button.
+        """
     def __init__(self,):
         super().__init__()
 
@@ -19,14 +27,23 @@ class DriverRegisterWindow(QMainWindow):
         self.add_Driver_button.clicked.connect(self.addDriver)
 
 
-
+    """
+        Clears all input fields in the driver registration form.
+        Resets the form to its initial state after successful driver registration.
+        """
     def input_clear(self):
         self.IdInput.setText("")
         self.FirstNameInput.setText("")
         self.LastNameInput.setText("")
         self.PaymentInput.setText("")
 
-
+    """
+        Creates a new driver record in the database.
+        Validates that the tax code ID is provided, retrieves form data including
+        personal information, payment details, and driver type. Inserts the driver
+        data with 'Available' status. Shows warning messages for invalid input
+        or database constraint violations.
+        """
     def addDriver(self):
         try:
             id = self.IdInput.text()

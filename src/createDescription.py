@@ -6,11 +6,15 @@ from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5.uic import loadUi
 
 
-
+"""
+    Window for creating a tour description."""
 class CreateTourDescriptionWindow(QMainWindow):
     finished = pyqtSignal()
     
-    
+    """
+        Initializes the create tour description window.
+        Loads the UI, connects to the database, and sets up event handlers for buttons.
+    """
     def __init__(self,):
         super().__init__()
 
@@ -24,13 +28,21 @@ class CreateTourDescriptionWindow(QMainWindow):
 
         self.image_path = ""
 
-
+    """
+        Clears the input fields in the create tour description form.
+    """
     def input_clear(self):
         self.tourIdDInput.setText("")
         self.startingPriceDInput.setText("")
         self.image_path = ""
 
-
+    """
+        Saves the tour description as an HTML file.
+        Retrieves the tour details from the database using the provided tour ID,
+        formats the details into an HTML structure, and saves it to a file.
+        If the tour ID is not found or if there is an error, it shows a warning message.
+        Emits a finished signal and clears the input fields after saving.
+    """
     def saveDescription(self):
         try:
             tourDescId = self.tourIdDInput.text()
@@ -133,7 +145,10 @@ class CreateTourDescriptionWindow(QMainWindow):
         finally:
             self.finished.emit()
             self.close()    
-    
+    """
+        Opens a file dialog to select an image for the tour description.
+        Sets the selected image path to the `image_path` attribute.
+    """  
     def getImage(self):
         file_dialog = QFileDialog()
         file_path, _ = file_dialog.getOpenFileName(self, "Select Image", "", "Images (*.png *.jpg *.jpeg *.bmp)")

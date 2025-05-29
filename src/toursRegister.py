@@ -5,11 +5,18 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QCheckBox
 from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5.uic import loadUi
 
-
+"""
+    Window for registering new tours in the system.
+    Allows users to create tours with destination, dates, description, transportation details,
+    and associate hotels with the tour.
+    """
 class ToursRegisterWindow(QMainWindow):
     finished = pyqtSignal()
 
-
+    """
+        Initializes the tours registration window.
+        Loads the UI, connects to the database, and sets up event handlers.
+        """
     def __init__(self,):
         super().__init__()
 
@@ -27,7 +34,10 @@ class ToursRegisterWindow(QMainWindow):
         self.generateId = set()
     
 
-
+        """
+        Clears all input fields and removes hotel checkboxes.
+        Resets the form to its initial state after successful tour creation.
+        """
     def input_clear(self):
         self.destinationInput.setText("")
         self.descriptionInput.setText("")
@@ -36,7 +46,12 @@ class ToursRegisterWindow(QMainWindow):
             cb.setParent(None)
         self.checkboxes.clear()
 
-    
+    """
+        Generates a unique tour ID.
+        Creates a random 6-digit ID prefixed with 'TO' and ensures uniqueness
+        by checking against previously generated IDs.
+        :return: Unique tour ID string in format 'TO######'
+        """
     def createItemID(self):
         min_id = 10**5  
         max_id = (10**6) - 1 
@@ -47,7 +62,11 @@ class ToursRegisterWindow(QMainWindow):
                 self.generateId.add(new_id)
                 return new_id
 
-    
+    """
+        Dynamically loads and displays hotels based on the entered destination.
+        Creates checkboxes for each hotel in the specified city, allowing users
+        to select which hotels to associate with the tour.
+        """
     def addHotels(self):
         hotelCity = self.destinationInput.text()
         self.cursor.execute("SELECT id, name FROM Hotels WHERE city = ?",
@@ -60,7 +79,12 @@ class ToursRegisterWindow(QMainWindow):
             self.hotelContainer.addWidget(checkbox)
             self.checkboxes.append(checkbox)
 
-
+    """
+        Creates a new tour record in the database.
+        Validates input fields, generates a unique ID, inserts tour data,
+        and associates selected hotels with the tour. Shows warning messages
+        for invalid input or database errors.
+        """
     def addTour(self):
         try:
             id = self.createItemID()

@@ -13,9 +13,18 @@ from PyQt5.QtGui import QFont
 
 from classes.populate_table import PopulateTable
 
-
+"""    Window for managing reservations, including adding clients, tours, and group payments.
+    Provides a user interface for filtering clients and tours, adding reservations,
+    and managing group payments.
+"""
 class ReservationWindow(QMainWindow):
     finished = pyqtSignal()
+    """
+        Initializes the reservation window.
+        Loads the UI, connects to the database, and sets up event handlers for various UI elements.
+        Connects buttons for adding clients, filtering clients and tours, updating hotels for selected tours,
+        adding reservations, and managing group payments.
+        """
     def __init__(self): #REMOVE BEFORE FINAL VERSION
         super().__init__()
 
@@ -52,14 +61,20 @@ class ReservationWindow(QMainWindow):
         self.add_Client_button.clicked.connect(self.addClient)    
 
 
-
+    """ Clears all input fields in the client registration form.
+        Resets the form to its initial state after successful client addition."""
     def input_clear(self):
         self.PhoneNumberInput.setText("")
         self.FirstNameInput.setText("")
         self.LastNameInput.setText("")
         self.EmailInput.setText("")
 
-
+    """ Creates a new client record in the database.
+        Validates that required fields (phone number, first name, last name, email) are provided,
+        retrieves form data including phone number, first name, last name, and email.
+        Inserts the client data into the database. Shows warning messages
+        for invalid input or database constraint violations.
+        """
     def addClient(self):
         try:
             phone = self.PhoneNumberInput.text()
@@ -82,7 +97,11 @@ class ReservationWindow(QMainWindow):
             self.connection.rollback()    
     
     
-    
+    """ Loads all clients from the database and populates the client list widget.
+        Clears the existing items in the client list widget before loading new data.
+        Retrieves client information (phone number, first name, last name, email) from the database
+        and adds each client as an item in the client list widget.
+        If an error occurs during the loading process, it prints the error message."""
     def loadClients(self):
         self.Client_listWidget.clear()
         try:
@@ -94,7 +113,11 @@ class ReservationWindow(QMainWindow):
                 self.Client_listWidget.addItem(item_text)
         except Exception as e:
             print("Error loading clients:", e)
-
+        
+    """ Loads all free tours from the database and populates the tour list widget.
+        Clears the existing items in the tour list widget before loading new data.
+        Retrieves tour information (id, destination, start date, end date, description) from the database
+        and adds each tour as an item in the tour list widget."""
     def loadFreeTours(self):
         self.Tour_listWidget.clear()
         try:
@@ -111,8 +134,14 @@ class ReservationWindow(QMainWindow):
         except Exception as e:
             print("Error loading free tours:", e)
 
-
-
+    """ Filters the client list based on the input in the client line edit.
+        Clears the existing items in the client list widget before loading new data.
+        If the input is empty, it retrieves all clients from the database.
+        If there is input, it retrieves clients whose phone number starts with the input text.
+        Each client is added as an item in the client list widget with the format:
+        "First Name Last Name | 📞 Phone Number | ✉️ Email".
+        If no clients match the search criteria, a "No result for this value" item is added in gray italic font.
+    """
     def filterClients(self):
         search_text = self.ClientlineEdit.text().strip()
         self.Client_listWidget.clear()
@@ -145,7 +174,14 @@ class ReservationWindow(QMainWindow):
 
 
 
-
+    """ Filters the tour list based on the input in the tour line edit.
+        Clears the existing items in the tour list widget before loading new data.
+        If the input is empty, it retrieves all free tours from the database.
+        If there is input, it retrieves tours whose id starts with the input text.
+        Each tour is added as an item in the tour list widget with the format:
+        "#ID | Destination | Start Date ➝ End Date | Description".
+        If no tours match the search criteria, a "No result for this value" item is added in gray italic font.
+        """
     def filterTours(self):
         search_text = self.TourslineEdit.text().strip()
         self.Tour_listWidget.clear()
@@ -179,9 +215,14 @@ class ReservationWindow(QMainWindow):
                 self.Tour_listWidget.addItem(no_result_item)
         except Exception as e:
             print("Error filtering tours:", e)
-
-                
-
+  
+    """ Updates the hotels combo box based on the selected tour in the tour list widget.
+        Retrieves the hotels associated with the selected tour from the database.
+        Clears the existing items in the hotels combo box before loading new data.
+        Each hotel is added as an item in the hotels combo box with the format:
+        "Hotel Name - Price€/person".
+        If an error occurs during the loading process, it prints the error message.
+    """
     def updateHotelsForTour(self, item):
         try:
             # Βρες το ID του επιλεγμένου tour από το κείμενο (π.χ. "#15 | Athens")
@@ -207,7 +248,13 @@ class ReservationWindow(QMainWindow):
         except Exception as e:
             print("Error loading hotels for tour:", e)
     
-
+    """ Adds a reservation based on the selected tour, client, and other input fields.
+        Retrieves the selected tour and client from the list widgets, validates input fields,
+        calculates the total cost based on the number of people, hotel, and transportation type.
+        Inserts the reservation into the database, including ticket information if applicable.
+        If the reservation is for a group (more than one person), it creates a group record and a prepayment.
+        Displays success or error messages based on the outcome of the operation.
+        """
     def addReservation(self):
         try:
             # Πάρε το επιλεγμένο tour
@@ -335,7 +382,13 @@ class ReservationWindow(QMainWindow):
 
 
 
-
+    """ Loads all active groups from the database and populates the group combo box.
+        Clears the existing items in the group combo box before loading new data.
+        Retrieves group information (id, reservation id, total people, total cost, destination, tour id)
+        from the database and adds each group as an item in the group combo box with the format:
+        "Group #ID | Reservation: ID | People: N | Cost: €C | Tour: #T - Destination".
+        If an error occurs during the loading process, it prints the error message.
+    """
     def loadGroups(self):
         try:
             self.groupComboBox.clear()
@@ -361,7 +414,13 @@ class ReservationWindow(QMainWindow):
 
 
 
-
+    """ Loads all payments for the selected group and populates the group payments table.
+        Clears the existing rows in the group payments table before loading new data.
+        Retrieves payment information (id, group id, amount, payment date, type) from the database
+        and adds each payment as a row in the group payments table with the format:
+        "ID | Group ID | Amount | Payment Date | Type".
+        If an error occurs during the loading process, it prints the error message.
+    """
     def loadGroupPayments(self, group_id):
         try:
             self.groupPaymentsTable.setRowCount(0)
@@ -388,7 +447,12 @@ class ReservationWindow(QMainWindow):
             print("Error loading group payments:", e)
 
 
-
+    """ Adds a new group payment based on the selected group and input fields.
+        Validates that a group is selected, retrieves the payment date, type, and amount from the UI.
+        Checks if the amount is valid (greater than 0) and does not exceed the remaining balance of the group.
+        Inserts the payment into the database and updates the total amount paid for the group.
+        Displays success or error messages based on the outcome of the operation.
+    """
     def addGroupPayment(self):
         try:
             group_id = self.groupComboBox.currentData()
@@ -432,7 +496,12 @@ class ReservationWindow(QMainWindow):
         except Exception as e:
             print("Error adding payment:", e)
             QMessageBox.critical(self, "Failed", "Failure to insert the payment.")
-
+    """ Updates the status label for the selected group based on the total cost and amount paid.
+        Retrieves the total cost, amount paid, and reservation ID for the group from the database.
+        Determines the payment status (Unpaid, Partially Paid, or Paid) based on the amount paid.
+        Retrieves the tour ID from the reservation and the start date of the tour.
+        Displays the payment status, amount paid, total cost, and start date in the payment status label.
+    """
     def updateGroupStatus(self, group_id):
         try:
             # 1. Πάρε τα βασικά από το group
@@ -478,7 +547,13 @@ class ReservationWindow(QMainWindow):
         except Exception as e:
             print("Error updating group status:", e)
             self.paymentStatusLabel.setText("Σφάλμα κατά την ενημέρωση της κατάστασης.")
-
+    """ Deletes a selected group payment from the database.
+        Retrieves the current row from the group payments table, checks if a payment is selected,
+        retrieves the group ID and payment ID from the selected row.
+        Validates that the amount is greater than 0, confirms the deletion with the user,
+        deletes the payment from the GroupPayments table, and updates the amount paid for the group.
+        Displays success or error messages based on the outcome of the operation.
+    """
     def deleteGroupPayment(self):
         current_row = self.groupPaymentsTable.currentRow()
         if current_row == -1:
@@ -505,7 +580,13 @@ class ReservationWindow(QMainWindow):
             self.loadGroupPayments(group_id)
             QMessageBox.information(self, "Success", "Payment deleted successfully.")
 
-
+    """ Edits a selected group payment directly from the group payments table.
+        Retrieves the current row from the group payments table, checks if a payment is selected,
+        retrieves the group ID and payment ID from the selected row.
+        Validates that the new amount is greater than 0, retrieves the old amount from the database,
+        updates the payment in the GroupPayments table, and updates the amount paid for the group.
+        Displays success or error messages based on the outcome of the operation.
+    """
     def editGroupPayment(self):
         current_row = self.groupPaymentsTable.currentRow()
         if current_row == -1:

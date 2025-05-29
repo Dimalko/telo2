@@ -5,12 +5,19 @@ from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5.uic import loadUi
 
 
-
+"""
+    Window for registering new buses in the system.
+    Allows users to add bus information including specifications, rental details,
+    and contract information to the fleet management system.
+    """
 class BusesRegisterWindow(QMainWindow):
     finished = pyqtSignal()
     
     
-    
+    """
+        Initializes the buses registration window.
+        Loads the UI, connects to the database, and sets up event handlers for bus registration.
+        """
     def __init__(self,):
         super().__init__()
 
@@ -21,7 +28,11 @@ class BusesRegisterWindow(QMainWindow):
 
         self.add_Buses_button.clicked.connect(self.addBus)
 
-
+    
+    """
+        Clears all input fields in the bus registration form.
+        Resets the form to its initial state after successful bus registration.
+        """
     def input_clear(self):
         self.PlateNumberInput.setText("")
         self.ModelInput.setText("")
@@ -31,7 +42,12 @@ class BusesRegisterWindow(QMainWindow):
         self.ConsumptionInput.setText("")
         self.SeatsInput.setText("")
 
-
+    """
+        Creates a new bus record in the database.
+        Validates input fields, retrieves form data including plate number, model,
+        specifications, and rental information. Inserts the bus data with 'Available' status.
+        Shows warning messages for invalid input or database constraint violations.
+        """
     def addBus(self):
         try:
             plateNumber = self.PlateNumberInput.text()

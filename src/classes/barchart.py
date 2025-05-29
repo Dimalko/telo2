@@ -4,14 +4,28 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout
 from PyQt5.QtChart import QChart, QChartView, QBarSeries, QBarSet, QBarCategoryAxis
 from PyQt5.QtGui import QPainter
 from PyQt5.QtCore import Qt
-
+"""
+    Class to create and manage a bar chart using data from a SQLite database.
+    It connects to the database, executes a query, and populates the bar chart with the results.
+    The class can handle different types of queries and formats the data accordingly.
+    The bar chart is displayed in a QChartView widget.
+    The bar chart can be created dynamically based on the provided query and layout.
+"""
 class BarChart():
+    """ Initializes the BarChart class.
+        Sets up the chart view and series for the bar chart.
+    """
     def __init__(self):
         self.chartview = None
         self.series = None
         
         
-
+    """ Creates a bar chart based on the provided query and layout.
+        The method connects to the SQLite database, executes the query, and populates the bar chart with the results.
+        If the query returns no data, it will not display the chart.
+        :param query: The SQL query to execute.
+        :param layout: The layout where the chart view will be added.
+    """
     def create_barchart(self, query, layout):
         connection = sqlite3.connect("data//database.db")
         cursor = connection.cursor()

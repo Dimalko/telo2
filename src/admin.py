@@ -18,7 +18,13 @@ from classes.populate_table import PopulateTable
 from classes.piechart import PieChart
 from classes.barchart import BarChart
 
-
+""" Main window for the admin interface.
+    This class handles the main functionalities of the admin interface,
+    including adding, editing, and removing travel agents, team leaders, drivers, buses, tours, and hotels.
+    It also provides statistics and charts for tours, drivers, and team leaders.
+    The class uses PyQt5 for the GUI and SQLite for the database connection.
+    Signals are used to communicate with other windows and components.
+"""
 class AdminWindow(QMainWindow):
     open_TravelAgentReg = pyqtSignal()
     open_TeamLeaderReg = pyqtSignal()
@@ -36,7 +42,15 @@ class AdminWindow(QMainWindow):
     leadersBarc = BarChart()
     driversDestPiec = PieChart()
     leadersDestPiec = PieChart()
-    
+
+    """ Initializes the AdminWindow class.
+        Sets up the UI, connects to the database, initializes classes for populating tables and creating charts,
+        and creates statistics for tours, drivers, and team leaders.
+        :param self: The instance of the class. 
+        This method also connects buttons to their respective functions and populates tables and lists with data.    
+        It handles the navigation between different sections of the admin interface and manages the display of statistics.    
+        It also connects to other windows for adding, editing, and removing travel agents, team leaders, drivers, buses, tours, and hotels.
+    """
     def __init__(self):
         super().__init__()
         
@@ -360,7 +374,11 @@ class AdminWindow(QMainWindow):
 
 
 
-#--Style----------   
+#--Style----------
+    """ Applies a custom style to the UI elements.
+        This method sets the logo image and applies padding to the logo label.
+        :param self: The instance of the class.
+"""   
     def uiStyle(self):
         pixmap = QPixmap("data//images//logo_image.png")
         self.logoLabel.setPixmap(pixmap)
@@ -369,6 +387,12 @@ class AdminWindow(QMainWindow):
 
 
 #--Update Tables After An Action----------
+    """ Updates the specified table after an action is performed.
+        This method checks which table needs to be updated based on the provided table name
+        and calls the corresponding populate method to refresh the table data.
+        :param self: The instance of the class.
+        :param table_name: The name of the table to be updated.
+    """
     def update_table(self, table_name):
         if table_name == 'Agents':
             self.populate_travelagent_table()
@@ -385,25 +409,48 @@ class AdminWindow(QMainWindow):
 
 
 
-#--Populate Tables----------  
+#--Populate Tables----------
+    """ Populates the tour table with data from the database.
+        This method executes a SQL query to fetch all tours and fills the tour table widget with the results.
+        :param self: The instance of the class.
+    """  
     def populate_tour_table(self):
         self.populate_table.populate_table(self.tourTableWidget, "SELECT * FROM Tours", 11, 2)
-        
+    """ Populates the travel agent table with data from the database.
+        This method executes a SQL query to fetch all travel agents and fills the travel agent table widget with the results.
+        :param self: The instance of the class.
+    """    
     def populate_travelagent_table(self):
         self.populate_table.populate_table(self.travelagentTableWidget, "SELECT * FROM Staff WHERE role='Travel_Agent'", 8)
-    
+    """ Populates the team leader table with data from the database.
+        This method executes a SQL query to fetch all team leaders and fills the team leader table widget with the results.
+        :param self: The instance of the class.
+"""
     def populate_teamleader_table(self):
         self.populate_table.populate_table(self.teamleaderTableWidget, "SELECT * FROM TeamLeaders", 6)  
-    
+    """ Populates the driver table with data from the database.
+        This method executes a SQL query to fetch all drivers and fills the driver table widget with the results.
+        :param self: The instance of the class.
+    """
     def populate_driver_table(self):
         self.populate_table.populate_table(self.driverTableWidget, "SELECT * FROM Drivers", 6)    
-    
+    """ Populates the buses table with data from the database.
+        This method executes a SQL query to fetch all buses and fills the buses table widget with the results.
+        :param self: The instance of the class.
+    """
     def populate_buses_table(self):
         self.populate_table.populate_table(self.busesTableWidget, "SELECT * FROM Buses", 10)
-
+    """ Populates the hotels table with data from the database.
+        This method executes a SQL query to fetch all hotels and fills the hotel table widget with the results.
+        :param self: The instance of the class.
+    """
     def populate_hotels_table(self):
         self.populate_table.populate_table(self.hotelTableWidget, "SELECT * FROM Hotels", 5)
-
+    """ Loads the ongoing tours into the ongoing tour list widget.
+        This method clears the existing items in the list widget and fetches ongoing tours from the database,
+        adding each tour as an item in the list widget with its ID and destination.
+        :param self: The instance of the class.
+    """
     def loadFreeTours(self):
         self.TourlistWidget.clear()
         self.cursor.execute("SELECT id, destination FROM Tours WHERE status = 'Free'")
@@ -418,58 +465,61 @@ class AdminWindow(QMainWindow):
 
 #--Display Windows----------
     #Add Windows
+    """ Opens the travel agent registration window and populates the travel agent table."""
     def addTravelAgent(self):
         self.open_TravelAgentReg.emit()
         self.TravelAgentRegister.show()
         self.populate_travelagent_table()
-    
+    """ Opens the team leader registration window and populates the team leader table."""
     def addTeamLeader(self):
         self.open_TeamLeaderReg.emit()
         self.TeamLeaderRegister.show()    
         self.populate_teamleader_table()  
-    
+    """ Opens the driver registration window and populates the driver table."""
     def addDriver(self):
         self.open_DriverReg.emit()
         self.DriverRegister.show()    
-    
+    """ Opens the bus registration window and populates the bus table."""
     def addBus(self):
         self.open_BusReg.emit()
         self.BusRegister.show()
-    
+    """ Opens the tour registration window and populates the tour table."""
     def addTour(self):
         self.open_TourReg.emit()
         self.ToursRegister.show()   
-
+    """ Opens the hotel registration window and populates the hotel table."""
     def addHotel(self):
         self.open_HotelReg.emit()
         self.HotelRegister.show() 
     
     #Remove/Delete Windows
+    """ Opens the remove agent window for deleting a travel agent."""
     def removeAgent(self):
         self.open_delete.emit()
         self.removeAgentShow.show()
-
+    """ Opens the remove tour window for deleting a tour."""
     def removeTour(self):
         self.open_delete.emit()
         self.removeTourShow.show()
-    
+    """ Opens the remove team leader window for deleting a team leader."""
     def removeTeamLeader(self):
         self.open_delete.emit()
         self.removeTeamLeaderShow.show()
-
+    """ Opens the remove driver window for deleting a driver."""
     def removeDriver(self):
         self.open_delete.emit()
         self.removeDriverShow.show()
-
+    """ Opens the remove bus window for deleting a bus."""
     def removeBus(self):
         self.open_delete.emit()
         self.removeBusShow.show()
-
+    """ Opens the remove hotel window for deleting a hotel."""
     def removeHotel(self):
         self.open_delete.emit()
         self.removeHotelShow.show()
 
     #Create Tour Description Window
+    """ Opens the create tour description window for creating a description for a tour."""
     def createTourDescription(self):
         self.open_createDescription.emit()
         self.createDescriptionShow.show()
@@ -477,6 +527,12 @@ class AdminWindow(QMainWindow):
 
 
 #--Functions To Categorize!!!----------
+    """ Loads the tour summary into the tour summary table.
+        This method executes a SQL query to calculate the total number of people and total cost for the specified tour.
+        It updates the tour summary table with the results, displaying "No Reservations were made" if there are no active reservations.
+        :param self: The instance of the class.
+        :param tour_id: The identifier of the selected tour.
+        """
     def load_tour_summary(self, tour_id):
         try:
             self.cursor.execute("""
@@ -501,8 +557,14 @@ class AdminWindow(QMainWindow):
 
         except Exception as e:
             print("Error loading tour summary:", e)
-
+    """
+    Triggered when an ongoing tour is selected from the list.
+    Loads ongoing tour details, updates related UI components, and calculates costs.
+    Args:
+        item (QListWidgetItem): The selected item from the ongoing tour list.
+    """
     def on_tour_selected(self, item):
+
         try:
             tour_text = item.text()
             tour_id = tour_text.split(" ")[0].replace("#", "").strip()
@@ -511,24 +573,28 @@ class AdminWindow(QMainWindow):
             self.load_tour_summary(tour_id)
             self.load_comboboxes_for_tour(tour_id)
             self.calculate_all_costs()
-
         except Exception as e:
             print("Error selecting tour:", e)
-
+    
+    """ Calculates the cost for a guide based on their monthly salary and the number of tour days.
+        This method takes the monthly salary of the guide and the number of days for the tour,
+        and calculates the cost based on a standard working month of 22 days.
+        :param self: The instance of the class.
+        :param monthly_salary: The monthly salary of the guide.
+        :param tour_days: The number of days for the tour.
+        :return: The calculated cost for the guide.
+    """
     def calculate_guide_cost(self, monthly_salary, tour_days):
         working_days_month = 22
         return (monthly_salary / working_days_month) * tour_days
-
-    def calculate_driver_cost(self, driver_row, tour_days):
-        driver_type = driver_row[3]
-        salary = driver_row[4]
-
-        if driver_type == 'Freelancer':
-            return salary * tour_days
-        else:
-            working_days_month = 22
-            return (salary / working_days_month) * tour_days
-
+    """Calculates the cost for a bus based on its rental cost, fuel consumption, and the distance of the tour.
+        This method takes the bus row data and the total kilometers for the tour,
+        and calculates the total cost including rental cost and fuel cost.
+        :param self: The instance of the class.
+        :param bus_row: The row data of the bus from the database.
+        :param tour_km: The total kilometers for the tour.
+        :return: The total cost for the bus.
+    """
     def calculate_bus_cost(self, bus_row, tour_km):
         rental_cost = bus_row[5] or 0
         consumption = bus_row[6]
@@ -536,7 +602,14 @@ class AdminWindow(QMainWindow):
 
         fuel_cost = (tour_km * consumption / 100) * fuel_price_per_liter
         return rental_cost + fuel_cost
-    
+    """ Calculates the cost for a driver based on their type (Permanent or Freelancer) and the number of tour days.
+        This method takes the driver row data and the number of days for the tour,
+        and calculates the cost based on whether the driver is a freelancer (paid per day) or a permanent employee (paid monthly).
+        :param self: The instance of the class.
+        :param driver_row: The row data of the driver from the database.
+        :param tour_days: The number of days for the tour.
+        :return: The total cost for the driver.
+    """
     def calculate_driver_cost(self, driver_row, tour_days):
 
         driver_type = driver_row[3]  # 'Permanent' or 'Freelancer'
@@ -547,14 +620,27 @@ class AdminWindow(QMainWindow):
         else:
             working_days_month = 22
             return (salary / working_days_month) * tour_days
-
+    """ Calculates the number of days for a tour based on the start and end dates.
+        This method takes the start and end dates of the tour in the format "YYYY-MM-DD",
+        and calculates the total number of days for the tour, including both start and end dates.
+        :param self: The instance of the class.
+        :param start_date: The start date of the tour in "YYYY-MM-DD" format.
+        :param end_date: The end date of the tour in "YYYY-MM-DD" format.
+        :return: The total number of days for the tour.
+    """
     def calculate_tour_days(self, start_date, end_date):
         from datetime import datetime
         fmt = "%Y-%m-%d"
         start = datetime.strptime(start_date, fmt)
         end = datetime.strptime(end_date, fmt)
         return (end - start).days + 1
-
+    """ Loads the comboboxes for the selected tour based on its transportation type.
+        This method fetches the transportation type for the selected tour and populates the driver, vehicle, and guide comboboxes accordingly.
+        If the transportation type is "Bus", it populates the driver and vehicle comboboxes with available drivers and buses.
+        If the transportation type is "Airplane" or "Boat", it adds a single item to the vehicle combobox.
+        :param self: The instance of the class.
+        :param tour_id: The identifier of the selected tour.
+    """
     def load_comboboxes_for_tour(self, tour_id):
         try:
             self.cursor.execute("SELECT transportation FROM Tours WHERE id = ?", (tour_id,))
@@ -602,7 +688,13 @@ class AdminWindow(QMainWindow):
 
         except Exception as e:
             print("Error loading comboboxes:", e)
-
+    """ Calculates all costs associated with the selected tour.
+        This method retrieves the tour details, calculates costs for the driver, guide, and vehicle,
+        and updates the UI labels with the calculated values. It also calculates the total income, profit amount, and hotel share.
+        If `return_values_only` is set to True, it returns a dictionary with the calculated values instead of updating the UI.
+        :param self: The instance of the class.
+        :param return_values_only: If True, returns a dictionary with calculated values instead of updating UI labels.
+    """
     def calculate_all_costs(self, return_values_only=False):
         try:
             tour_id = self.selected_tour_id
@@ -713,7 +805,12 @@ class AdminWindow(QMainWindow):
         except Exception as e:
             print("Error calculating all costs:", e)
             return False
-
+    """ Accepts the selected tour, updates its status, and calculates financials.
+        This method retrieves the selected tour ID, calculates financials, updates the tour status to 'Accepted',
+        and updates the status of the associated driver, vehicle, and guide. It also inserts financial data into the TourFinancials table.
+        If the tour is successfully accepted, it updates the UI and shows a success message.
+        :param self: The instance of the class.
+    """
     def accept_tour(self):
         try:
             if not hasattr(self, "selected_tour_id"):
@@ -812,7 +909,12 @@ class AdminWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Could not accept tour.\n{e}")
             self.connection.rollback()
-            
+    """ Declines the selected tour and cancels all associated reservations.
+        This method retrieves the selected tour ID, updates its status to 'Declined',
+        cancels all reservations associated with the tour, and updates the UI accordingly.
+        If the tour is successfully declined, it shows a success message and updates the ongoing tours list.
+        :param self: The instance of the class.
+    """        
     def decline_tour(self):
         try:
                 if not hasattr(self, "selected_tour_id"):
@@ -833,7 +935,11 @@ class AdminWindow(QMainWindow):
         except Exception as e:
                 QMessageBox.critical(self, "Error", f"Could not decline tour.\n{e}")
                 self.connection.rollback()
-                        
+    """ Loads the ongoing tours into the ongoing tour list widget.
+        This method clears the existing items in the list widget and fetches ongoing tours from the database,
+        adding each tour as an item in the list widget with its ID and destination.
+        :param self: The instance of the class.
+    """                     
     def loadOngoingTours(self):
         self.ongoingTourListWidget.clear()
         self.cursor.execute("SELECT id, destination FROM Tours WHERE status = 'Accepted'")
@@ -841,7 +947,12 @@ class AdminWindow(QMainWindow):
 
         for tour_id, destination in tours:
             self.ongoingTourListWidget.addItem(f"{tour_id} - {destination}")
-
+    """ Loads the details of the selected ongoing tour into the ongoing tour details table.
+        This method clears the existing rows in the table and fetches financial details for the selected tour from the TourFinancials table.
+        It populates the table with the fetched data, including destination, start and end dates, total income, participants, transportation type, transportation cost, driver, and guide.
+        :param self: The instance of the class.
+        :param tour_id: The identifier of the selected ongoing tour.
+    """
     def loadOngoingTourDetails(self, tour_id):
         try:
             self.ongoingTourDetailsTable.setRowCount(0)
@@ -871,13 +982,23 @@ class AdminWindow(QMainWindow):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to load tour details.\n{e}")
-
+    """ Triggered when an ongoing tour is selected from the list.
+        This method retrieves the selected tour ID from the list item, loads the ongoing tour details,
+        and updates the selected tour ID for further operations.
+        :param self: The instance of the class.
+        :param item: The selected item from the ongoing tour list widget.
+    """
     def on_ongoing_tour_selected(self, item):
         tour_text = item.text()
         tour_id = tour_text.split(" ")[0].strip()  # π.χ. "t12"
         self.selected_tour_id = tour_id
         self.loadOngoingTourDetails(tour_id)
-
+    """ Completes the selected ongoing tour by updating its status and resetting associated resources.
+        This method retrieves the selected tour ID, updates the status of the tour to 'Completed',
+        resets the status of the associated transportation, driver, and guide, and updates all active reservations to 'Completed'.
+        If the tour is successfully completed, it shows a success message and updates the ongoing tours list and related tables.
+        :param self: The instance of the class.
+    """
     def complete_tour(self):
         try:
             selected_item = self.ongoingTourListWidget.currentItem()
@@ -937,9 +1058,16 @@ class AdminWindow(QMainWindow):
             QMessageBox.critical(self, "Error", f"Failed to complete tour.\n{e}")
             self.connection.rollback()
 
-
-
 #--Edit Function----------
+    """ Opens a dialog to edit the selected row in the given table widget.
+        This method retrieves the currently selected row in the table widget, creates a dialog with input fields for each column,
+        and allows the user to edit the values. If the dialog is accepted, it updates the table and executes the provided SQL query with the new values.
+        :param self: The instance of the class.
+        :param table_widget: The QTableWidget containing the data to be edited.
+        :param query: The SQL query to execute for updating the database.
+        :param q_num: The number of columns in the table (default is 1).
+        :param readonly_fields: A list of fields that should be read-only in the dialog (default is None).
+    """
     def editSelectedRow(self, table_widget, query, q_num=1, readonly_fields=None):
         selected_row = table_widget.currentRow()
         if selected_row == -1:
@@ -1022,6 +1150,13 @@ class AdminWindow(QMainWindow):
 
         
 #--Stats Functions----------
+    """ Creates a label with statistics based on the provided SQL query.
+        This method executes the given SQL query, fetches the result, and formats it for display in the provided label.
+        If the result is None or empty, it sets the label text to "N/A".
+        :param self: The instance of the class.
+        :param query: The SQL query to execute for fetching statistics.
+        :param label: The QLabel where the statistics will be displayed.
+    """
     def create_label_stats(self, query, label):
         self.cursor.execute(query)
         data = self.cursor.fetchone()
@@ -1036,7 +1171,13 @@ class AdminWindow(QMainWindow):
             label.setText(str(fdata))
         else:
             label.setText("N/A")
-
+    """ Loads a list of statistics into the provided QListWidget based on the given SQL query.
+        This method clears the existing items in the list widget, executes the SQL query to fetch statistics,
+        and adds each result as an item in the list widget formatted as "data1 - data2".
+        param self: The instance of the class.
+        param list: The QListWidget where the statistics will be displayed.
+        param query: The SQL query to execute for fetching statistics.
+    """
     def load_stats_lists(self, list, query):
         list.clear()
         self.cursor.execute(query)
@@ -1044,7 +1185,17 @@ class AdminWindow(QMainWindow):
 
         for data1, data2 in data:
             list.addItem(f"{data1} - {data2}")
-
+    """ Selects a list item and updates the pie chart and table based on the selected item.
+        This method retrieves the text of the selected item, extracts the ID from it,
+        and uses it to create a pie chart and populate a table with statistics related to the selected item.
+        :param self: The instance of the class.
+        :param item: The selected QListWidgetItem from the statistics list.
+        :param pie: An instance of a PieChart class to create the pie chart.
+        :param p_layout: The layout for the pie chart.
+        :param l_layout: The layout for the table.
+        :param p_query: The SQL query for the pie chart.
+        :param l_query: The SQL query for the table.
+    """
     def select_list_stats(self, item, pie, p_layout, l_layout, p_query, l_query):
         text = item.text()
         text_id = text.split(" ")[0].strip()
@@ -1053,20 +1204,18 @@ class AdminWindow(QMainWindow):
 
         self.populate_table.populate_table(l_layout, l_query, 3, 1, text_id)
 
-
-    
-
 #--LogOut----------
+    """ Closes the current window and opens the login window.
+        This method hides the current window and creates an instance of the LoginWindow class,
+        which is then shown to the user.
+        :param self: The instance of the class.
+    """
     def to_login_window(self):
         from login import LoginWindow
         login_window_instance = LoginWindow()
         login_window_instance.show()
         self.hide()
         self.login_window_instance = login_window_instance
-
-    
-
-
 
 #!REMOVE BEFORE FINAL VERSION------------------------------------------------------------------------------------------
 if __name__ == "__main__":
