@@ -56,6 +56,8 @@ class BusesRegisterWindow(QMainWindow):
             mileage = float(self.MileageInput.text())
             company = self.CompanyComboBox.currentText()
             rental_cost = float(self.Rental_CostInput.text())
+            if rental_cost == "": 
+                rental_cost=self.Rental_CostInput.text()
             consumption = float(self.ConsumptionInput.text())
             seats = float(self.SeatsInput.text())
             date = self.Contract_Date_dateEdit.date().toString("yyyy-MM-dd")  # Assuming your QDateEdit is named DateEdit
@@ -65,6 +67,7 @@ class BusesRegisterWindow(QMainWindow):
                                 (plateNumber, model, year, mileage,company, rental_cost, consumption, seats, status,date))
             if plateNumber == "":
                 raise ValueError("Plate number cannot be empty")
+            
             self.connection.commit()
             self.hide()
             self.finished.emit()
