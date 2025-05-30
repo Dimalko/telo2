@@ -232,12 +232,3 @@ class AgentWindow(QMainWindow):
         login_window_instance.show()
         self.hide()
         self.login_window_instance = login_window_instance
-
-
-
-#!REMOVE BEFORE FINAL VERSION---------------------------------------------------------------------------------------------------------------------------
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = AgentWindow()
-    window.show()
-    sys.exit(app.exec_())

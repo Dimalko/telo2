@@ -630,10 +630,3 @@ class ReservationWindow(QMainWindow):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Could not update payment.\n{e}")
-
-#!REMOVE BEFORE FINAL VERSION---------------------------------------------------------------------------------------------------------------------------
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = ReservationWindow()
-    window.show()
-    sys.exit(app.exec_())

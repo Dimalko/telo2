@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QApplication
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtChart import QChart, QChartView, QPieSeries, QPieSlice
+
+
 """
     Class to create and manage a pie chart using data from a SQLite database.
     It connects to the database, executes a query, and populates the pie chart with the results.
@@ -11,6 +13,7 @@ from PyQt5.QtChart import QChart, QChartView, QPieSeries, QPieSlice
     The pie chart is displayed in a QChartView widget.  
 """
 class PieChart():
+    
     """ Initializes the PieChart class.
         Sets up the chart view and series for the pie chart.
     """
@@ -18,6 +21,7 @@ class PieChart():
         self.chartview = None
         self.series = None
         
+
     """ Creates a pie chart based on the provided query and layout.
         The method connects to the SQLite database, executes the query, and populates the pie chart with the results.
         If the query returns no data or all values are zero, it will not display the chart.
@@ -39,13 +43,16 @@ class PieChart():
             if self.series is None:
                 self.series = QPieSeries()
                 self.chartview = QChartView()
+                self.chartview.setRenderHint(QPainter.Antialiasing)
                 layout.addWidget(self.chartview)
                 
             
             self.series.clear()
             
-            if all(float(item[1]) == 0 for item in data):
-                print("All values are 0")
+            if not data or all(float(item[1]) == 0 for item in data):
+                chart = QChart()
+                chart.setTitle("No Data Available")
+                self.chartview.setChart(chart)
                 return
 
             num_colors = len(data)
@@ -66,13 +73,13 @@ class PieChart():
             chart = QChart()
             chart.addSeries(self.series)
             chart.setAnimationOptions(QChart.SeriesAnimations)
+            
             if key==None:
                 chart.legend().setAlignment(Qt.AlignRight)
             else:
                 chart.legend().setAlignment(Qt.AlignBottom)
 
             self.chartview.setChart(chart)
-            self.chartview.setRenderHint(QPainter.Antialiasing)
-            layout.addWidget(self.chartview)
+            print("finished pie\n")
         except Exception as e:
             print("an error ocurred", str(e))

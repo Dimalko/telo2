@@ -75,6 +75,7 @@ class LoginWindow(QMainWindow):
         pixmap = QPixmap("data//images//login_img.jpg")
         self.imgLabel.setPixmap(pixmap)
 
+
     """
     Main entry point of the application.
     Creates the PyQt5 application and displays the login window.

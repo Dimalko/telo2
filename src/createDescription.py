@@ -155,9 +155,3 @@ class CreateTourDescriptionWindow(QMainWindow):
         
         if file_path:
             self.image_path = file_path
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = CreateTourDescriptionWindow()
-    window.show()
-    sys.exit(app.exec_())
